@@ -10,10 +10,84 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731133346) do
+ActiveRecord::Schema.define(version: 20160801105336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.string   "github_id"
+    t.boolean  "pinned"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_comments_on_topic_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mentions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_mentions_on_comment_id", using: :btree
+    t.index ["user_id"], name: "index_mentions_on_user_id", using: :btree
+  end
+
+  create_table "project_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_users_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_project_users_on_user_id", using: :btree
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.string   "repo_id"
+    t.string   "thales_key"
+    t.string   "client"
+    t.text     "purpose"
+    t.text     "parts_functionality"
+    t.string   "material"
+    t.string   "state"
+    t.string   "cycle"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "specs", force: :cascade do |t|
+    t.string   "category"
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "custom"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["project_id"], name: "index_specs_on_project_id", using: :btree
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "type"
+    t.string   "github_id"
+    t.string   "state"
+    t.string   "category"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "project_state"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["project_id"], name: "index_topics_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_topics_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +102,24 @@ ActiveRecord::Schema.define(version: 20160731133346) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "token"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "picture"
+    t.string   "category"
+    t.string   "entity"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "comments", "topics"
+  add_foreign_key "comments", "users"
+  add_foreign_key "mentions", "comments"
+  add_foreign_key "mentions", "users"
+  add_foreign_key "project_users", "projects"
+  add_foreign_key "project_users", "users"
+  add_foreign_key "specs", "projects"
+  add_foreign_key "topics", "projects"
+  add_foreign_key "topics", "users"
 end
