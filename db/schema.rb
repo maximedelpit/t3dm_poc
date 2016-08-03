@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 20160801105336) do
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
-  create_table "materials", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "mentions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -52,23 +46,31 @@ ActiveRecord::Schema.define(version: 20160801105336) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
+    t.text     "part_functionality"
+    t.text     "notes"
+    t.string   "measurement_unit"
+    t.decimal  "length"
+    t.decimal  "width"
+    t.decimal  "height"
+    t.decimal  "min_wall_thickness"
+    t.decimal  "min_hole_diameter"
+    t.decimal  "max_pipe_diameter"
+    t.boolean  "impossible_details"
+    t.boolean  "trapped_volumes"
     t.string   "repo_id"
     t.string   "thales_key"
     t.string   "client"
-    t.text     "purpose"
-    t.text     "parts_functionality"
-    t.string   "material"
     t.string   "state"
     t.string   "cycle"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "specs", force: :cascade do |t|
-    t.string   "category"
-    t.string   "name"
+    t.string   "type"
+    t.string   "title"
     t.text     "description"
-    t.boolean  "custom"
+    t.boolean  "standard"
     t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

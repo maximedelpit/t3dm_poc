@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :comments
   has_many :mentions
 
+  validates :token, :uid, :name, :category, :entity, presence: true
+  validates :token, :uid, :email, uniqueness: true
+
   def self.find_for_github_oauth(auth)
      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
        user.provider = auth.provider
