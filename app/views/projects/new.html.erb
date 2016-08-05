@@ -1,8 +1,21 @@
-<%= simple_form_for @project %>
-  <%= f.error_notification %>
-  <%= f.input :title %>
-  <%= f.input :purpose %>
-  <%= f.input :parts_functionality %>
-  <%= f.input :material %>
-  <%= f.submit %>
-<% end %>
+
+<div class="col s6 offset-s3">
+  <h2>Project Details</h2>
+  <%= simple_form_for @project do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :title %>
+    <%= f.input :client_project_id %>
+    <div class="form-group">
+      <label class="control-label " >T3DM project ID:</label>
+      <p class='form-control'><%= Project::ExternalInput.next_thales_id %></p>
+    </div>
+    <%#= f.input :file %>
+    <%= f.input :part_functionality %>
+    <% @specs.each do |key, spec| %>
+      <%= render 'spec_field', f: f, spec_type: key %>
+    <% end %>
+    <%= f.input :notes %>
+    <%= f.submit %>
+  <% end %>
+</div>
+

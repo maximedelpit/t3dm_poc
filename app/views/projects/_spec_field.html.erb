@@ -1,0 +1,5 @@
+<%= f.simple_fields_for spec_type do |p| %>
+  <h2><%= spec_type.to_s.gsub('_', ' ').capitalize %></h2>
+  <%= p.input :title, collection: %w(a b c other) %>
+  <%= p.input :description%>
+<% end %>

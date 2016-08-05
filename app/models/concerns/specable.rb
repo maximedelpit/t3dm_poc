@@ -3,7 +3,13 @@ module Specable
 
   included do
       belongs_to :project
-      validates :project, presence: true
       has_ancestry # TO DO: check if relevant here
+      # validate :check_if_standard, on: [:create, :update]
+
+      def check_if_standard
+        if title
+          title == 'other' ? false : true
+        end
+      end
   end
 end

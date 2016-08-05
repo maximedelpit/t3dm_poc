@@ -14,7 +14,8 @@ class CreateProjects < ActiveRecord::Migration[5.0]
       t.boolean :impossible_details
       t.boolean :trapped_volumes
       t.string :repo_id
-      t.string :thales_key
+      t.string :thales_id
+      t.string :client_project_id
       t.string :client
       t.string :state
       t.string :cycle

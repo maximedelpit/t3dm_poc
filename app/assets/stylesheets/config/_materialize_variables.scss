@@ -1,0 +1,67 @@
+/* -------------------------------------
+ * Materialize sass variable
+ * (see https://github.com/mkhairi/materialize-sass/blob/master/app/assets/stylesheets/materialize/components/_variables.scss)
+ * ------------------------------------- */
+
+ /**
+  * Table of Contents:
+  *
+  *  1. Colors
+  *  2. Badges
+  *  3. Buttons
+  *  4. Cards
+  *  5. Collapsible
+  *  6. Chips
+  *  7. Date Picker
+  *  8. Dropdown
+  *  10. Forms
+  *  11. Global
+  *  12. Grid
+  *  13. Navigation Bar
+  *  14. Side Navigation
+  *  15. Photo Slider
+  *  16. Spinners | Loaders
+  *  17. Tabs
+  *  18. Tables
+  *  19. Toasts
+  *  20. Typography
+  *  21. Footer
+  *  22. Flow Text
+  *  23. Collections
+  *  24. Progress Bar
+  */
+
+// Semantic color scheme
+$primary-color: $blue;
+$primary-color-light: $sky-blue;
+$primary-color-dark: $navy-blue;
+$secondary-color: $turquoise;
+$success-color: $green;
+$error-color: $red;
+
+$link-color: $gray-darker;
+
+
+
+/* 1. Colors
+   ========================================================================== */
+$primary-color: $blue;
+$primary-color-light: $sky-blue;
+$primary-color-dark: $navy-blue;
+$secondary-color: $turquoise;
+$success-color: $green;
+$error-color: $red;
+$link-color: $gray-darker;
+
+
+/* 20. Typography
+   ========================================================================== */
+
+$off-black: $gray;
+// Header Styles
+$h1-fontsize: 2rem !default;
+$h2-fontsize: 1.5rem !default;
+$h3-fontsize: 1.4rem !default;
+$h4-fontsize: 1.3rem !default;
+$h5-fontsize: 1.2rem !default;
+$h6-fontsize: 1rem !default;
