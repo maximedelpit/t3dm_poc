@@ -1,0 +1,24 @@
+.panel-container {
+  .panel {
+    float: left;
+    box-sizing: border-box;
+    padding: 0 0rem;
+    height: 70vh;
+  }
+  .vertical {
+    width: 3%;
+    background: $navy-blue;
+    .vertical-nav-wrapper {
+      height: 100%
+    }
+  }
+
+  .core {
+    width: 97%;
+    overflow-y: auto;
+    height: 70vh;
+    .main {
+      margin: 1%;
+    }
+  }
+}

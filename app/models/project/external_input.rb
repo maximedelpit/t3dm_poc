@@ -8,7 +8,7 @@ class Project < ApplicationRecord
       while next_id.size < 6
         next_id = '0' + next_id
       end
-      return base + next_id
+      return (base + next_id).gsub(' ','-')
     end
 
     def set_default_dimensions

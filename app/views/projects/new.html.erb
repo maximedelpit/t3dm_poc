@@ -1,21 +1,24 @@
-
-<div class="col s6 offset-s3">
-  <h2>Project Details</h2>
-  <%= simple_form_for @project do |f| %>
-    <%= f.error_notification %>
-    <%= f.input :title %>
-    <%= f.input :client_project_id %>
-    <div class="form-group">
-      <label class="control-label " >T3DM project ID:</label>
-      <p class='form-control'><%= Project::ExternalInput.next_thales_id %></p>
-    </div>
-    <%#= f.input :file %>
-    <%= f.input :part_functionality %>
-    <% @specs.each do |key, spec| %>
-      <%= render 'spec_field', f: f, spec_type: key %>
+<div class="row">
+  <div>
+    <h1 class="col s12">New Project</h1>
+    <p class="col s12"><em>Please fill the following form</em></p>
+    <%= simple_form_for @project, html: {class:"col s6"} do |f| %>
+      <h3 class="col s12">Project Details</h3>
+      <%= f.error_notification %>
+      <%= f.input :title, wrapper_html: { class: 's12' } %>
+      <%= f.input :client_project_id, wrapper_html: { class: 's12' } %>
+      <div class="form-group">
+        <label class="control-label" >T3DM project ID:</label>
+        <span class='form-control'><%= Project::ExternalInput.next_thales_id %></span>
+      </div>
+      <%= f.input :file, as: :file, label: 'Upload Attachment', wrapper_html: { class: 's12' } %>
+      <%= f.input :part_functionality, wrapper_html: { class: 's12' }  %></br>
+      <h3 class="col s12" id="specs">Specs</h3>
+      <% @specs.each do |key, spec| %>
+        <%= render 'spec_field', f: f, spec_type: key %>
+      <% end %>
+      <%= f.input :notes, wrapper_html: { class: 's12' }  %>
+      <%= f.button :submit, class:'btn' %>
     <% end %>
-    <%= f.input :notes %>
-    <%= f.submit %>
-  <% end %>
+  </div>
 </div>
-

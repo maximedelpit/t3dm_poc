@@ -1,4 +1,4 @@
-<nav>
+<nav class='nav-s nav-l'>
   <div class="nav-wrapper">
     <!-- Logo -->
     <%= link_to root_path, class: "brand-logo" do %>
@@ -11,7 +11,7 @@
     <!-- Right Navigation -->
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <!-- Search form -->
-      <li>
+      <!-- <li>
         <form>
           <div class="input-field">
             <input id="search" type="search" required>
@@ -19,36 +19,34 @@
             <i class="material-icons">close</i>
           </div>
         </form>
-      </li>
+      </li> -->
 
       <!-- Different navigation if login or not -->
       <% if user_signed_in? %>
+        <li><%= render 'shared/user_overview', user: current_user %></li>
+
+
         <!-- Notification -->
         <li>
           <%= link_to "#" do %>
             <div class="badge-container">
-              <i class="fa fa-envelope-o"></i>
-              <div class="badge badge-blue">3</div>
+              <i class="material-icons small">notifications</i>
+              <div class="badge badge-red">3</div>
             </div>
           <% end %>
         </li>
 
         <!-- Dropdown Trigger -->
-        <li>
+        <!-- <li>
           <a class="dropdown-button" href="#!" data-activates="nav-dropdown">
             Profile<i class="material-icons right">arrow_drop_down</i>
           </a>
-        </li>
+        </li> -->
       <% else %>
         <li>
-          <%= link_to t(".sign_in", default: "Login"), new_user_session_path %>
+          <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "waves-effect waves-light btn" %>
         </li>
       <% end %>
-
-      <!-- Button (call-to-action) -->
-      <li>
-        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "waves-effect waves-light btn" %>
-      </li>
     </ul>
 
     <!-- Dropdown list appearing on mobile only -->
@@ -63,23 +61,23 @@
 
 
 <!-- Dropdown Structure -->
-<ul id="nav-dropdown" class="dropdown-content">
+<!-- <ul id="nav-dropdown" class="dropdown-content">
   <li>
-    <%= link_to "#" do %>
+    <%#= link_to "#" do %>
       <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-    <% end %>
+    <%# end %>
   </li>
   <li>
-    <%= link_to "#" do %>
-      <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
-    <% end %>
+    <%#= link_to "#" do %>
+      <i class="fa fa-home"></i>  <%#= t(".profile", default: "Home") %>
+    <%# end %>
   </li>
   <li>
-    <%= link_to destroy_user_session_path, method: :delete do %>
-      <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-    <% end %>
+    <%#= link_to destroy_user_session_path, method: :delete do %>
+      <i class="fa fa-sign-out"></i>  <%#= t(".sign_out", default: "Log out") %>
+    <%# end %>
   </li>
-</ul>
+</ul> -->
 
 <%= content_for(:after_js) do %>
   <%= javascript_tag do %>

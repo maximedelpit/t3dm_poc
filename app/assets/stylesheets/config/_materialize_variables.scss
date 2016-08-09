@@ -53,10 +53,16 @@ $success-color: $green;
 $error-color: $red;
 $link-color: $gray-darker;
 
+/* 10. Forms
+   ========================================================================== */
+$label-font-size: 1rem;
+
+/* 13. Navigation Bar
+   ========================================================================== */
+$navbar-font-size : $nav-size;
 
 /* 20. Typography
    ========================================================================== */
-
 $off-black: $gray;
 // Header Styles
 $h1-fontsize: 2rem !default;

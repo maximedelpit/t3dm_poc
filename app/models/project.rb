@@ -1,8 +1,8 @@
 class Project < ApplicationRecord
   # TO DO => check Trello for models assoc. & valid. to add
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
-  has_many :specs
+  has_many :specs, dependent: :destroy
   has_one :purpose
   has_one :material
   has_one :heat_treatment
@@ -56,7 +56,7 @@ class Project < ApplicationRecord
   end
 
   def repo_name
-    "#{thales_id}-#{title}"
+    "#{thales_id}-#{title.gsub(' ','-')}"
   end
 
   def repo_uri

@@ -1,0 +1,37 @@
+ul.right.hide-on-med-and-down {
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  line-height: 1.5;
+
+  .user-overview {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    line-height: 1.5;
+    min-width: 15vw;
+    div {
+      padding: 2px 10px;
+    }
+
+    .user-identity {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-content: center;
+
+      .position {
+        color: $gray-light;
+      }
+
+      hr {
+        border-color: $gray-light;
+      }
+
+      a {
+        padding: 0px;
+        color: grey;
+      }
+    }
+  }
+}

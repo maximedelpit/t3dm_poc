@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.users.push(current_user)
     @project.client = current_user.entity
     @project.github_owner = current_user.github_login
     @project.state = 'pending' # TO DO state_machine init
@@ -21,9 +22,20 @@ class ProjectsController < ApplicationController
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
     if @project.save
-      RepoManager.new(current_user.id, @project).create_repo
+      if @file
+        file_path = @file.tempfile.path
+        file_name = @file.original_filename
+      else
+        file_path = nil
+        file_name = nil
+      end
+      RepoManager.new(current_user.id, @project, file_path, file_name).generate_full_repo
+      # TO DO save repo id
+      # TO DO webhook
+      redirect_to projects_path
     else
-      redirect_to :new
+      build_spec_fields
+      render :new
     end
   end
 
@@ -37,11 +49,14 @@ class ProjectsController < ApplicationController
 
    def project_params
     spec_attr = [:id, :title, :description, :_destroy]
-    params.require(:project).permit( :title, :client_project_id, :part_functionality, :notes,
+    project_params = params.require(:project).permit( :title, :client_project_id, :part_functionality, :notes, :file,
                                      purpose_attributes: spec_attr, material_attributes: spec_attr,
                                      heat_treatment_attributes: spec_attr, surface_attributes: spec_attr,
                                      dimension_attributes: spec_attr, quality_control_attributes: spec_attr
                                     )
+    @file = params[:project][:file]
+    project_params.delete(:file)
+    return project_params
   end
 
   def find_project
@@ -57,10 +72,17 @@ class ProjectsController < ApplicationController
   #   return @specs
   # end
   def build_spec_fields
+    # TO DO insert value if params
     @specs = {}
     Spec::TYPE.each do | type |
       type_key = type.underscore.to_sym
-      @specs[type_key] = instance_variable_set('@' + type.underscore, @project.send('build_' + type.underscore))
+      type_attr_key = "#{type.downcase}_attributes"
+      if params[:project] && params[:project][type_attr_key]
+        value = params[:project][type_attr_key].to_unsafe_h
+      else
+        value = {}
+      end
+      @specs[type_key] = instance_variable_set('@' + type.underscore, @project.send('build_' + type.underscore, value))
     end
     return @specs
   end

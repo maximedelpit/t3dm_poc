@@ -1,4 +1,20 @@
 /* Main class */
 nav {
-  background-color: $navy-blue;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('bg-l-nav.png');
+  .nav-wrapper {
+    padding: 7% 3% 3% 3%;
+
+    .brand-logo img {
+      width: 70%;
+    }
+  }
+}
+
+
+.nav-s {
+  height: 10vh
+}
+
+.nav-l {
+  height: 30vh
 }
