@@ -22,7 +22,8 @@ module T3dmPoc
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Used to integrate STI models
+    # Used to integrate STI models & services
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'services', '{**/}')]
   end
 end

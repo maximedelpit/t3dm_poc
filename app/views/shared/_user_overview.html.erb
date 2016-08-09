@@ -1,0 +1,13 @@
+<div class="user-overview">
+  <div><%= image_tag user.picture, alt:"user_profile_picture", class:"avatar-large" %></div>
+  <div class="user-identity">
+    <span><strong><%= user.name %></strong></span>
+    <span class="position">
+      <span><%= user.entity.capitalize %></span>
+      <span> - </span>
+      <span><%= user.category.capitalize %></span>
+      <hr>
+      <span class='after-break-line'><%= link_to 'Edit', edit_user_registration_path %></span>
+    </span>
+  </div>
+</div>

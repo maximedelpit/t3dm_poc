@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801105336) do
+ActiveRecord::Schema.define(version: 20160805122447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,12 +58,14 @@ ActiveRecord::Schema.define(version: 20160801105336) do
     t.boolean  "impossible_details"
     t.boolean  "trapped_volumes"
     t.string   "repo_id"
-    t.string   "thales_key"
+    t.string   "thales_id"
+    t.string   "client_project_id"
     t.string   "client"
     t.string   "state"
     t.string   "cycle"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "github_owner"
   end
 
   create_table "specs", force: :cascade do |t|
@@ -74,6 +76,8 @@ ActiveRecord::Schema.define(version: 20160801105336) do
     t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "ancestry"
+    t.index ["ancestry"], name: "index_specs_on_ancestry", using: :btree
     t.index ["project_id"], name: "index_specs_on_project_id", using: :btree
   end
 
@@ -111,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160801105336) do
     t.string   "picture"
     t.string   "category"
     t.string   "entity"
+    t.string   "github_login"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

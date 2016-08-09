@@ -1,0 +1,8 @@
+<%= f.simple_fields_for spec_type do |p| %>
+  <div class="aligned-fields">
+    <div class="col s4">
+      <%= p.input :title, collection: %w(a b c other), label: spec_type.to_s.gsub('_', ' ').capitalize, wrapper_html: { class: 's12' } %>
+    </div>
+    <div class="col s8"><%= p.input :description, wrapper_html: { class: 's12' } %></div>
+  </div>
+<% end %>

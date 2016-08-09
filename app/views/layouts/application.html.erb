@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>Thalès - T3DM</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   </head>
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <%= yield %>
+
+    <div class="panel-container">
+      <section class="panel vertical">
+        <%= render 'shared/vertical_navbar' %>
+      </section>
+      <section class="panel core">
+        <div class="main">
+          <%= yield %>
+        </div>
+      </section>
+    </div>
+
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

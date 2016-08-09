@@ -1,7 +1,7 @@
 class Spec < ApplicationRecord
 
-  TYPE = %w(Purpose Material HeatTreatment Surface Dimension QualityControl)
+  TYPE = %w(Purpose Material HeatTreatment Surface Dimension QualityControl).freeze
 
-  validates :type, presence: true, inclusion: { in: %w(Purpose HeatTreatment large) }
-  validates :title, :standard, presence: true
+  validates :type, presence: true
+  validates :title, presence: true
 end
