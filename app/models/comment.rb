@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
   has_many :mentions
   has_many :recipients, through: :mentions, class_name: 'User'
 
-  validates :topic, :user presence: true
+  validates :topic, :user, presence: true
   validates :github_id, presence: true, uniqueness: true
 
   def author
