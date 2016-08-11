@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805122447) do
+ActiveRecord::Schema.define(version: 20160811124908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20160805122447) do
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_mentions_on_comment_id", using: :btree
     t.index ["user_id"], name: "index_mentions_on_user_id", using: :btree
+  end
+
+  create_table "project_transitions", force: :cascade do |t|
+    t.string   "to_state",                   null: false
+    t.text     "metadata",    default: "{}"
+    t.integer  "sort_key",                   null: false
+    t.integer  "project_id",                 null: false
+    t.boolean  "most_recent",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["project_id", "most_recent"], name: "index_project_transitions_parent_most_recent", unique: true, where: "most_recent", using: :btree
+    t.index ["project_id", "sort_key"], name: "index_project_transitions_parent_sort", unique: true, using: :btree
   end
 
   create_table "project_users", force: :cascade do |t|

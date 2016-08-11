@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  include Statesman::Adapters::ActiveRecordQueries
+
   # TO DO => check Trello for models assoc. & valid. to add
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
@@ -10,9 +12,12 @@ class Project < ApplicationRecord
   has_one :dimension
   has_one :quality_control
   has_many :topics
+  has_many :transitions, class_name: "ProjectTransition", autosave: false
 
-  validates :title, :client, :state, :cycle, :measurement_unit, presence: true
-  validates :length, :width, :height, :min_wall_thickness,
+
+  # validates :state, :cycle, presence: true
+  validates :title, :client, :measurement_unit, presence: true
+  validates :length, :width, :height, :min_wall_thickness, :github_owner,
             :min_hole_diameter, :max_pipe_diameter, presence: true
 
   validates :length, :width, :numericality => { greater_than: 0, less_than_or_equal_to: BigDecimal.new(250)} # TO DO => if not only mm => convertor
@@ -20,6 +25,8 @@ class Project < ApplicationRecord
   validates :min_wall_thickness, :numericality => { greater_than_or_equal_to: BigDecimal.new(0.2, 3)} # TO DO => if not only mm => convertor
   validates :min_hole_diameter, :numericality => { greater_than_or_equal_to: BigDecimal.new(0.3, 3)} # TO DO => if not only mm => convertor
   validates :max_pipe_diameter, :numericality => { greater_than: 0, less_than: BigDecimal.new(0.8, 3)} # TO DO => if not only mm => convertor
+  validates :impossible_details, :trapped_volumes, inclusion: {in: [false], allow_nil: false}
+
 
   validates :thales_id, presence: true, uniqueness: true
   validates :repo_id, presence: true, uniqueness: true, on: :update
@@ -62,4 +69,24 @@ class Project < ApplicationRecord
   def repo_uri
     "#{github_owner}/#{repo_name}"
   end
+
+  # STATE MACHINE METHODS
+  def state_machine
+    @state_machine ||= ProjectStateMachine.new(self, transition_class: ProjectTransition,
+                                                     association_name: :transitions)
+  end
+
+  def self.transition_name
+    :transitions
+  end
+
+  def self.transition_class
+    ProjectTransition
+  end
+  private_class_method :transition_class
+
+  def self.initial_state
+    :pending
+  end
+  private_class_method :initial_state
 end
