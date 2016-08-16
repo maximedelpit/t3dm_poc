@@ -1,0 +1,31 @@
+.card {
+  .row {
+    margin-bottom: 0;
+  }
+  .card-image img {
+    height: 170px;
+  }
+  .card-content {
+    padding: 10px;
+    a {
+      color: $link-color;
+    }
+    .title {
+      text-transform: capitalize;
+    }
+    .date {
+      color: $gray-light !important;
+    }
+  }
+
+  .card-action {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    background-color: $gray-lighter
+
+  }
+}
+

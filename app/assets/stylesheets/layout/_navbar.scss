@@ -1,20 +1,21 @@
 /* Main class */
-nav {
+.nav-large {
+  height: 30vh;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), image-url('bg-l-nav.png');
   .nav-wrapper {
     padding: 7% 3% 3% 3%;
-
-    .brand-logo img {
-      width: 70%;
-    }
   }
 }
 
-
-.nav-s {
-  height: 10vh
+.nav-small {
+  height: 6vh;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), image-url('bg-l-nav.png');
+  .nav-wrapper {
+    padding: 0% 5%;
+  }
 }
 
-.nav-l {
-  height: 30vh
+.nav-wrapper .brand-logo img {
+  width: 70%;
 }
+

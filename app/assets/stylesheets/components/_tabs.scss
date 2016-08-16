@@ -1,0 +1,29 @@
+#projects-by-status {
+  background-color: $sky-blue;
+  .tabs {
+    background-color: inherit;
+    color: white;
+    .tab {
+      text-transform: none;
+      a {
+        color: white;
+        font-weight: lighter;
+        &:hover, &:focus, &:active {
+          color: inherit;
+          background-color: $sky-blue-dark;
+        }
+      }
+      .active {
+        border: none;
+        background-color: $turquoise;
+        &:hover, &:focus, &:active {
+          color: inherit;
+          background-color: $turquoise;
+        }
+      }
+    }
+  }
+  .row .col {
+    padding: 0;
+  }
+}

@@ -31,18 +31,6 @@
   *  24. Progress Bar
   */
 
-// Semantic color scheme
-$primary-color: $blue;
-$primary-color-light: $sky-blue;
-$primary-color-dark: $navy-blue;
-$secondary-color: $turquoise;
-$success-color: $green;
-$error-color: $red;
-
-$link-color: $gray-darker;
-
-
-
 /* 1. Colors
    ========================================================================== */
 $primary-color: $blue;
@@ -53,6 +41,12 @@ $success-color: $green;
 $error-color: $red;
 $link-color: $gray-darker;
 
+/* 8. Dropdown
+   ========================================================================== */
+$dropdown-hover-bg-color: #eee !default;
+$dropdown-color: $link_color !default;
+$dropdown-item-height: 10px !default;
+
 /* 10. Forms
    ========================================================================== */
 $label-font-size: 1rem;
@@ -60,6 +54,12 @@ $label-font-size: 1rem;
 /* 13. Navigation Bar
    ========================================================================== */
 $navbar-font-size : $nav-size;
+
+/* 17. Tabs
+   ========================================================================== */
+$tabs-underline-color: $secondary-color !default;
+$tabs-text-color: $primary-color !default;
+$tabs-bg-color: transparent !default;
 
 /* 20. Typography
    ========================================================================== */

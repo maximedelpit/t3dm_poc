@@ -12,7 +12,7 @@ RSpec.describe ProjectStateMachine do
       expect(subject.current_state).to eq("pending")
     end
     it 'can transition from state N to state N+1 excl. last ' do
-      states = subject.states
+      states = subject.ordered_states
       expect(
         states.all? do |state|
           index = states.find_index(state)
@@ -25,7 +25,7 @@ RSpec.describe ProjectStateMachine do
       ).to eq(true)
     end
     it 'can transition from state N to state N-1 excl first' do
-      reverse_states = subject.states.reverse
+      reverse_states = subject.ordered_states.reverse
       expect(
         reverse_states.all? do |state|
           index = reverse_states.find_index(state)

@@ -1,7 +1,7 @@
 class ProjectStateMachine
   include Statesman::Machine
 
-  STATES = [ :pending, :design_analysis, :feasability, :bid, :pricing_estimates,
+  STATES = [ :pending, :design_analysis, :feasibility, :bid, :pricing_estimates,
              :bid_review, :planning, :production, :production_orders, :finishing,
              :quality_control, :payment, :shipping, :satisfaction
   ]
@@ -36,23 +36,19 @@ class ProjectStateMachine
     project.update(cycle: 'co-engineering')
   end
 
-
-  # state :pending, initial: true
-  # state :design_analysis
-  # state :feasability
-  # state :bid
-  # state :pricing_estimates
-  # state :bid_review
-  # state :planning
-  # state :production
-  # state :production_orders
-  # state :finishing
-  # state :quality_control
-  # state :payment
-  # state :shipping
-  # state :satisfaction
-
-  def states
+  def ordered_states
     STATES
+  end
+
+  def next
+    current_index = STATES.find_index(current_state)
+    next_state = STATES[current_index + 1]
+    can_transition_to?(next_state) ? transition_to!(next_state) : raise
+  end
+
+  def previous
+    current_index = STATES.find_index(current_state)
+    previous_state = STATES[current_index - 1]
+    can_transition_to?(previous_state) ? transition_to!(previous_state) : raise
   end
 end
