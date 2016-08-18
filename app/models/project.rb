@@ -36,7 +36,7 @@ class Project < ApplicationRecord
                                 :surface, :dimension, :quality_control,
                                 reject_if: :all_blank, allow_destroy: true
 
-  scope :in_phasis, -> (filter) {in_state(self.send(filter)).distinct}
+  scope :in_phasis, -> (filter) {in_state(ProjectStateMachine.send("#{filter}?")).distinct}
 
   include Project::ExternalInput
 
@@ -72,6 +72,10 @@ class Project < ApplicationRecord
     "#{github_owner}/#{repo_name}"
   end
 
+  def current_branch
+    self.state_machine
+  end
+
   # STATE MACHINE METHODS
   def state_machine
     @state_machine ||= ProjectStateMachine.new(self, transition_class: ProjectTransition,
@@ -91,17 +95,4 @@ class Project < ApplicationRecord
     :pending
   end
   private_class_method :initial_state
-
-  def self.feasibility
-    [:pending, :design_analysis, :feasibility]
-  end
-
-  def self.bid
-    [:bid, :pricing_estimates, :bid_review]
-  end
-
-  def self.production
-    [ :planning, :production, :production_orders, :finishing, :quality_control,
-      :payment, :shipping, :satisfaction ]
-  end
 end

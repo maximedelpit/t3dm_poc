@@ -3,19 +3,29 @@
 # http://mattgreensmith.net/2013/08/08/commit-directly-to-github-via-api-with-octokit/
 class RepoManager
   require "base64" # Github file encoded in base64
+  include Cache
 
-  def initialize(user_id, project_id, file_path = nil, file_name = nil)
+  def initialize(user_id, project_id, options= {})
     @user = User.find(user_id)
     @octokit_client = Octokit::Client.new(:access_token => @user.token)
     @project = Project.find(project_id)
-    @file_path = file_path
-    @file_name = file_name
+    @file_path = options[:file_path]
+    @file_name = options[:file_name]
   end
 
   def generate_full_repo
     create_repo
     new_commit = create_commit("master", create_tree_repo_architecture, "Create repo architecture")
     add_commit_to_branch("master", new_commit)
+  end
+
+  ############ Retrieve info  based on branch name && sha ############
+  def retrieve_repo_architecture(branch_name)
+    # TO DO cache
+    tree_sha = get_branch_ref_tree_sha(branch_name)
+    from_cache(@project.id, @project.repo_uri, branch_name, tree_sha, "structure") do
+      response = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
+    end
   end
 
   private

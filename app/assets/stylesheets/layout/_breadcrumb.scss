@@ -1,0 +1,32 @@
+// OVERIDDE MATERIALIZE
+#breadcrumb {
+  line-height: 50px;
+  height: 6vh;
+  font-size: $nav-size;
+  color: $gray-dark;
+  z-index: 2;
+  .row {
+    margin-bottom: 0;
+    height: 100%;
+  }
+  .project-info {
+    .project-title {
+      text-transform: uppercase;
+      font-weight: 900;
+      margin: 0;
+      line-height: 40px;
+    }
+    .date {
+      margin: 0;
+      line-height: 0px;
+    }
+  }
+  .breadcrumb {
+    font-size: $nav-size;
+    color: $gray-dark;
+    opacity: 1;
+    &:before {
+      color: $gray-dark;
+    }
+  }
+}

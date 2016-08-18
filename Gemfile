@@ -13,6 +13,10 @@ gem 'omniauth-github'
 gem "octokit", "~> 4.0"
 
 gem 'redis'
+gem 'redis-namespace'
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra/sinatra'  # Dependency for the Sidekiq Dashboard
+gem 'sidekiq-failures'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -21,6 +25,9 @@ gem 'materialize-sass'
 gem 'font-awesome-sass'
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'autoprefixer-rails'
+gem 'rails-assets-jstree', source: 'https://rails-assets.org'
+
+
 
 
 # STI relations for specs
@@ -28,6 +35,9 @@ gem 'ancestry'
 
 # State Machines
 gem 'statesman', '~> 2.0', '>= 2.0.1'
+
+# cache octokit
+# gem 'faraday-http-cache'
 
 group :development, :test do
   # debug

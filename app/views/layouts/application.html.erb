@@ -15,7 +15,6 @@
       <%= render 'shared/navbar', size: 'large' %>
     <% else %>
       <%= render 'shared/navbar', size: 'small' %>
-      <%#= render 'shared/breadcrumb', breadcrumb: generate_breadcrumb %>
     <% end %>
     <div class="panel-container">
       <section class="panel vertical">
@@ -23,7 +22,9 @@
       </section>
       <section class="panel core">
         <%= render 'shared/flashes' %>
-        <%= yield %>
+        <div class="row">
+          <%= yield %>
+        </div>
       </section>
     </div>
 

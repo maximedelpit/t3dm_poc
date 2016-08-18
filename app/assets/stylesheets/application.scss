@@ -3,6 +3,7 @@
 @import 'materialize';
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "jstree";
 
 // Graphical variables
 @import "config/variables";
@@ -13,3 +14,7 @@
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
+.row {
+  margin: 0;
+}

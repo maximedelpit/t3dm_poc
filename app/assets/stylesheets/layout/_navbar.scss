@@ -8,14 +8,20 @@
 }
 
 .nav-small {
-  height: 6vh;
+  height: 30vh;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), image-url('bg-l-nav.png');
   .nav-wrapper {
-    padding: 0% 5%;
+    height: 6vh;
+    padding: 0% 3%;
+    z-index: 10;
+    ul.right.hide-on-med-and-down {
+      height: 6vh;
+    }
   }
 }
 
 .nav-wrapper .brand-logo img {
   width: 70%;
 }
+
 

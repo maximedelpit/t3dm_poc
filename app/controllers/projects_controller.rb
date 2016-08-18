@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
   end
 
   def new
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
         file_path = nil
         file_name = nil
       end
-      RepoManager.new(current_user.id, @project, file_path, file_name).generate_full_repo
+      RepoManager.new(current_user.id, @project, {file_path: file_path, file_name: file_name}).generate_full_repo
       # TO DO save repo id
       # TO DO webhook
       redirect_to project_path(@project)

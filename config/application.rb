@@ -25,5 +25,8 @@ module T3dmPoc
     # Used to integrate STI models & services
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}')]
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '{**/}')]
+
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
