@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
 
   def show
     @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
+    binding.pry
   end
 
   def new
