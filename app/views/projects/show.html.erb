@@ -40,12 +40,7 @@
     </div>
     <div id="folders" class="col s12">
       <div id="jstree">
-        <%#= render 'repo_tree' %>
-        <!-- <ul>
-          <%# @repo_tree.each do |part| do %>
-            <li></li>
-          <%# end %>
-        </ul> -->
+        <%= nested_trees(@repo_tree) %>
 
 
 
@@ -53,6 +48,9 @@
           <li>Root node 1
             <ul>
               <li id="child_node_1">Child node 1</li>
+                <ul>
+                  <li>bla</li>
+                </ul>
               <li>Child node 2</li>
             </ul>
           </li>

@@ -26,7 +26,7 @@ class RepoManager
     repo_tree = from_cache(@project.id, @project.repo_uri, branch_name, tree_sha, "structure") do
       response = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
     end
-    return arrange_tree(flat_structure(repo_tree))
+    return arrange_tree(flat_structure(repo_tree[:tree]))
   end
 
   private
@@ -185,5 +185,6 @@ class RepoManager
         end
       end
     end
+    return tree_hash
   end
 end

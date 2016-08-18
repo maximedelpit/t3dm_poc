@@ -1,4 +1,8 @@
 $(document).ready(function() {
-  $('#jstree').jstree();
+  $("#jstree").jstree({
+    "core" : {
+      "multiple" : false
+    }
+  });
 });
 

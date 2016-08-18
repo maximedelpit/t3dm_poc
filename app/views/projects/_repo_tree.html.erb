@@ -1,10 +1,11 @@
-<ul>
-  <li>Root node 1
-    <ul>
-      <li id="child_node_1">Child node 1</li>
-      <li>Child node 2</li>
-    </ul>
+
+  <li data-sha='<%= data.sha %>' data-url='<%= data.url %>' data-type='<%= data.type %>'><%= data.name %>
+    <% if subdata != {} %>
+      <% subdata.each do | sub, value| %>
+        <ul>
+          <li data-sha='<%= sub.sha %>' sub-url='<%= sub.url %>' sub-type='<%= sub.type %>'><%= sub.name %></li>
+        </ul>
+      <% end %>
+    <% end %>
   </li>
-  <li>Root node 2</li>
-</ul>
 
