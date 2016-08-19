@@ -33,4 +33,8 @@ class User < ApplicationRecord
     self.entity = 'Max Corp'
     self.category = 'client'
   end
+
+  def initials
+    name.split().map {|word| word[0].capitalize}.join('')
+  end
 end

@@ -1,13 +1,28 @@
-<div class="user-overview">
-  <div><%= image_tag user.picture, alt:"user_profile_picture", class:"avatar-large" %></div>
-  <div class="user-identity">
+<div class="user-overview <%= size %>">
+  <!-- Dropdown Trigger -->
+  <a class='dropdown-button' href='#' data-activates='user_actions' data-beloworigin='true' data-constrainwidth='false'>
+    <%= image_tag user.picture, alt:"user_profile_picture", class:"avatar-#{size}" %>
+  </a>
+  <div class="user-identity <%= size %>">
     <span><strong><%= user.name %></strong></span>
     <span class="position">
       <span><%= user.entity.capitalize %></span>
       <span> - </span>
       <span><%= user.category.capitalize %></span>
-      <hr>
-      <span class='after-break-line'><%= link_to 'Edit', edit_user_registration_path %></span>
+        <% if size == 'large' %>
+          <hr>
+          <span class='after-break-line'><%= link_to 'Edit', edit_user_registration_path %></span> -
+          <span class='after-break-line'><%= link_to 'Logout', destroy_user_session_path %></span>
+        <% end %>
     </span>
   </div>
 </div>
+<% if size == 'small' %>
+  <!-- Dropdown Structure -->
+  <ul id='user_actions' class='dropdown-content'>
+    <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+    <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+    <li class="divider"></li>
+    <li><%= link_to 'Delete Account', cancel_user_registration_path %></li>
+  </ul>
+<% end %>

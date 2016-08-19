@@ -1,10 +1,19 @@
 class ProjectsController < ApplicationController
   before_action :find_project, except: [:index, :new, :create]
   def index
-    @projects = current_user.projects
+    if params[:filters]
+      @projects = current_user.projects.in_phasis(params[:filters])
+    else
+      @projects = current_user.projects
+    end
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def show
+    @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
   end
 
   def new
@@ -17,8 +26,6 @@ class ProjectsController < ApplicationController
     @project.users.push(current_user)
     @project.client = current_user.entity
     @project.github_owner = current_user.github_login
-    @project.state = 'pending' # TO DO state_machine init
-    @project.cycle = 'Co-Engineering' # TO DO state_machine init
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
     if @project.save
@@ -29,10 +36,10 @@ class ProjectsController < ApplicationController
         file_path = nil
         file_name = nil
       end
-      RepoManager.new(current_user.id, @project, file_path, file_name).generate_full_repo
+      RepoManager.new(current_user.id, @project, {file_path: file_path, file_name: file_name}).generate_full_repo
       # TO DO save repo id
       # TO DO webhook
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else
       build_spec_fields
       render :new
@@ -43,6 +50,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project.state_machine.next if params[:next_state]
+    @project.state_machine.next if params[:prev_state]
   end
 
   private

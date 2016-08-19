@@ -1,0 +1,12 @@
+#timeline {
+  height: 18vh;
+  background-color: transparent;
+  .accordeon {
+    height: 15vh;
+    background: $blue-opaq;
+  }
+  .accordeon.open {
+    background: $turquoise-opaq;
+  }
+
+}

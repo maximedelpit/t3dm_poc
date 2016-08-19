@@ -3,19 +3,30 @@
 # http://mattgreensmith.net/2013/08/08/commit-directly-to-github-via-api-with-octokit/
 class RepoManager
   require "base64" # Github file encoded in base64
+  include Cache
 
-  def initialize(user_id, project_id, file_path = nil, file_name = nil)
+  def initialize(user_id, project_id, options= {})
     @user = User.find(user_id)
     @octokit_client = Octokit::Client.new(:access_token => @user.token)
     @project = Project.find(project_id)
-    @file_path = file_path
-    @file_name = file_name
+    @file_path = options[:file_path]
+    @file_name = options[:file_name]
   end
 
   def generate_full_repo
     create_repo
     new_commit = create_commit("master", create_tree_repo_architecture, "Create repo architecture")
     add_commit_to_branch("master", new_commit)
+  end
+
+  ############ Retrieve info  based on branch name && sha ############
+  def retrieve_repo_architecture(branch_name)
+    # TO DO cache
+    tree_sha = get_branch_ref_tree_sha(branch_name)
+    repo_tree = from_cache(@project.id, @project.repo_uri, branch_name, tree_sha, "structure") do
+      response = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
+    end
+    return arrange_tree(flat_structure(repo_tree[:tree]))
   end
 
   private
@@ -114,6 +125,66 @@ class RepoManager
     # the tree last commit of the branch point to
     return @octokit_client.commit(@project.repo_uri, get_branch_ref_sha(branch_name)).commit.tree.sha
   end
+
+  ############ Treatement of github tree to transform within tree js structure ############
+  def flat_structure(repo_tree)
+    # Used to add ancestry within github main tree
+    # We sort them by path
+    # maybe use sha for ancestry items ?
+    repo_tree.sort_by do |item|
+      split_path = item.path.split('/')
+      item[:id] = item.sha
+      item[:name] = split_path.last
+      item[:ancestry] = split_path.select {|v| v != item[:name]}.join('/')
+      item[:ancestry] = nil if item[:ancestry].empty?
+      item[:parent] = split_path[-2]
+      # split_path.length == 1 ? item[:node] = item[:id] : item[:node] = split_path[-2]
+      item.path
+    end
+  end
+
+
+  def arrange_tree(ancestry_repo_tree)
+    tree_by_type = ancestry_repo_tree.group_by(&:type)
+    tree_hash = build_tree_architecture(tree_by_type['tree'])
+    return fill_with_blobs(tree_hash, tree_by_type['blob'])
+  end
+
+  def build_tree_architecture(trees)
+    tree_hash = {}
+    trees.each do | tree |
+      tree[:path].split('/').reduce(tree_hash) do |m,k|
+        parent = m.keys.find {|parent| parent.name == k}
+        parent ||= tree
+        # m.merge!(parent =>  {}) && m = m[parent]
+        m.merge!(parent =>  {}) do |key, oldval, newval|
+          if m[key] != newval
+            oldval
+          elsif oldval == {}
+            newval
+          else
+            "pas vu pas pris"
+          end
+        end
+        m = m[parent]
+      end
+    end
+    return tree_hash
+  end
+
+  def fill_with_blobs(tree_hash, blobs)
+    blobs.each do | blob |
+      blob[:path].split('/').reduce(tree_hash) do | m, k |
+        if k == blob.name
+          m.merge!(blob => {})
+        else
+          parent = m.keys.find {|parent| parent.name == k }
+          # parent ||= tree
+          # pas bon
+          m = m[parent]
+        end
+      end
+    end
+    return tree_hash
+  end
 end
-
-

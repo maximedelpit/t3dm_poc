@@ -4,4 +4,12 @@ class Spec < ApplicationRecord
 
   validates :type, presence: true
   validates :title, presence: true
+
+  def full_spec_description
+    if title =='other' && description
+      return "#{type}: #{title} - #{decription}"
+    else
+      return "#{type}: #{title}"
+    end
+  end
 end

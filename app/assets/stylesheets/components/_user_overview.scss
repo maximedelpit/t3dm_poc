@@ -33,5 +33,13 @@ ul.right.hide-on-med-and-down {
         color: grey;
       }
     }
+    .after-break-line {
+      display: inline-block;
+      padding-right: 2px;
+    }
   }
+}
+
+.user-overview.small {
+  margin-top: 10px;
 }

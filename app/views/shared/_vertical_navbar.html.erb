@@ -1,2 +1,12 @@
 <nav class='vertical-nav-wrapper'>
+  <%= link_to projects_path,  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "All Projects", class: 'tooltipped' do %>
+    <i class="material-icons">work</i>
+  <% end %>
+  <%= link_to projects_path(store: true),  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "Project Catalog", class: 'tooltipped' do %>
+    <i class="material-icons">photo_library</i>
+  <% end %>
+
+  <%= link_to new_project_path,  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "New Project", class: 'tooltipped' do %>
+    <i class="material-icons">create_new_folder</i>
+  <% end %>
 </nav>

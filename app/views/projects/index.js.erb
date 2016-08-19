@@ -1,0 +1,19 @@
+<% if params[:filters] %>
+  var tab_id = '/projects?filters=<%= j params[:filters] %>';
+<% else %>
+  var tab_id = '/projects';
+<% end %>
+$('#projects-by-status ul.tabs').tabs()
+$('#projects-by-status ul.tabs').tabs('select_tab', tab_id)
+// $('#projects-by-status ul.tabs').tabs()
+// $('a[href="'+tab_id+'"]').addClass('active');
+<% if @projects.empty? %>
+  var filter = <%= params[:filters] %>;
+  var new_partial = '<p>No projects under' + filter +' process </p>'
+<% elsif params[:store] %>
+  var new_partial  = '<%= j render "project_store" %>'
+<% else %>
+  var new_partial  = '<%= j render "project_list" %>'
+<% end %>
+
+$('.main .row').html(new_partial)

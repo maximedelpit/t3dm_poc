@@ -1,9 +1,14 @@
 <div class="row">
   <div>
-    <h1 class="col s12">New Project</h1>
-    <p class="col s12"><em>Please fill the following form</em></p>
+    <h3 class="col s12">New Project</h3>
+    <div id='instructions'>
+      <p class="col s12">
+      <em>Please fill the following form. If you get lost, do not hesitate to onsult guidelines or contact us. Be careful to submit us only STL & STEPS file formats. Other format will be added soon. If you need specific specs, do not forget to send a description we will get back to you for feasability.</em>
+      </p>
+    </div>
+
     <%= simple_form_for @project, html: {class:"col s6"} do |f| %>
-      <h3 class="col s12">Project Details</h3>
+      <h4 class="col s12">Project Details</h4>
       <%= f.error_notification %>
       <%= f.input :title, wrapper_html: { class: 's12' } %>
       <%= f.input :client_project_id, wrapper_html: { class: 's12' } %>
@@ -11,14 +16,32 @@
         <label class="control-label" >T3DM project ID:</label>
         <span class='form-control'><%= Project::ExternalInput.next_thales_id %></span>
       </div>
-      <%= f.input :file, as: :file, label: 'Upload Attachment', wrapper_html: { class: 's12' } %>
+      <%= f.input "file", as: :file, label: 'Upload Attachment', wrapper_html: { class: 's12' } %>
       <%= f.input :part_functionality, wrapper_html: { class: 's12' }  %></br>
-      <h3 class="col s12" id="specs">Specs</h3>
+      <h4 class="col s12" id="specs">Specs</h4>
       <% @specs.each do |key, spec| %>
         <%= render 'spec_field', f: f, spec_type: key %>
       <% end %>
       <%= f.input :notes, wrapper_html: { class: 's12' }  %>
       <%= f.button :submit, class:'btn' %>
     <% end %>
+    <div class="col s6" id="guidelines">
+      <h4>Guidelines</h4>
+        <h5>Machine details (ref: #M424242 )</h5>
+        <ul>
+          <li>Dimensions: in millimeters(mm)</li>
+          <li>Max width: 250mm</li>
+          <li>Max lenght: 250mm</li>
+          <li>Max height: 300mm</li>
+          <li>Min wall thickness: 0.2mm</li>
+          <li>Min hole diameter: 0.3mm</li>
+          <li>Min pipe diameter: 0.8mm</li>
+          <li>No impossible details - no trapped volumes</li>
+          <li><%= link_to 'More', '#' %></li>
+        </ul>
+        <h5>Doc Resource</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+        <%= link_to 'More', '#' %>
+    </div>
   </div>
 </div>

@@ -17,9 +17,29 @@
 .bg-grey {
   background: #aeaeae;
 }
+.bg-gray-lighter {
+  background: $gray-lighter;
+}
 .bg-blue {
   background: #00a3e1;
 }
-.bg-dark-blue {
-  background: #3b5998;
+.bg-navy-blue {
+  background: $navy-blue;
 }
+
+.bg-client {
+  background: $sky-blue;
+}
+
+.bg-methods {
+  background: $purple;
+}
+
+.bg-supplier {
+  background: $orange;
+}
+
+.bg-production {
+  background: $light-green;
+}
+

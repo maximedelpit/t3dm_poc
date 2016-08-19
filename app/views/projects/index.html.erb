@@ -1,10 +1,36 @@
-<h1>Your projects</h1>
-<div class="row">
-  <% @projects.each do |project| %>
-    <div class='col s6'>
-      <h2><%= project. title %></h2>
-      <script src="https://embed.github.com/view/3d/maximedelpit/T3DM-000014-test-up-1/master/3D%20Models/medaille_ambition10__MEDAILLE_AMBITION10.stl"></script>
-
+<!-- Projects nav -->
+<div id='projects-by-status'>
+  <div class="row">
+    <div class="col s8">
+      <ul class="tabs">
+        <li class="tab">
+          <%= link_to 'All Projects', projects_path(store: params[:store]), target:'', class: 'active', remote: true %>
+        </li>
+        <li class='tab'>
+          <%= link_to 'feasibility', projects_path(filters: 'feasibility', store: params[:store]), target:'', remote: true %>
+        </li>
+        <li class='tab'>
+          <%= link_to 'Bid', projects_path(filters: 'bid', store: params[:store]), target:'', remote: true %>
+        </li>
+        <li class='tab'>
+          <%= link_to 'Production', projects_path(filters: 'production', store: params[:store]), target:'', remote: true %>
+        </li>
+        <li class='tab'>
+          <%= link_to 'Archives', projects_path(filters: 'archives', store: params[:store]), target:'', remote: true %>
+        </li>
+      </ul>
     </div>
-  <% end %>
+  </div>
+</div>
+
+<div class='main'>
+  <div class="row">
+    <% if @projects.empty? %>
+      <p><em>No project yet! <%= link_to 'Create one', new_project_path %> </em></p>
+    <% elsif params[:store] %>
+      <%= render 'project_store' %>
+    <% else %>
+      <%= render 'project_list' %>
+    <% end %>
+  </div>
 </div>

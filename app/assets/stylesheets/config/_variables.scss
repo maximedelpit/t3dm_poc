@@ -4,6 +4,7 @@
 
   $nav-size: 12px;
   $text-size: 12px;
+  $small-size: 10px;
 /* -------------------------------------
  * Colors
  * ------------------------------------- */
@@ -13,12 +14,16 @@ $brand-color: #D23333;
 $red: #ff053a;
 $navy-blue: #08112a;
 $blue: #0f1a53;
+$blue-opaq: rgba(15, 26, 83, 0.8);
 $sky-blue: #42d0f8;
+$sky-blue-dark: darken($sky-blue, 10%);
 $turquoise: #00899d;
+$turquoise-opaq: rgba(0, 137, 157, 0.8);
 $orange: #ffba5a;
-$purlple: #c765b1;
+$orange-opacity: rgba(255, 186, 90, 0.2);
+$purple: #c765b1;
 $green: #00c23c;
-$fade-green: #54b979;
+$light-green: #54b979;
 // Gray scale
 $gray-darker:  darken(#434343, 20%);
 $gray-dark:    darken(#434343, 10%);

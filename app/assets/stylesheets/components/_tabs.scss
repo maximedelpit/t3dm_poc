@@ -1,0 +1,51 @@
+#projects-by-status {
+  background-color: $sky-blue;
+  .tabs {
+    background-color: transparent;
+    color: white;
+    .tab {
+      text-transform: none;
+      a {
+        color: white;
+        font-weight: lighter;
+        &:hover, &:focus, &:active {
+          color: inherit;
+          background-color: $sky-blue-dark;
+        }
+      }
+      .active {
+        border: none;
+        background-color: $turquoise;
+        &:hover, &:focus, &:active {
+          color: inherit;
+          background-color: $turquoise;
+        }
+      }
+    }
+  }
+  .row .col {
+    padding: 0;
+  }
+}
+
+// OVERIDDE MATERIALIZE
+.tabs {
+  background-color: transparent;
+  color: white;
+}
+.tabs.small {
+  height: 38px;
+  .tab {
+    line-height: 38px;
+    height: 100%;
+  }
+}
+.tab-content {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0px 0px 0px;
+  }
+  // OVERIDDE MATERIALIZE
+  ul.sublist {
+    margin: 0 0 0 5px !important;
+  }
+}

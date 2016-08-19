@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :projects
   resources :topics, only: [:create, :show]
 
+  require "sidekiq/web"
+  authenticate :user, lambda { |u| u.name == 'maximedelpit'} do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

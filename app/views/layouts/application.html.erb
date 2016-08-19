@@ -11,15 +11,18 @@
 
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-
+    <% if params[:controller] == 'projects' && params[:action] == 'index' %>
+      <%= render 'shared/navbar', size: 'large' %>
+    <% else %>
+      <%= render 'shared/navbar', size: 'small' %>
+    <% end %>
     <div class="panel-container">
       <section class="panel vertical">
         <%= render 'shared/vertical_navbar' %>
       </section>
       <section class="panel core">
-        <div class="main">
+        <%= render 'shared/flashes' %>
+        <div class="row">
           <%= yield %>
         </div>
       </section>
