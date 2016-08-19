@@ -40,22 +40,19 @@
     </div>
     <div id="folders" class="col s12">
       <div id="jstree">
-        <%= nested_trees(@repo_tree) %>
-
-
-
-        <ul>
-          <li>Root node 1
-            <ul>
-              <li id="child_node_1">Child node 1</li>
+        <ul><%= nested_trees(@repo_tree) %></ul>
+        <!-- <ul>
+          <li data-sha='<%#= data.sha %>' data-url='<%#= data.url %>' data-type='<%#= data.type %>'><%#= data.name %>
+            <%# if subdata != {} %>
+              <%# subdata.each do | sub, value| %>
                 <ul>
-                  <li>bla</li>
+                  <li data-sha='<%#= sub.sha %>' sub-url='<%#= sub.url %>' sub-type='<%#= sub.type %>'><%#= sub.name %></li>
                 </ul>
-              <li>Child node 2</li>
-            </ul>
+              <%# end %>
+            <%# end %>
+            <ul><%#= yield %></ul>
           </li>
-          <li>Root node 2</li>
-        </ul>
+        </ul> -->
       </div>
 
     </div>
@@ -64,7 +61,7 @@
 
 <!-- Step overview -->
 <div id='step-focus' class="col s8 full">
-  <p>blab</p>
+  <div id='plop'>chababda</div>
 </div>
 
 <!-- Topics overview -->
