@@ -1,5 +1,13 @@
-<li data-sha='<%= data.sha %>' data-url='<%= data.url %>' data-type='<%= data.type %>'>
-  <%= data.name %>
+<li id='<%= data.sha %>' data-url='<%= data.url %>' data-gtype='<%= data.type %>' data-jstree='{ "type" : "<%= data.extension %>"}', data-path='<%= data.path %>' >
+  <span class="fileinput-node">
+    <%= data.name %>
+    <% if data.type == 'tree' %>
+      <%= file_field_tag  "sha[#{data.sha}[file]]", disabled: false, accept: "*", class:'input-tree' %>
+      <%= hidden_field_tag "sha[#{data.sha}[path]]", nil, {class:'sha-path-input'} %>
+    <% end %>
+  </span>
   <%= yield %>
 </li>
+
+
 

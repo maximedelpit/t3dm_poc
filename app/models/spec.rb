@@ -7,7 +7,7 @@ class Spec < ApplicationRecord
 
   def full_spec_description
     if title =='other' && description
-      return "#{type}: #{title} - #{decription}"
+      return "#{type}: #{title} - #{description}"
     else
       return "#{type}: #{title}"
     end

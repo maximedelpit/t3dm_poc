@@ -29,15 +29,8 @@ class ProjectsController < ApplicationController
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
     if @project.save
-      if @file
-        file_path = @file.tempfile.path
-        file_name = @file.original_filename
-      else
-        file_path = nil
-        file_name = nil
-      end
-      RepoManager.new(current_user.id, @project, {file_path: file_path, file_name: file_name}).generate_full_repo
-      # TO DO save repo id
+      manage_file_upload
+      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).generate_full_repo
       # TO DO webhook
       redirect_to project_path(@project)
     else
@@ -50,8 +43,17 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    # TO DO manage permitted params
     @project.state_machine.next if params[:next_state]
     @project.state_machine.next if params[:prev_state]
+    if params[:upload]
+      sha_key = params[:sha].keys[0]
+      @file = params[:sha][sha_key][:file]
+      manage_file_upload
+      dir_path = params[:sha][sha_key][:path]
+      # For the moment no new branch
+      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, options={})
+    end
   end
 
   private
@@ -70,6 +72,16 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
+  end
+
+  def manage_file_upload
+    if @file
+      @file_path = @file.tempfile.path
+      @file_name = @file.original_filename
+    else
+      @file_path = nil
+      @file_name = nil
+    end
   end
 
   # def build_spec_fields
