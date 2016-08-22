@@ -29,22 +29,89 @@ $(document).ready(function() {
     });
 
     $('.input-tree').on('change',function(event){
-      var folder_name = $(this).closest('li').text();
-      var data_path = $(this).closest('li').data('path');
-      $(this).siblings('.sha-path-input').val(data_path);
-      swal({
-          title: "Upload to" + folder_name, type: "input",
+      if ($(this).val() != '') {
+        var folder_name = $(this).closest('li').text();
+        var data_path = $(this).closest('li').data('path');
+        $(this).siblings('.sha-path-input').val(data_path);
+        var title = "Upload to" + folder_name;
+        swal({
+          title: title,
           text: "Type DIRECT for direct upload \n Or TEAM if you your team to discuss within a topic.",
-          showCancelButton: true, closeOnConfirm: false, animation: "slide-from-top",
-          inputPlaceholder: "Write something"
-        },
-        function(inputValue){
-          if (inputValue === false) return false;
-          if (inputValue != 'TEAM' && inputValue != 'DIRECT' ) { swal.showInputError("You can only write TEAM or DIRECT (capitalized)!"); return false }
-          swal.close();
-          $('.jstree-form').submit(); //utils.js:70 Uncaught TypeError: $.rails.ajax(...).complete is not a function
-        }
-      );
+          input: 'text',
+          inputPlaceholder: "Type TEAM or DIRECT",
+          showCancelButton: true,
+          animation: "slide-from-top",
+          inputValidator: function(value) {
+            return new Promise(function(resolve, reject) {
+              if (value === 'TEAM') {
+                $('#pull_request').val(true);
+                swal.close();
+                $('#pr_fields').openModal({
+                  complete: function() {
+                    // make conditions
+                    $('.jstree-form').submit();
+                  }
+                });
+              } else if (value === 'DIRECT') {
+                $('#pull_request').val(false);
+                swal.close();
+                $('.jstree-form').submit(); //utils.js:70 Uncaught TypeError: $.rails.ajax(...).complete is not a function
+              } else {
+                reject('You can only write TEAM or DIRECT (capitalized)!');
+              }
+            });
+          }
+        }).then(function(result) {
+          swal({
+            type: 'success',
+            html: 'You entered: ' + result
+          });
+          }, function(dismiss) {
+            if ($.inArray(dismiss, ['cancel', 'overlay', 'close']) > -1) {
+              $('.jstree-form .clean-input').each(function(index){
+                $(this).attr('disabled', false);
+                $(this).val('');
+                console.log($(this).attr('id') +'---'+ $(this).val() +'---'+$(this).attr('disabled') )
+              });
+            }
+          })
+      }
+
+
+
+
+      // if ($(this).val() != '') {
+      //   var folder_name = $(this).closest('li').text();
+      //   var data_path = $(this).closest('li').data('path');
+      //   $(this).siblings('.sha-path-input').val(data_path);
+      //   swal({
+      //       title: "Upload to" + folder_name, type: "question", input: 'text',
+      //       text: "Type DIRECT for direct upload \n Or TEAM if you your team to discuss within a topic.",
+      //       showCancelButton: true, closeOnConfirm: false, animation: "slide-from-top",
+      //       inputPlaceholder: "Type TEAM or DIRECT"
+      //     },
+      //     function(inputValue){
+      //       if (inputValue === false) return false;
+      //       if (inputValue != 'TEAM' && inputValue != 'DIRECT' ) {
+      //         swal.showInputError("You can only write TEAM or DIRECT (capitalized)!");
+      //         return false;
+      //       } else if(inputValue === 'TEAM') {
+      //         $('#pull_request').val(true);
+      //         swal.close();
+      //         $('#pr_fields').openModal({
+      //           complete: function() {
+      //             // make conditions
+      //             $('.jstree-form').submit();
+      //           }
+      //         });
+      //       } else {
+      //         $('#pull_request').val(false);
+      //         swal.close();
+      //         $('.jstree-form').submit(); //utils.js:70 Uncaught TypeError: $.rails.ajax(...).complete is not a function
+      //       }
+      //     }
+      //   ).then(function(isConfirm) {debugger;});
+      // }
     });
   });
 });

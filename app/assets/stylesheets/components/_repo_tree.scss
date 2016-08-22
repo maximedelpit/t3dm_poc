@@ -23,3 +23,7 @@
       cursor: pointer;
   }
 }
+
+.jstree-default > .jstree-container-ul > .jstree-node {
+    margin: 3px 0 !important;
+}

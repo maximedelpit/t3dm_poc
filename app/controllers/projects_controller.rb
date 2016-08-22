@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :find_project, except: [:index, :new, :create]
+  before_action :project_update_params, only: :update
   def index
     if params[:filters]
       @projects = current_user.projects.in_phasis(params[:filters])
@@ -47,12 +48,13 @@ class ProjectsController < ApplicationController
     @project.state_machine.next if params[:next_state]
     @project.state_machine.next if params[:prev_state]
     if params[:upload]
+      binding.pry
       sha_key = params[:sha].keys[0]
       @file = params[:sha][sha_key][:file]
       manage_file_upload
       dir_path = params[:sha][sha_key][:path]
       # For the moment no new branch
-      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, options={})
+      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, handle_pull_request)
     end
   end
 
@@ -70,6 +72,13 @@ class ProjectsController < ApplicationController
     return project_params
   end
 
+  def project_update_params
+    params.permit(:sha, :upload, :pull_request, :repo)
+    params[:sha].each do |k, v|
+      params[:sha].delete(k) if v[:path] == ""
+    end
+  end
+
   def find_project
     @project = Project.find(params[:id])
   end
@@ -84,14 +93,17 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # def build_spec_fields
-  #   @specs = {}
-  #   Spec::TYPE.each do | type |
-  #     type_key = type.underscore.to_sym
-  #     @specs[type_key] = @project.specs.build(type: type)
-  #   end
-  #   return @specs
-  # end
+  def handle_pull_request
+    options = {}
+    if params[:pull_request] == 'true'
+      options[:new_branch] = "#{@file_name}-#{current_user.name}-#{Time.now.to_i}".gsub(' ','_')
+      options[:pr] = true
+      options[:pr_title] = params[:repo][:title]
+      options[:pr_body] = params[:repo][:content]
+    end
+    return options
+  end
+
   def build_spec_fields
     # TO DO insert value if params
     @specs = {}

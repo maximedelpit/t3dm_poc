@@ -2,6 +2,7 @@
 # http://www.gitguys.com/topics/git-object-tag/
 # http://mattgreensmith.net/2013/08/08/commit-directly-to-github-via-api-with-octokit/
 class RepoManager
+  # TO DO REFACT & manage errors seb like
   require "base64" # Github file encoded in base64
   require 'digest/sha1'
   include Cache
@@ -30,22 +31,22 @@ class RepoManager
     return arrange_tree(flat_structure(repo_tree[:tree]))
   end
 
-  def upload_file(base_branch, dir_path, options={})
+  def upload_file(base_branch_name, dir_path, options={})
     # NB check if we need to make diff between new and update
     # What was the point of the versionning discussion with benjamin ? => last commit date?
     # TO DO: when treating direct & team => include it in message
-    binding.pry
     if options[:new_branch]
-      head_branch = create_branch(base_branch, new_branch)
+      head_branch = create_branch(base_branch_name, options[:new_branch])
       head_branch_name = head_branch[:ref].split('/').last
     else
-      head_branch_name = base_branch
+      head_branch_name = base_branch_name
     end
     blob = add_file_to_folder(dir_path, @file_path, @file_name, head_branch_name)
     commit = @octokit_client.git_commit(@project.repo_uri, get_branch_ref_sha(head_branch_name))
     new_tree = @octokit_client.create_tree(@project.repo_uri, [blob], {base_tree: commit[:tree][:sha]})
     new_commit = create_repo_architecture_commit(head_branch_name, new_tree, "Upload #{@filename} in #{dir_path}")
     add_commit_to_branch(head_branch_name, new_commit)
+    create_pull_request(base_branch_name, head_branch_name, options[:pr_title], options[:pr_body]) if options[:pr]
   end
   #Get a content blob
     # @octokit_client.contents(@project.repo_uri, path:"3D Models/0_index_projet_list.jpg", sha: "84bb468c935ea2032d2dff95c02a4e7970f0fd10")
@@ -66,11 +67,19 @@ class RepoManager
         private: false,
         auto_init: true
       )
+      create_webhook
       @project.update(repo_id: repository.id)
     rescue Octokit::Response::RaiseError => e
       puts "Mayday! Mayday!"
       e.errors.each {|error| puts "#{error[:resource]} - #{error[:message]}" }
     end
+  end
+
+  def create_webhook
+    whook_url = ENV['HOST'] +"projects/#{@project.id}/github_webhooks"
+    config = { url: whook_url, content_type: 'json', secret: ENV['GITHUB_WEBHOOK_SECRET'] }
+    options = { :events => ['push', 'pull_request', 'repository'], :active => true }
+    @octokit_client.create_hook(@project.repo_uri, 'web', config, options)
   end
 
   def create_tree_repo_architecture(base_tree = nil)
@@ -130,10 +139,10 @@ class RepoManager
     @octokit_client.update_ref(@project.repo_uri, "heads/#{branch_name}", new_commit[:sha])
   end
 
-  def create_pull_request(head_branch, base_branch, title, body)
+  def create_pull_request(base_branch_name, head_branch_name, title, body)
     # base_branch => branch on which to merge i.e master
     # head_branch => branch on which modif has been made i.e new branch commit
-    @octokit_client.create_pull_request(@project.repo_uri, base_branch, head_branch, title, body)
+    @octokit_client.create_pull_request(@project.repo_uri, base_branch_name, head_branch_name, title, body)
   end
 
   # Get all contents

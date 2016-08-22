@@ -39,10 +39,12 @@
       </ul>
     </div>
     <div id="folders" class="col s12">
-      <%= form_for @project, :url => project_path(@project, upload: true), html: {method: :put, class: 'jstree-form'}, remote: true do |f| %>
+      <%= simple_form_for :repo, :url => project_path(@project, upload: true), html: {method: :put, class: 'jstree-form'}, remote: true do |f| %>
+        <%= hidden_field_tag "pull_request", nil, {class: 'clean-input'} %>
         <div id="jstree">
           <ul><%= nested_trees(@repo_tree) %></ul>
         </div>
+        <%= render 'pull_request_modal_form', f: f %>
       <% end %>
 
     </div>

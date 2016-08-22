@@ -3,7 +3,7 @@
 //= require materialize-sprockets
 //= require jstree
 //= require jquery.remotipart
-//= require sweetalert
+//= require sweetalert2
 //= require_tree .
 
 

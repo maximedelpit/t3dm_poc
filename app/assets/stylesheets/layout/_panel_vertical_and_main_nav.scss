@@ -27,7 +27,8 @@
     .row .col.full {
       height: 70vh;
       padding-top: 1vh;
-      overflow-y: auto
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
