@@ -52,13 +52,23 @@
 </div>
 
 <!-- Step overview -->
-<div id='step-focus' class="col s8 full">
-  <div id='plop'>chababda</div>
+<div id='step-focus' class="col s7 full">
+  <h4 class='part-title'>Step Focus</h4>
+  <div class="valign-wrapper" style="height: 60vh;">
+    <h1 style="width: 100%;">WORK IN PROGRESS</h1>
+  </div>
 </div>
 
 <!-- Topics overview -->
-<div class="col s2 full">
-  <p>blab</p>
+<div class="col s3 full">
+  <ul class='title-action'>
+    <li><h4 class='part-title'>Topics</h4></li>
+    <li>
+      <a class="btn-icon-large"><i class="material-icons turquoise">add_circle_outline</i></a>
+    </li>
+  </ul>
+  <%= render 'topics/filters' %>
+  <%= render 'topics/index', topics: @topics %>
 </div>
 
 

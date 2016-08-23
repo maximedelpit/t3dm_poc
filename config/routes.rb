@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  root to: 'pages#home'
+  root to: 'projects#index'
 
   resources :projects do
     resource :github_webhooks, only: :create, defaults: { formats: :json }
+    resources :topics, only: [:create, :show]
   end
-  resources :topics, only: [:create, :show]
+
 
 
   require "sidekiq/web"

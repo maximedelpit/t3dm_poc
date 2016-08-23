@@ -142,7 +142,11 @@ class RepoManager
   def create_pull_request(base_branch_name, head_branch_name, title, body)
     # base_branch => branch on which to merge i.e master
     # head_branch => branch on which modif has been made i.e new branch commit
-    @octokit_client.create_pull_request(@project.repo_uri, base_branch_name, head_branch_name, title, body)
+    pr = @octokit_client.create_pull_request(@project.repo_uri, base_branch_name, head_branch_name, title, body)
+    binding.pry
+    PullRequest.create( project: @project, project_state: @project.state_machine.current_state,
+                  state: pr[:state], user: @user, github_number: pr[:number],
+    )
   end
 
   # Get all contents

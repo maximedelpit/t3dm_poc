@@ -4,19 +4,19 @@
     <div class="col s8">
       <ul class="tabs">
         <li class="tab">
-          <%= link_to 'All Projects', projects_path(store: params[:store]), target:'', class: 'active', remote: true %>
+          <%= link_to 'All Projects', projects_path(list: params[:list]), target:'', class: 'active', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'feasibility', projects_path(filters: 'feasibility', store: params[:store]), target:'', remote: true %>
+          <%= link_to 'feasibility', projects_path(filters: 'feasibility', list: params[:list]), target:'', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'Bid', projects_path(filters: 'bid', store: params[:store]), target:'', remote: true %>
+          <%= link_to 'Bid', projects_path(filters: 'bid', list: params[:list]), target:'', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'Production', projects_path(filters: 'production', store: params[:store]), target:'', remote: true %>
+          <%= link_to 'Production', projects_path(filters: 'production', list: params[:list]), target:'', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'Archives', projects_path(filters: 'archives', store: params[:store]), target:'', remote: true %>
+          <%= link_to 'Archives', projects_path(filters: 'archives', list: params[:list]), target:'', remote: true %>
         </li>
       </ul>
     </div>
@@ -27,10 +27,10 @@
   <div class="row">
     <% if @projects.empty? %>
       <p><em>No project yet! <%= link_to 'Create one', new_project_path %> </em></p>
-    <% elsif params[:store] %>
-      <%= render 'project_store' %>
-    <% else %>
+    <% elsif params[:list] %>
       <%= render 'project_list' %>
+    <% else %>
+      <%= render 'project_store' %>
     <% end %>
   </div>
 </div>

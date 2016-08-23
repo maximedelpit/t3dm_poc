@@ -61,13 +61,13 @@ class ProjectStateMachine
   end
 
   def next
-    current_index = STATES.find_index(current_state)
+    current_index = STATES.find_index(current_state.to_sym)
     next_state = STATES[current_index + 1]
     can_transition_to?(next_state) ? transition_to!(next_state) : raise
   end
 
   def previous
-    current_index = STATES.find_index(current_state)
+    current_index = STATES.find_index(current_state.to_sym)
     previous_state = STATES[current_index - 1]
     can_transition_to?(previous_state) ? transition_to!(previous_state) : raise
   end
@@ -102,9 +102,9 @@ class ProjectStateMachine
   def current_base_branch
     # does not deal with back to prev state since
     state = current_state.to_sym
-    if [:pending, :feasability, :bid_review, :payment, :shipping, :satisfaction].include?(state)
+    if [:pending, :bid_review, :payment, :shipping, :satisfaction].include?(state)
       return "master"
-    elsif state == :design_analisys
+    elsif state == :design_analysis
       return 'feasability'
     elsif state == :bid || state == :pricing_estimates
       return 'bid'

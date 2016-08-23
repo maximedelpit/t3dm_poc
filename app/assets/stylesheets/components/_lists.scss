@@ -1,0 +1,16 @@
+ul.title-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+ul.list-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  li {
+    padding-right: 4px;
+  }
+}

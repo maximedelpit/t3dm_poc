@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812075048) do
+ActiveRecord::Schema.define(version: 20160823173652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20160812075048) do
 
   create_table "topics", force: :cascade do |t|
     t.string   "type"
-    t.string   "github_id"
+    t.integer  "github_number"
     t.string   "state"
     t.string   "category"
     t.integer  "user_id"

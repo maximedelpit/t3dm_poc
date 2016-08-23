@@ -26,7 +26,9 @@
 .bg-navy-blue {
   background: $navy-blue;
 }
-
+.bg-white {
+  background: white !important;
+}
 .bg-client {
   background: $sky-blue;
 }
@@ -43,3 +45,44 @@
   background: $light-green;
 }
 
+
+.part-title {
+  font-weight: bold;
+  color: $turquoise;
+}
+
+.border.red {
+  border-color: $red !important;
+  color: $red !important;
+}
+
+.border.turquoise {
+  border-color: $turquoise !important;
+  color: $turquoise !important;
+}
+.row {
+  margin: 0;
+}
+
+
+
+// OVERIDDE MATERIALIZE
+
+h1 {
+  font-size: 1.8rem !important;
+}
+h2 {
+  font-size: 1.6rem !important;
+}
+h3 {
+  font-size: 1.5rem !important;
+}
+h4 {
+  font-size: 1.4rem !important;
+}
+h5 {
+  font-size: 1.3rem !important;
+}
+h6 {
+  font-size: 1rem !important;
+}

@@ -1,0 +1,3 @@
+class PullRequest < Topic
+
+end

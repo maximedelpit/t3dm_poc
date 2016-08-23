@@ -1,0 +1,34 @@
+<% db_topic = topic_hash[:topic]%>
+<div class="card horizontal topic">
+  <div class="card-stacked">
+    <div class="card-content info-group">
+      <ul class='title-action'>
+        <li><h6 class="header main-info"><%= topic_hash[:title] %></h6></li>
+        <li>
+          <a class="btn-icon">
+            <%= state_button_tag(topic_hash[:state]) %>
+          </a>
+        </li>
+      </ul>
+
+      <ul class='list-inline second-info'>
+        <li><%= image_tag db_topic.user.picture, class:"avatar-mini" %>
+        </li>
+        <li><%=db_topic.user.name %></li>
+      </ul>
+    </div>
+    <% if db_topic.comments.any? %>
+      <div class="card-action bg-white">
+        <ul class='list-inline'>
+          <li>Contributors:</li>
+          <li>
+            <% raise %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-link-abs">
+    <%= link_to '', project_topic_path(@project.id, db_topic.id) %>
+  </div>
+</div>

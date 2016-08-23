@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, except: [:index, :new, :create]
+  before_action :find_project, only: [:edit, :update]
   before_action :project_update_params, only: :update
   def index
     if params[:filters]
@@ -14,7 +14,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
+    @project = Project.includes(:topics).find(params[:id])
+    @topics = @project.topics
+    # when dealing with states & branch
+    # @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
+    @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
+    @topic_hashes = TopicManager.new(current_user.id, @project.id).get_project_topics(@topics)
   end
 
   def new
@@ -48,7 +53,7 @@ class ProjectsController < ApplicationController
     @project.state_machine.next if params[:next_state]
     @project.state_machine.next if params[:prev_state]
     if params[:upload]
-      binding.pry
+
       sha_key = params[:sha].keys[0]
       @file = params[:sha][sha_key][:file]
       manage_file_upload

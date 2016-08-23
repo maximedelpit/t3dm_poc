@@ -1,0 +1,47 @@
+// OVERIDDE MATERIALIZE
+.btn-floating {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  i {
+    line-height: inherit;
+  }
+}
+
+.btn-floating.border {
+  width: 30px;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+  background: transparent !important;
+  box-shadow: none;
+  i {
+    width: 100%;
+    color: inherit;
+    font-weight: bold;
+  }
+}
+
+.btn-icon-large {
+  height: 30px;
+  width: 30px;
+  i {
+    font-size: 30px;
+  }
+}
+
+
+.btn-icon-large, .btn-icon {
+  background: transparent;
+  i.red {
+    color: $red;
+    background: transparent !important;
+  }
+  i.turquoise {
+    color: $turquoise;
+    background: transparent !important;
+  }
+  i.green {
+    color: $green;
+    background: transparent !important;
+  }
+}
