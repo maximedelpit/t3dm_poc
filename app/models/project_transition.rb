@@ -9,7 +9,7 @@ class ProjectTransition < ActiveRecord::Base
   private
 
   def update_most_recent
-    last_transition = project.project_transitions.order(:sort_key).last
+    last_transition = project.transitions.order(:sort_key).last
     return unless last_transition.present?
     last_transition.update_column(:most_recent, true)
   end
