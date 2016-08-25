@@ -1,14 +1,13 @@
 module ProjectsHelper
   def breadcrumb_generated_items
+    breadcrumb = {}
     if project_breadcrumb_conditions
-      breadcrumb = {
-        cycle: @project.cycle,
-        phasis: @project.state_machine.phasis,
-        state: @project.state_machine.current_state
-      }
-      return breadcrumb
+      breadcrumb[:cycle] = @project.cycle.capitalize
+      breadcrumb[:phasis]=  @project.state_machine.phasis.capitalize
+      breadcrumb[:state] = @project.state_machine.current_state.capitalize
     else
     end
+    return breadcrumb
   end
 
   # def nested_trees(repo)
@@ -27,7 +26,11 @@ module ProjectsHelper
 
   private
   def project_breadcrumb_conditions
-    %w(projects comments topics).include?(params[:controller]) && %w(show edit).include?(params[:action])
+    if %w(projects comments topics).include?(params[:controller])
+      %w(show edit).include?(params[:action])
+    elsif params[:controller] == 'project_states'
+      params[:action] == 'update'
+    end
   end
 
   def format_value(entry, value)

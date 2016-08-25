@@ -8,7 +8,7 @@
   .vertical {
     width: 5%;
     .vertical-nav-wrapper {
-      background: $navy-blue;
+      background: $c-navy-blue;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -21,13 +21,20 @@
   .core {
     width: 95%;
     height: 70vh;
-    // .main {
-    //   margin: 1%;
-    // }
+    .main {
+      padding: 10px;
+    }
+    .main.scroll-y {
+      height: 64vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
     .row .col.full {
       height: 70vh;
       padding-top: 1vh;
-      overflow-y: auto
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }
+

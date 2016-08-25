@@ -1,0 +1,15 @@
+<div class="col s2 full light-vt-border-right">
+    <%= render 'shared/project_infos' %>
+  </div>
+<% if @topic.type == 'PullRequest' %>
+  <!-- Project Overview -->
+  <div class="col s7 full">
+  </div>
+  <div class="col s3 full light-vt-border-left">
+    <%= render 'topics/comments', size: 'mini' %>
+  </div>
+<% else %>
+  <div class="col s10 full">
+    <%= render 'topics/comments', size: 'sm' %>
+  </div>
+<% end %>

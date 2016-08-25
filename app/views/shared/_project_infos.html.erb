@@ -1,0 +1,49 @@
+<div id="small-viewer" class='viewer'>
+  <img src="http://placehold.it/270x180" class='responsive-img materialboxed'>
+</div>
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs small">
+      <li class="tab col s3"><a href="#config">Config</a></li>
+      <li class="tab col s3"><a class="active" href="#folders">Folders</a></li>
+    </ul>
+  </div>
+  <div id="config" class="col s12 tab-content">
+    <%#= render 'project_config_summary' %>
+    <h6 class='project-title'><%= @project.title %></h6>
+    <ul class='sub-list'>
+      <li class='project-data'>Client: <%= @project.client %></li>
+      <li class='project-data'>Client Ref: <%= @project.client_project_id %></li>
+      <li class='project-data'>Thales Ref: <%= @project.thales_id %></li>
+      <li class='project-data'>Functionality: <%= @project.part_functionality %></li>
+      <li class='project-state'>Due date: <%= @project.due_date %></li>
+      <li class='project-state'>State: <%= @state_machine.current_state %></li>
+    </ul>
+
+    <h6 class='project-title'>Dimensions (<%= @project.measurement_unit %>)</h6>
+    <ul>
+      <li class='project-data'>Width: <%= @project.width %></li>
+      <li class='project-data'>Length: <%= @project.length %></li>
+      <li class='project-data'>Height: <%= @project.height %></li>
+      <li class='project-data'>Min thickness: <%= @project.min_wall_thickness %></li>
+      <li class='project-data'>Min hole ø: <%= @project.min_wall_thickness %></li>
+      <li class='project-data'>Max pipe ø: <%= @project.min_wall_thickness %></li>
+    </ul>
+    <h6 class='project-title'>Specs</h6>
+    <ul>
+      <% @project.specs.each do | spec | %>
+        <li class='project-data'><%= spec.full_spec_description %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="folders" class="col s12">
+    <%= simple_form_for :repo, :url => project_path(@project, upload: true), html: {method: :put, class: 'jstree-form'}, remote: true do |f| %>
+      <%= hidden_field_tag "pull_request", nil, {class: 'clean-input'} %>
+      <div id="jstree">
+        <ul><%= nested_trees(@repo_tree) %></ul>
+      </div>
+      <%= render 'projects/pull_request_modal_form', f: f %>
+    <% end %>
+
+  </div>
+</div>

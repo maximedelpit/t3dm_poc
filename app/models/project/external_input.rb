@@ -20,6 +20,8 @@ class Project < ApplicationRecord
       self.min_wall_thickness = BigDecimal.new(0.2, 3)
       self.min_hole_diameter = BigDecimal.new(0.3, 3)
       self.max_pipe_diameter = BigDecimal.new(0.7, 3)
+      self.impossible_details = false
+      self.trapped_volumes = false
       return self
     end
   end

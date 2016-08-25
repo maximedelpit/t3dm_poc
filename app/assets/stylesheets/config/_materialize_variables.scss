@@ -1,3 +1,4 @@
+
 /* -------------------------------------
  * Materialize sass variable
  * (see https://github.com/mkhairi/materialize-sass/blob/master/app/assets/stylesheets/materialize/components/_variables.scss)
@@ -33,18 +34,18 @@
 
 /* 1. Colors
    ========================================================================== */
-$primary-color: $blue;
-$primary-color-light: $sky-blue;
-$primary-color-dark: $navy-blue;
-$secondary-color: $turquoise;
-$success-color: $green;
-$error-color: $red;
-$link-color: $gray-darker;
+$primary-color: $c-blue;
+$primary-color-light: $c-sky-blue;
+$primary-color-dark: $c-navy-blue;
+$secondary-color: $c-turquoise;
+$success-color: $c-green;
+$error-color: $c-red;
+$link-color: $c-gray-darker;
 
 /* 8. Dropdown
    ========================================================================== */
 $dropdown-hover-bg-color: #eee !default;
-$dropdown-color: $link_color !default;
+$dropdown-color: $link-color !default;
 $dropdown-item-height: 10px !default;
 
 /* 10. Forms
@@ -63,11 +64,11 @@ $tabs-bg-color: transparent !default;
 
 /* 20. Typography
    ========================================================================== */
-$off-black: $gray;
+$off-black: $c-gray;
 // Header Styles
-$h1-fontsize: 2rem !default;
-$h2-fontsize: 1.5rem !default;
-$h3-fontsize: 1.4rem !default;
-$h4-fontsize: 1.3rem !default;
-$h5-fontsize: 1.2rem !default;
-$h6-fontsize: 1rem !default;
+$h1-fontsize: 1.8rem !default;
+$h2-fontsize: 1.6rem !default;
+$h3-fontsize: 1.5rem !default;
+$h4-fontsize: 1.4rem !default;
+$h5-fontsize: 1.3rem !default;
+$h6-fontsize: 1.2rem !default;

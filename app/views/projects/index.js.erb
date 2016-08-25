@@ -10,10 +10,10 @@ $('#projects-by-status ul.tabs').tabs('select_tab', tab_id)
 <% if @projects.empty? %>
   var filter = <%= params[:filters] %>;
   var new_partial = '<p>No projects under' + filter +' process </p>'
-<% elsif params[:store] %>
-  var new_partial  = '<%= j render "project_store" %>'
-<% else %>
+<% elsif params[:list] %>
   var new_partial  = '<%= j render "project_list" %>'
+<% else %>
+  var new_partial  = '<%= j render "project_store" %>'
 <% end %>
 
 $('.main .row').html(new_partial)

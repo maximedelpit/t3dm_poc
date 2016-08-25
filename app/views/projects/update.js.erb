@@ -1,0 +1,10 @@
+$('.jstree-form .clean-input').each(function(index){
+  $(this).attr('disabled', false);
+  $(this).val('');
+  console.log($(this).attr('id') +'---'+ $(this).val() +'---'+$(this).attr('disabled') )
+});
+swal(
+  'Success!',
+  'File was uploaded successfully!',
+  'success'
+);

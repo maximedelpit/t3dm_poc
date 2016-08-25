@@ -6,8 +6,8 @@
         <p class='date'><%= formatted_date(@project.created_at) %></p>
       </div>
       <div class="col s5">
-        <% breadcrumb_generated_items.each do |key, value | %>
-          <a href="#!" class="breadcrumb"><%= value %></a>
+        <% breadcrumb_items.each do |key, value | %>
+          <a href="#!" class="breadcrumb"><%= value.capitalize %></a>
         <% end %>
       </div>
       <div class="col s5">

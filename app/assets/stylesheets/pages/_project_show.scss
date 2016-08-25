@@ -1,4 +1,13 @@
-#step-focus {
-  border-right: 1px solid $gray-lighter;
-  border-left: 1px solid $gray-lighter;
+.light-vt-borders {
+  border-right: 1px solid $c-gray-lighter;
+  border-left: 1px solid $c-gray-lighter;
+}
+
+
+.light-vt-border-left {
+  border-left: 1px solid $c-gray-lighter;
+}
+
+.light-vt-border-right {
+  border-right: 1px solid $c-gray-lighter;
 }

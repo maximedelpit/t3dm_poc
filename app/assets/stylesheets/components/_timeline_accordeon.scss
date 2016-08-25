@@ -3,10 +3,10 @@
   background-color: transparent;
   .accordeon {
     height: 15vh;
-    background: $blue-opaq;
+    background: $c-blue-opaq;
   }
   .accordeon.open {
-    background: $turquoise-opaq;
+    background: $c-turquoise-opaq;
   }
 
 }

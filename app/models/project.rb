@@ -76,6 +76,11 @@ class Project < ApplicationRecord
     self.state_machine
   end
 
+  def self.find_from_repo_name(repo_name)
+    title = repo_name.gsub(/T3DM-\d{6}-/,'')
+    find_by_title(title)
+  end
+
   # STATE MACHINE METHODS
   def state_machine
     @state_machine ||= ProjectStateMachine.new(self, transition_class: ProjectTransition,
@@ -94,5 +99,9 @@ class Project < ApplicationRecord
   def self.initial_state
     :pending
   end
-  private_class_method :initial_state
+
+  def self.last_state
+    :satisfaction
+  end
+
 end

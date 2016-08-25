@@ -1,0 +1,6 @@
+<% new_breadcrumb_items = breadcrumb_generated_items %>
+var new_breadcrumb = "<%= j render 'shared/breadcrumb', breadcrumb_items: new_breadcrumb_items %>";
+var new_timeline = "<%= j render 'projects/timeline' %>";
+$('#project-info-wrapper').fadeOut();
+$('#project-info-wrapper').fadeIn(new_breadcrumb + new_timeline);
+// TO DO => change transition button modal`
