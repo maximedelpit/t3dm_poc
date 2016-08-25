@@ -18,50 +18,68 @@
   background: #aeaeae;
 }
 .bg-gray-lighter {
-  background: $gray-lighter;
+  background: $c-gray-lighter;
 }
 .bg-blue {
   background: #00a3e1;
 }
 .bg-navy-blue {
-  background: $navy-blue;
+  background: $c-navy-blue;
 }
 .bg-white {
   background: white !important;
 }
 .bg-client {
-  background: $sky-blue;
+  background: $c-sky-blue;
 }
 
-.bg-methods {
-  background: $purple;
-}
+// .bg-methods {
+//   background: $c-purple;
+// }
 
 .bg-supplier {
-  background: $orange;
+  background: $c-orange;
 }
 
 .bg-production {
-  background: $light-green;
+  background: $c-light-green;
 }
 
 
 .part-title {
   font-weight: bold;
-  color: $turquoise;
+  color: $c-turquoise;
 }
 
 .border.red {
-  border-color: $red !important;
-  color: $red !important;
+  border-color: $c-red !important;
+  color: $c-red !important;
 }
 
 .border.turquoise {
-  border-color: $turquoise !important;
-  color: $turquoise !important;
+  border-color: $c-turquoise !important;
+  color: $c-turquoise !important;
 }
 .row {
   margin: 0;
+}
+
+.info-group {
+  .main-info {
+    color: $c-gray-dark;
+    font-weight: 900;
+    i {
+      color: $c-gray-dark;
+    }
+  }
+  .second-info {
+    color: $c-gray-light;
+    margin: 0;
+    line-height: 0px;
+    i {
+      color: $c-gray-light;
+    }
+  }
 }
 
 

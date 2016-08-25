@@ -33,15 +33,23 @@
 .btn-icon-large, .btn-icon {
   background: transparent;
   i.red {
-    color: $red;
+    color: $c-red;
     background: transparent !important;
   }
   i.turquoise {
-    color: $turquoise;
+    color: $c-turquoise;
     background: transparent !important;
   }
   i.green {
-    color: $green;
+    color: $c-green;
     background: transparent !important;
   }
+}
+
+.btn-mini {
+  font-size: 12px;
+  height: 25px;
+  line-height: 26px;
+  min-width: 40px;
+  padding: 0 5px;
 }

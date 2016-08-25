@@ -99,5 +99,9 @@ class Project < ApplicationRecord
   def self.initial_state
     :pending
   end
-  private_class_method :initial_state
+
+  def self.last_state
+    :satisfaction
+  end
+
 end

@@ -8,4 +8,6 @@ class Topic < ApplicationRecord
   validates :state, :user, :project, presence: true
   validates :type, presence: true, inclusion: { in: %w(PullRequest Issue) }
   validates :github_number, presence: true, uniqueness: true, on: :update
+
+  attr_accessor :content, :title
 end

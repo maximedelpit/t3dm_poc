@@ -1,16 +1,13 @@
-
+// Graphical variables
+@import "config/variables";
+@import "config/materialize_variables";
 
 // External libraries
-@import "materialize/components/color";
 @import 'materialize';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "jstree";
 @import "sweetalert2";
-
-// Graphical variables
-@import "config/variables";
-@import "config/materialize_variables";
 
 // Your CSS
 @import "layout/index";

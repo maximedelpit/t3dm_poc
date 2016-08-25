@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:topics).find(params[:id])
+    @state_machine = @project.state_machine
     @topics = @project.topics
     # when dealing with states & branch
     # @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
@@ -50,10 +51,8 @@ class ProjectsController < ApplicationController
 
   def update
     # TO DO manage permitted params
-    @project.state_machine.next if params[:next_state]
-    @project.state_machine.next if params[:prev_state]
+    # Make a repository controller
     if params[:upload]
-
       sha_key = params[:sha].keys[0]
       @file = params[:sha][sha_key][:file]
       manage_file_upload

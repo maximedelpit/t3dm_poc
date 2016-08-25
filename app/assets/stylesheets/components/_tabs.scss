@@ -1,5 +1,5 @@
 #projects-by-status {
-  background-color: $sky-blue;
+  background-color: $c-sky-blue;
   .tabs {
     background-color: transparent;
     color: white;
@@ -10,15 +10,15 @@
         font-weight: lighter;
         &:hover, &:focus, &:active {
           color: inherit;
-          background-color: $sky-blue-dark;
+          background-color: $c-sky-blue-dark;
         }
       }
       .active {
         border: none;
-        background-color: $turquoise;
+        background-color: $c-turquoise;
         &:hover, &:focus, &:active {
           color: inherit;
-          background-color: $turquoise;
+          background-color: $c-turquoise;
         }
       }
     }

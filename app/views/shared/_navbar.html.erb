@@ -46,8 +46,11 @@
       <li><a href="mobile.html">Mobile</a></li>
     </ul>
   </div>
-  <%= render 'shared/breadcrumb', breadcrumb: breadcrumb_generated_items %>
-  <%= render 'projects/timeline' %>
+  <div id='project-info-wrapper'>
+    <%= render 'shared/breadcrumb', breadcrumb_items: breadcrumb_generated_items %>
+    <%= render 'projects/timeline' %>
+  </div>
+
 </nav>
 
 

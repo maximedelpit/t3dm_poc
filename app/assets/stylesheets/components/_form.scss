@@ -11,3 +11,17 @@ input[type=submit] {
 textarea.materialize-textarea {
   padding: 0px;
 }
+
+#topic-form-accordion, #comment-form-accordion {
+  border: none;
+  box-shadow: none;
+  .collapsible-header {
+    padding: 0;
+    i {
+      margin-right: 0;
+    }
+  }
+  form {
+    min-height: 20vh;
+  }
+}

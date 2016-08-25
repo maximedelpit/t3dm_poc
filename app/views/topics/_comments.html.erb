@@ -1,0 +1,75 @@
+<div class="main">
+  <ul class="collapsible" data-collapsible="accordion" id='comment-form-accordion'>
+    <li>
+      <ul class='title-action collapsible-header'>
+        <li>
+          <h4 class='part-title'>Topic: <%= @topic_comments[:topic][:title]%>
+          </h4>
+        </li>
+        <li>
+          <a class="btn-icon-large"><i class="material-icons turquoise">add_circle_outline</i></a>
+        </li>
+      </ul>
+      <div class="collapsible-body" id='comment-form'>
+        <p>YOOOOOOoo</p>
+        <%#= render 'comments/new', topic: Comment.new %>
+      </div>
+    </li>
+  </ul>
+
+
+  <div id='topic-body' class="card horizontal topic z-depth-2 <%= size %>">
+    <div class="card-stacked">
+      <div class="card-content info-group">
+        <ul class='list-inline'>
+          <li><%= image_tag @topic_comments[:topic][:user][:avatar_url], alt:"writer_picture", class:"avatar-#{size}" %>
+          </li>
+          <li class='main-info'><%= @topic_comments[:topic][:user][:login] %></li>
+          <li class='main-item fade right-align'><%= formatted_date(@topic_comments[:topic][:created_at]) %></li>
+        </ul>
+        <p class='second-info <%= size %>'><%= simple_format @topic_comments[:topic][:body] %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class='scroll-collection'>
+    <ul class="collection" id='comments-wrapper' >
+      <% @topic_comments[:comments].each do | comment | %>
+        <li class="collection-item avatar info-group <%= size %>">
+          <%= image_tag comment[:user][:avatar_url], alt:"writer_picture", class:"avatar-#{size}" %>
+          <div class="title">
+            <span class='main-info'><%= comment[:user][:login] %></span>
+            <span class='second-info'>
+              <%= formatted_date(comment[:created_at]) %>
+            </span>
+            <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
+          </div>
+          <p class="second-info content">
+            <%= simple_format comment[:body] %>
+          </p>
+
+        </li>
+      <% end %>
+      <li class="collection-item avatar info-group form  <%= size %>">
+        <%= image_tag current_user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
+        <div class="title">
+          <span class='main-info'><%= current_user.github_login %></span>
+          <span class='second-info'>
+            <%= formatted_date(Date.today) %>
+          </span>
+          <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
+        </div>
+        <p class="second-info content">
+          <%= simple_form_for :comment, remote: true, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
+            <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
+            <%= f.button :submit, 'Send', class: "btn-#{size}" %>
+          <% end %>
+        </p>
+
+      </li>
+    </ul>
+  </div>
+   <a href="#new_comment" class="btn waves-effect waves-light" type="submit" name="action">Add Comment
+    <i class="material-icons right">comment</i>
+  </a>
+</div>

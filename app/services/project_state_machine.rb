@@ -86,13 +86,14 @@ class ProjectStateMachine
   end
 
   def phasis
+    state_sym = current_state.to_sym
     if in_state?(self.class.feasibility?)
       return "Adapt & Finalize"
     elsif in_state?(self.class.bid?)
       return "Bid"
-    elsif in_state?(self.class.production?) && self.class.production?.index_of(current_state) < 2
-      return "Planning"
-    elsif in_state?(self.class.production?) && self.class.production?.index_of(current_state) > 4
+    elsif in_state?(self.class.production?) && self.class.production?.find_index(state_sym) < 2
+      return "Analisys"
+    elsif in_state?(self.class.production?) && self.class.production?.find_index(state_sym) > 4
       return "Finalizing"
     else
       return "Manufacturing"

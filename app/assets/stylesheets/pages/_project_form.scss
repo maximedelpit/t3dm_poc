@@ -5,7 +5,12 @@
 #guidelines {
   position: fixed;
   left: 55%;
-  top: 44vh;
-  bottom: 0;
+  top: 35vh;
   width: 40%;
+  background: $c-gray-lighter;
+  padding: 10px 20px;
+  border-radius: 3px;
+  a, a:hover, a:focus, a:active {
+    color: $c-turquoise;
+  }
 }

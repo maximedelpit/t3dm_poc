@@ -7,7 +7,7 @@ class TopicManager
   end
 
   def create_issue(title, body=nil, options = {})
-    @octokit_client.create_issue(@project.repo_uri, title, body, options)
+    issue = @octokit_client.create_issue(@project.repo_uri, title, body, options)
   end
 
   def get_project_topics(topics, filters={})
@@ -20,5 +20,12 @@ class TopicManager
       issue[:topic] = topics.select {|t| t.github_number == issue[:number]}.first
     end
     return relevant_issues
+  end
+
+  def get_topic_and_comments(topic_number)
+    topic_comments = {}
+    topic_comments[:topic] = @octokit_client.issue(@project.repo_uri, topic_number)
+    topic_comments[:comments] = @octokit_client.issue_comments(@project.repo_uri, topic_number)
+    return topic_comments
   end
 end

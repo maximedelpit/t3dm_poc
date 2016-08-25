@@ -11,24 +11,24 @@
 // Scheme
 $brand-color: #D23333;
 
-$red: #ff053a;
-$navy-blue: #08112a;
-$blue: #0f1a53;
-$blue-opaq: rgba(15, 26, 83, 0.8);
-$sky-blue: #42d0f8;
-$sky-blue-dark: darken($sky-blue, 10%);
-$turquoise: #00899d;
-$turquoise-opaq: rgba(0, 137, 157, 0.8);
-$orange: #ffba5a;
-$orange-opacity: rgba(255, 186, 90, 0.2);
-$purple: #c765b1;
-$green: #00c23c;
-$light-green: #54b979;
+$c-red: #ff053a;
+$c-navy-blue: #08112a;
+$c-blue: #0f1a53;
+$c-blue-opaq: rgba(15, 26, 83, 0.8);
+$c-sky-blue: #42d0f8;
+$c-sky-blue-dark: darken($c-sky-blue, 10%);
+$c-turquoise: #00899d;
+$c-turquoise-opaq: rgba(0, 137, 157, 0.8);
+$c-orange: #ffba5a;
+$c-orange-opacity: rgba(255, 186, 90, 0.2);
+// $c-purple: #c765b1;
+$c-green: #00c23c;
+$c-light-green: #54b979;
 // Gray scale
-$gray-darker:  darken(#434343, 20%);
-$gray-dark:    darken(#434343, 10%);
-$gray:         #434343;
-$gray-light:   #ababab;
-$gray-lighter: #d3d4d6;
+$c-gray-darker:  darken(#434343, 20%);
+$c-gray-dark:    darken(#434343, 10%);
+$c-gray:         #434343;
+$c-gray-light:   #ababab;
+$c-gray-lighter: #d3d4d6;
 
 
