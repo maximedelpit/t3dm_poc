@@ -1,10 +1,20 @@
-$('.jstree-form .clean-input').each(function(index){
-  $(this).attr('disabled', false);
-  $(this).val('');
-  console.log($(this).attr('id') +'---'+ $(this).val() +'---'+$(this).attr('disabled') )
-});
+// // $('.jstree-form .clean-input').each(function(index){
+// //   $(this).attr('disabled', false);
+// //   $(this).val('');
+// //   console.log($(this).attr('id') +'---'+ $(this).val() +'---'+$(this).attr('disabled') )
+// // });
+// debugger;
+// var new_tree_form = '<%= j render "projects/repo_tree_form" %>';
 swal(
   'Success!',
   'File was uploaded successfully!',
   'success'
 );
+
+$('#folders').html('');
+$('#pr_fields').html('')
+var new_tree_form = '<%= j render "projects/repo_tree_form" %>';
+$('#folders').html(new_tree_form);
+var $JStree_repo = $('#jstree')
+init_tree($JStree_repo);
+monitor_tree_input_change($('.input-tree'));

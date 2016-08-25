@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
     @project.github_owner = current_user.github_login
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
+    @project.cycle = 'co-engineering'
     if @project.save
       manage_file_upload
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).generate_full_repo
@@ -58,7 +59,9 @@ class ProjectsController < ApplicationController
       manage_file_upload
       dir_path = params[:sha][sha_key][:path]
       # For the moment no new branch
+      # binding.pry
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, handle_pull_request)
+      @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     end
   end
 

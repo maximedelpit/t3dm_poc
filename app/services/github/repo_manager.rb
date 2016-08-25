@@ -76,7 +76,7 @@ class RepoManager
   end
 
   def create_webhook
-    whook_url = ENV['HOST'] +"projects/#{@project.id}/github_webhooks"
+    whook_url = ENV['HOST'] + "projects/#{@project.id}/github_webhooks"
     config = { url: whook_url, content_type: 'json', secret: ENV['GITHUB_WEBHOOK_SECRET'] }
     options = { :events => ['push', 'pull_request', 'repository'], :active => true }
     @octokit_client.create_hook(@project.repo_uri, 'web', config, options)
