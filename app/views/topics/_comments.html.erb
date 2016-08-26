@@ -3,7 +3,7 @@
     <li>
       <ul class='title-action collapsible-header'>
         <li>
-          <h4 class='part-title'>Topic: <%= @topic_comments[:topic][:title]%>
+          <h4 class='part-title'>Topic: <%= @topic_hash[:title]%>
           </h4>
         </li>
         <li>
@@ -22,32 +22,34 @@
     <div class="card-stacked">
       <div class="card-content info-group">
         <ul class='list-inline'>
-          <li><%= image_tag @topic_comments[:topic][:user][:avatar_url], alt:"writer_picture", class:"avatar-#{size}" %>
+          <li><%= image_tag @topic.user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
           </li>
-          <li class='main-info'><%= @topic_comments[:topic][:user][:login] %></li>
-          <li class='main-item fade right-align'><%= formatted_date(@topic_comments[:topic][:created_at]) %></li>
+          <li class='main-info'><%= @topic.user.github_login %></li>
+          <li class='main-item fade right-align'><%= formatted_date(@topic.created_at) %></li>
         </ul>
-        <p class='second-info <%= size %>'><%= simple_format @topic_comments[:topic][:body] %></p>
+        <p class='second-info <%= size %>'><%= simple_format @topic_hash[:body] %></p>
       </div>
     </div>
   </div>
 
   <div class='scroll-collection'>
     <ul class="collection" id='comments-wrapper' >
-      <% @topic_comments[:comments].each do | comment | %>
+      <% @comments.each do | comment | %>
         <li class="collection-item avatar info-group <%= size %>">
-          <%= image_tag comment[:user][:avatar_url], alt:"writer_picture", class:"avatar-#{size}" %>
+          <%= image_tag comment.user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
           <div class="title">
-            <span class='main-info'><%= comment[:user][:login] %></span>
+            <span class='main-info'><%= comment.user.github_login %></span>
             <span class='second-info'>
               <%= formatted_date(comment[:created_at]) %>
             </span>
             <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
           </div>
           <p class="second-info content">
-            <%= simple_format comment[:body] %>
+            <%= simple_format comment.content %>
           </p>
-
+          <% if comment.attachment %>
+              <%= render 'comments/attachment', comment: comment %>
+          <% end %>
         </li>
       <% end %>
       <li class="collection-item avatar info-group form  <%= size %>">
@@ -60,8 +62,14 @@
           <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
         </div>
         <p class="second-info content">
-          <%= simple_form_for :comment, remote: true, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
+          <!-- Comment.new, url: project_topic_comments_path(@project, @topic) -->
+          <%= simple_form_for [@project, @topic, Comment.new], method: :post, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
             <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
+            <span class="fileinput-node">
+              <i class="material-icons attachment-icon">attach_file</i>
+              <%= f.input :attachment, as: :attachinary, label: false %>
+              <span class="attchachinary-filename"></span>
+            </span>
             <%= f.button :submit, 'Send', class: "btn-#{size}" %>
           <% end %>
         </p>
@@ -69,7 +77,4 @@
       </li>
     </ul>
   </div>
-   <a href="#new_comment" class="btn waves-effect waves-light" type="submit" name="action">Add Comment
-    <i class="material-icons right">comment</i>
-  </a>
 </div>

@@ -4,26 +4,47 @@
     color: $c-sky-blue;
   }
   /* This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
-   .fileinput-node {
-      position: relative;
-      overflow: hidden;
+  .fileinput-node {
+    position: relative;
+    overflow: hidden;
   }
 
-   .fileinput-node input {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      margin: 0;
-      opacity: 0;
-      -ms-filter: 'alpha(opacity=0)';
-      /* font-size: 200px; */
-      direction: ltr;
-      cursor: pointer;
+  .fileinput-node input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    /* font-size: 200px; */
+    direction: ltr;
+    cursor: pointer;
   }
 }
 
 .jstree-default > .jstree-container-ul > .jstree-node {
     margin: 3px 0 !important;
 }
+
+
+.fileinput-node {
+  position: relative;
+  overflow: hidden;
+}
+
+.fileinput-node input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  /* font-size: 200px; */
+  direction: ltr;
+  cursor: pointer;
+}
+

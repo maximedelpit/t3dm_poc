@@ -4,9 +4,10 @@ class Comment < ApplicationRecord
 
   has_many :mentions
   has_many :recipients, through: :mentions, class_name: 'User'
+  has_attachment :attachment
 
   validates :topic, :user, presence: true
-  validates :github_id, presence: true, uniqueness: true
+  # validates :github_id, presence: true, uniqueness: true
 
   def author
     user

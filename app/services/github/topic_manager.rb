@@ -28,4 +28,8 @@ class TopicManager
     topic_comments[:comments] = @octokit_client.issue_comments(@project.repo_uri, topic_number)
     return topic_comments
   end
+
+  def get_topic_hash(topic_number)
+      return @octokit_client.issue(@project.repo_uri, topic_number)
+  end
 end
