@@ -1,0 +1,10 @@
+<% if comment.attachment.resource_type == 'image' && comment.attachment.format != 'pdf'%>
+  <div class='img-attachment-wrapper'>
+    <%= cl_image_tag comment.attachment.path, width:'200', height: '300', crop: :fill, class: 'responsive-img materialboxed' %>
+  </div>
+
+<% else %>
+  <%= link_to cloudinary_url(comment.attachment.public_id, {flags: 'attachment'}), target: :_blank, class:'attachment-link' do %>
+    <i class="material-icons attachment-icon">attach_file</i>
+  <% end %>
+<% end %>

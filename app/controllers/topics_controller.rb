@@ -22,7 +22,9 @@ class TopicsController < ApplicationController
     @state_machine = @project.state_machine
     @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     @topic = Topic.includes(:comments).find(params[:id]) # not sure to need include
-    @topic_comments = TopicManager.new(current_user.id, @project.id).get_topic_and_comments(@topic.github_number)
+    @topic_hash = TopicManager.new(current_user.id, @project.id).get_topic_hash(@topic.github_number)
+    @comments = @topic.comments
+    # @topic_comments = TopicManager.new(current_user.id, @project.id).get_topic_and_comments(@topic.github_number)
   end
 
   private

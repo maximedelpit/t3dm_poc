@@ -41,6 +41,10 @@ gem 'statesman', '~> 2.0', '>= 2.0.1'
 # File upload
 # wait for PR 151 to be merged => https://github.com/JangoSteve/remotipart/pull/151
 gem 'remotipart', github: 'mshibuya/remotipart'
+gem "cloudinary", "1.1.0"
+gem "attachinary", github: "assembler/attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
 
 group :development, :test do
   # debug
