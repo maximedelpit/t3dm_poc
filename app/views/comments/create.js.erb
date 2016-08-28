@@ -1,0 +1,6 @@
+<% if @comment.valid? %>
+  $('#comment-form form')[0].reset()
+  $('#topic-wrapper').prepend("<%= j render 'comment', topic_hash: @gh_topic %>")
+<% else %>
+  $('#topic-form').fadeIn('<%= j render "new", topic: @comment%>' )
+<% end %>

@@ -35,22 +35,7 @@
   <div class='scroll-collection'>
     <ul class="collection" id='comments-wrapper' >
       <% @comments.each do | comment | %>
-        <li class="collection-item avatar info-group <%= size %>">
-          <%= image_tag comment.user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
-          <div class="title">
-            <span class='main-info'><%= comment.user.github_login %></span>
-            <span class='second-info'>
-              <%= formatted_date(comment[:created_at]) %>
-            </span>
-            <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
-          </div>
-          <p class="second-info content">
-            <%= simple_format comment.content %>
-          </p>
-          <% if comment.attachment %>
-              <%= render 'comments/attachment', comment: comment %>
-          <% end %>
-        </li>
+        <%= render 'comments/comment', size: size, comment: comment %>
       <% end %>
       <li class="collection-item avatar info-group form  <%= size %>">
         <%= image_tag current_user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
@@ -61,17 +46,9 @@
           </span>
           <span class='second-info'><a href="#!" class="secondary-content"><i class="material-icons">star_border</i></a></span>
         </div>
-        <p class="second-info content">
+        <p class="second-info content" id='comment-form'>
           <!-- Comment.new, url: project_topic_comments_path(@project, @topic) -->
-          <%= simple_form_for [@project, @topic, Comment.new], method: :post, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
-            <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
-            <span class="fileinput-node">
-              <i class="material-icons attachment-icon">attach_file</i>
-              <%= f.input :attachment, as: :attachinary, label: false %>
-              <span class="attchachinary-filename"></span>
-            </span>
-            <%= f.button :submit, 'Send', class: "btn-#{size}" %>
-          <% end %>
+          <%= render 'comments/form', size: size %>
         </p>
 
       </li>

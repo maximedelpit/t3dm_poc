@@ -1,0 +1,22 @@
+<li class="collection-item avatar info-group <%= size %>">
+  <%= image_tag comment.user.picture, alt:"writer_picture", class:"avatar-#{size}" %>
+  <div class="title">
+    <span class='main-info'><%= comment.user.github_login %></span>
+    <span class='second-info'>
+      <%= formatted_date(comment[:created_at]) %>
+    </span>
+    <% comment.pinned ? pinned = 'active' : pinned = '' %>
+    <span class='second-info'>
+      <%= simple_form_for comment, id: comment.id do |f| %>
+        <%= f.input :pinned, as: :hidden, input_html: {value: comment.pinned} %>
+      <% end %>
+      <a href="#!" class="secondary-content"><i class="material-icons <%= pinned %>">star_border</i></a>
+    </span>
+  </div>
+  <p class="second-info content">
+    <%= simple_format comment.content %>
+  </p>
+  <% if comment.attachment %>
+      <%= render 'comments/attachment', comment: comment %>
+  <% end %>
+</li>

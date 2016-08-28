@@ -3,6 +3,5 @@
   $('#topic-form-accordion .collapsible-header').click()
   $('#topic-wrapper').prepend("<%= j render 'topic_card', topic_hash: @gh_topic %>")
 <% else %>
-  debugger;
   $('#topic-form').fadeIn('<%= j render "new", topic: @topic%>' )
 <% end %>

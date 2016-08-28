@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+
   end
 
   def download
@@ -36,7 +37,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :attachment)
+    params.require(:comment).permit(:content, :attachment, :pinned)
   end
 
   def check_mentions(content)
