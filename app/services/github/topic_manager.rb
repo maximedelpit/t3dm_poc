@@ -13,6 +13,7 @@ class TopicManager
   def get_project_topics(topics, filters={})
     # cache?
     filters[:sort] ||= "comments"
+    filters[:state] ||= "all"
     gh_topics = @octokit_client.list_issues(@project.repo_uri, filters)
     relevant_numbers = topics.map(&:github_number)
     relevant_issues = gh_topics.select do |issue|

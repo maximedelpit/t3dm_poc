@@ -1,0 +1,17 @@
+<%= simple_form_for @project do |f| %>
+  <h4 class="col s12">Project Details</h4>
+  <%= f.error_notification %>
+  <%= f.input :title, wrapper_html: { class: 's12' } %>
+  <%= f.input :client_project_id, wrapper_html: { class: 's12' } %>
+  <div class="form-group">
+    <label class="control-label" >T3DM project ID:</label>
+    <span class='form-control'><%= Project::ExternalInput.next_thales_id %></span>
+  </div>
+  <%= f.input :part_functionality, wrapper_html: { class: 's12' }  %></br>
+  <%= f.input :notes, wrapper_html: { class: 's12' }  %>
+  <h4 class="col s12" id="specs">Specs</h4>
+  <% specs.each do |key, spec| %>
+    <%= render 'spec_field', f: f, spec_type: key %>
+  <% end %>
+  <%= f.button :submit, class:'btn' %>
+<% end %>

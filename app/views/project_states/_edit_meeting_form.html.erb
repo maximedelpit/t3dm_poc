@@ -1,0 +1,12 @@
+<ul>
+  <li>Meeting status: <%= @meeting.state %></li>
+  <li>Duration: 30min</li>
+</ul>
+<%= simple_form_for meeting, remote: true do |f| %>
+  <%= f.error_notification %>
+  <%#= date_field_tag 'project[date]', @project.due_date, class: 'datepicker' %>
+
+  <%= f.input :date, as: :string, input_html: { class: 'datepicker', value: @ref_date }, wrapper_html: { class: 's6' } %>
+  <%= f.input :time, as: :string, input_html: { class: 'clockpicker', value: @ref_time }, wrapper_html: { class: 's6' } %>
+  <%= f.button :submit, class:'btn', wrapper_html: { class: 's6' } %>
+<% end %>

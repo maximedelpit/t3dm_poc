@@ -1,0 +1,37 @@
+.clockpicker-popover {
+  display: block;
+  top: 40vh;
+  left: 50%;
+  border-radius: 2px;
+  border: 1px solid #777777;
+  border-top-color: #898989;
+  border-bottom-width: 0;
+  box-shadow: 0 12px 36px 16px rgba(0, 0, 0, 0.24);
+  padding: 0;
+  .arrow {
+    display: none;
+  }
+  .popover-title {
+    background-color: #00899d;
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 0px;
+    .text-primary {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  .popover-content {
+    background-color: white;
+    .clockpicker-tick.active {
+      border-radius: 50%;
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+      background-color: #00899d;
+      color: #ffffff;
+    }
+    .clockpicker-tick:hover {
+      background-color: transparent;
+      font-weight: 900;
+      color: black;
+    }
+  }
+}

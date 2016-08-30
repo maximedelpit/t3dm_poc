@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     mentionned_users = check_mentions(@comment.content) if @comment.content
     mentionned_users.each {|u| @comment.mentions.build(user: u)}
-    binding.pry
     @comment.save
     if @comment.attachment.format.nil?
       @comment.attachment.format = @comment.attachment.public_id.split('.').last

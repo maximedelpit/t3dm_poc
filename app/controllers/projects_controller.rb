@@ -21,6 +21,13 @@ class ProjectsController < ApplicationController
     # @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
     @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     @topic_hashes = TopicManager.new(current_user.id, @project.id).get_project_topics(@topics)
+    if @state_machine.current_state == 'feasibility'
+      @meeting = Meeting.where(project_id: @project.id, object: 'Setup').first_or_initialize
+      if @meeting.start_time
+        @ref_date = @meeting.start_time.to_date.to_s
+        @ref_time = @meeting.start_time.to_s(:time)
+      end
+    end
   end
 
   def new
@@ -59,7 +66,6 @@ class ProjectsController < ApplicationController
       manage_file_upload
       dir_path = params[:sha][sha_key][:path]
       # For the moment no new branch
-      # binding.pry
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, handle_pull_request)
       @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     end

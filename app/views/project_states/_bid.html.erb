@@ -1,0 +1,28 @@
+<div id='instructions' class="z-depth-1">
+<% if current_user.category == 'client' %>
+  <p>We hope you enjoyed your meeting with our team members.</p>
+  <p>This is now time for asking for a quotation</p>
+  <p>Please ensure to validate all topics to go to next step.</p>
+<% elsif current_user.category == 'methods' %>
+  <p>Based on the customer feedback, please fine tune th project and use topic.</p>
+  <p>We will wait for the client to ask for a quotation then</p>
+<% else %>
+  <p>We are waiting for the client go.</p>
+  <p>Reading the topics will keep you up-to-date.</p>
+<% end %>
+</div>
+<br><br>
+
+<% if current_user.category == 'client' %>
+  <% if @topics.all? {|topic| topic.state == 'closed'} %>
+    <p>All topics are closed, you can now ask for a quotation.</p>
+    <%= link_to project_project_state_path(@project, next: true), method: :put, class: 'waves-effect waves-light btn', remote: true do %>
+      <i class="material-icons right">shopping_cart</i>Ask for a quotation
+    <% end %>
+  <% else %>
+    <p>Please close all topics before asking for a quotation</p>
+  <% end %>
+<% elsif current_user.category == 'methods' %>
+  <p>We are waiting client feed back to start pricing estimates</p>
+<% else %>
+<% end %>
