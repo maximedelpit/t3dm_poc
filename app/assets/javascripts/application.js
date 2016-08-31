@@ -4,6 +4,7 @@
 //= require jstree
 //= require jquery.remotipart
 //= require sweetalert2
+//= require clockpicker
 //= require_tree .
 
 

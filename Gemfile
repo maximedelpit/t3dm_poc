@@ -29,8 +29,10 @@ gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'autoprefixer-rails'
 # gem 'sweetalert-rails'
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
-
 gem 'rails-assets-jstree', source: 'https://rails-assets.org'
+gem 'rails-assets-clockpicker', source: 'https://rails-assets.org'
+
+
 
 # STI relations for specs
 gem 'ancestry'
@@ -45,6 +47,8 @@ gem "cloudinary", "1.1.0"
 gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"
 gem "coffee-rails"
+
+gem 'icalendar', '~> 2.2.2'
 
 group :development, :test do
   # debug

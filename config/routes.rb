@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :project_states, only: :update
   end
 
-
+  resources :meetings
 
   require "sidekiq/web"
   authenticate :user, lambda { |u| u.name == 'maximedelpit'} do

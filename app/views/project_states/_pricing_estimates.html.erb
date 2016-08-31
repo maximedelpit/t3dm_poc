@@ -1,0 +1,22 @@
+<div id='instructions' class="z-depth-1">
+<% if current_user.category == 'client' %>
+  <p>We are building your quotation.</p>
+  <p>Please follow topics and answer them to get it fast</p>
+<% elsif current_user.category == 'methods' %>
+  <p>You no need to start quotation.</p>
+  <p>Review with providers & production</p>
+  <p>Open topics and ensure they are all closed before next step</p>
+<% else %>
+  <p>Project is under review.</p>
+  <p>Please follow topics to help build fair & robust estimates.</p>
+<% end %>
+</div>
+<br><br>
+
+<% if current_user.category == 'client' %>
+  <p>We are estimating price & deadlines. We will come back to you soon.</p>
+<% elsif current_user.category == 'methods' %>
+  <p>The client asked for a quotation, please build it</p>
+  <#%= render 'orders/form' %>
+<% else %>
+<% end %>

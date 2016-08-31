@@ -5,7 +5,7 @@
   <li class='project-data'>Thales Ref: <%= @project.thales_id %></li>
   <li class='project-data'>Functionality: <%= @project.part_functionality %></li>
   <li class='project-state'>Due date: <%= @project.due_date %></li>
-  <li class='project-state'>State: <%= @project.state_machine.current_state %></li>
+  <li class='project-state'>State: <%= @state_machine.current_state %></li>
 </ul>
 
 <h6 class='project-title'>Dimensions (<%= @project.measurement_unit %>)</h6>

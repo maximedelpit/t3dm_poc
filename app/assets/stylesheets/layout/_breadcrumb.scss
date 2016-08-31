@@ -5,6 +5,9 @@
   font-size: $nav-size;
   color: $c-gray-dark;
   z-index: 2;
+  a, a:active, a:focus, a:hover {
+    color: $c-gray-dark;
+  }
   .row {
     margin-bottom: 0;
     height: 100%;

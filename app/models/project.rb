@@ -12,6 +12,7 @@ class Project < ApplicationRecord
   has_one :dimension
   has_one :quality_control
   has_many :topics
+  has_many :meetings
   has_many :transitions, class_name: "ProjectTransition", autosave: false
 
 

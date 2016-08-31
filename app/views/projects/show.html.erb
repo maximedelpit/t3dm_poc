@@ -6,10 +6,8 @@
 <!-- Step overview -->
 <div id='step-focus' class="col s7 full light-vt-borders">
   <h4 class='part-title'>Step Focus</h4>
-  <div class="valign-wrapper" style="height: 30vh;">
-    <h1 style="width: 100%;">WORK IN PROGRESS</h1>
-  </div>
-  <%#= render 'project_states/transition_buttons', state_machine: @state_machnine %>
+  <%= render "project_states/#{@state_machine.current_state}" %>
+  <%= render 'project_states/transition_buttons', state_machine: @state_machnine %>
 </div>
 
 <!-- Topics overview -->

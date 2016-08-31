@@ -25,9 +25,10 @@ class RepoManager
   def retrieve_repo_architecture(branch_name)
     # TO DO cache
     tree_sha = get_branch_ref_tree_sha(branch_name)
-    repo_tree = from_cache(@project.id, @project.repo_uri, branch_name, tree_sha, "structure") do
-      response = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
-    end
+    # repo_tree = from_cache(@project.id, @project.repo_uri, branch_name, tree_sha, "structure") do
+    #   response = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
+    # end
+    repo_tree = @octokit_client.tree(@project.repo_uri, tree_sha, recursive: true)
     return arrange_tree(flat_structure(repo_tree[:tree]))
   end
 

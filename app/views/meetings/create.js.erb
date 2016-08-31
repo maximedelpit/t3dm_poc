@@ -1,0 +1,22 @@
+<% if @meeting.valid? %>
+  var form = '<%= j render "project_states/edit_meeting_form", meeting: @meeting %>'
+  $('#feasability-step').html(form);
+  $('#feasability-step').prepend('Your meeting is planned, you can update it if needed');
+<% else %>
+  var form = '<%= j render "project_states/new_meeting_form", meeting: @meeting %>'
+  $('#feasability-step').html(form);
+<% end %>
+
+$('.datepicker').pickadate({
+  selectMonths: true, // Creates a dropdown to control month
+  selectYears: 1, // Creates a dropdown of 15 years to control year,
+  autoclose: true
+});
+$('.clockpicker').clockpicker({
+  autoclose: true
+});
+
+// TO DO INVESTIGATE TURBOLINKS
+$(function() {
+    Materialize.updateTextFields();
+});
