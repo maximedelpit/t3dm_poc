@@ -11,6 +11,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise', github: 'plataformatec/devise'
 gem 'omniauth-github'
 
+# # Authorization
+# gem "pundit"
+
 gem "octokit", "~> 4.0"
 gem 'github_webhook', '~> 0.5.0'
 
@@ -25,14 +28,15 @@ gem 'jquery-rails'
 gem 'uglifier'
 gem 'materialize-sass'
 gem 'font-awesome-sass'
-gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'autoprefixer-rails'
 # gem 'sweetalert-rails'
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 gem 'rails-assets-jstree', source: 'https://rails-assets.org'
 gem 'rails-assets-clockpicker', source: 'https://rails-assets.org'
 
-
+# forms
+gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'cocoon'
 
 # STI relations for specs
 gem 'ancestry'

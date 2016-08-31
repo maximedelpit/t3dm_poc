@@ -1,6 +1,18 @@
 <% new_breadcrumb_items = breadcrumb_generated_items %>
 var new_breadcrumb = "<%= j render 'shared/breadcrumb', breadcrumb_items: new_breadcrumb_items %>";
 var new_timeline = "<%= j render 'projects/timeline' %>";
-$('#project-info-wrapper').fadeOut();
-$('#project-info-wrapper').fadeIn(new_breadcrumb + new_timeline);
-// TO DO => change transition button modal`
+var new_step_focus = "<%= j render 'projects/step_focus', state_machine: @state_machine %>"
+// $('#project-info-wrapper').fadeOut();
+// $('#project-info-wrapper').fadeIn(new_breadcrumb + new_timeline);
+// $('#step-focus').children().fadeOut();
+// // TO DO => change transition button modal`
+// $('#step-focus').fadeIn(new_step_focus);
+
+
+$('#project-info-wrapper').html(new_breadcrumb + new_timeline);
+$('#step-focus').html(new_step_focus);
+
+// TO DO INVESTIGATE TURBOLINKS
+$(function() {
+  Materialize.updateTextFields();
+});

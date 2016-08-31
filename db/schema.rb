@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830102706) do
+ActiveRecord::Schema.define(version: 20160831155942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,28 @@ ActiveRecord::Schema.define(version: 20160830102706) do
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_mentions_on_comment_id", using: :btree
     t.index ["user_id"], name: "index_mentions_on_user_id", using: :btree
+  end
+
+  create_table "order_lines", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "order_id"
+    t.integer  "unit_price"
+    t.integer  "duration"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["order_id"], name: "index_order_lines_on_order_id", using: :btree
+    t.index ["project_id"], name: "index_order_lines_on_project_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "state"
+    t.string   "due_date"
+    t.integer  "price"
+    t.string   "quantity"
+    t.string   "integer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "project_transitions", force: :cascade do |t|
@@ -165,6 +187,8 @@ ActiveRecord::Schema.define(version: 20160830102706) do
   add_foreign_key "meetings", "projects"
   add_foreign_key "mentions", "comments"
   add_foreign_key "mentions", "users"
+  add_foreign_key "order_lines", "orders"
+  add_foreign_key "order_lines", "projects"
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "specs", "projects"

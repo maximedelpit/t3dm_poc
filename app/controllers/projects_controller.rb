@@ -28,6 +28,9 @@ class ProjectsController < ApplicationController
         @ref_time = @meeting.start_time.to_s(:time)
       end
     end
+    if @state_machine.phasis != " Adapt & Finalize"
+      @order = @project.last_order || Order.new
+    end
   end
 
   def new

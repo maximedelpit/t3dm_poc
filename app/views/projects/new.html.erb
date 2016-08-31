@@ -24,7 +24,7 @@
         <%= f.input :part_functionality, wrapper_html: { class: 's12' }  %></br>
         <h4 class="col s12" id="specs">Specs</h4>
         <% @specs.each do |key, spec| %>
-          <%= render 'spec_field', f: f, spec_type: key %>
+          <%= render 'projects/spec_field', f: f, spec_type: key %>
         <% end %>
         <%= f.input :notes, wrapper_html: { class: 's12' }  %>
         <%= f.button :submit, class:'btn' %>

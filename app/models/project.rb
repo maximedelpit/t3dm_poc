@@ -13,6 +13,8 @@ class Project < ApplicationRecord
   has_one :quality_control
   has_many :topics
   has_many :meetings
+  has_many :order_lines
+  has_many :orders, through: :order_lines
   has_many :transitions, class_name: "ProjectTransition", autosave: false
 
 
@@ -105,4 +107,7 @@ class Project < ApplicationRecord
     :satisfaction
   end
 
+  def last_order
+    orders.last
+  end
 end

@@ -5,6 +5,7 @@
 //= require jquery.remotipart
 //= require sweetalert2
 //= require clockpicker
+//= require cocoon
 //= require_tree .
 
 

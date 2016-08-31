@@ -1,0 +1,20 @@
+<tr>
+  <td><%= f.input :description, label: false, placeholder: 'Type line description', wrapper_html: { class: 's12' }  %></td>
+  <td><%= f.input :unit_price, as: :float, label: false, placeholder: '120', wrapper_html: { class: 's12' }  %></td>
+  <td><%= f.input :duration,  placeholder: '5', label: false, wrapper_html: { class: 's12' } %></td>
+  <td class='icon-td'>
+    <!-- <%# if order_line.id %>
+      <%#= link_to order_line_path(order_line), method: :delete, class: 's1', remote: true do %>
+        <i class="tiny material-icons">close</i>
+      <%# end %>
+    <%# else %>
+      <%#= link_to '', class: 's1 no_id_delete' do %>
+        <i class="tiny material-icons">close</i>
+      <%# end %>
+    <%# end %> -->
+    <%= link_to_remove_association f do %>
+      <i class="tiny material-icons">close</i>
+    <% end %>
+  </td>
+</tr>
+<%= f.input :project_id,  as: :hidden, input_html: { value: @project.id } %>

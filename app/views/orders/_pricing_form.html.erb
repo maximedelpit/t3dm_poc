@@ -1,0 +1,33 @@
+<%= simple_form_for [@project, order], html: {class: 'table_form'}, remote: true do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :due_date, wrapper_html: { class: '' } %>
+  <table class='responsive-table highlight'>
+    <thead>
+      <tr>
+        <th style='width: 60%;'>Description</th>
+        <th style='width: 15%;'>Unit Price (€)</th>
+        <th style='width: 20%;'>Duration (in days)</th>
+        <th style='width: 5%;'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :order_lines do |i| %>
+        <% order.order_lines.uniq.each do | order_line | %>
+          <%= render 'order_line_fields', f: i %>
+        <% end %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan='2'></td>
+        <td class="right-align">
+          <%#= link_to 'Add line', '', data: {order: order.id}, class:"btn btn-mini", id: 'add_order',  remote: true %>
+           <%= link_to_add_association 'Add line', f, :order_lines, data: { :'association-insertion-method' => 'append', :'association-insertion-node' => '.table_form tbody'}, class: 'btn btn-mini' %>
+        </td>
+        <td class="right-align">
+          <%= f.button :submit, 'Save', class:'btn-mini' %>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>
