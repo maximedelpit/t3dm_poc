@@ -1,12 +1,92 @@
 #timeline {
   height: 18vh;
   background-color: transparent;
-  .accordeon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  .accordion {
     height: 15vh;
     background: $c-blue-opaq;
+    margin: 0 0.5rem;
+    padding: 0 1rem;
+    i {
+      height: 44px;
+      line-height: 44px;
+      border-radius: 50%;
+      margin: auto;
+      width: 44px;
+    }
+    i.focus {
+      border: 1px solid white;
+    }
+    .axis {
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-around;
+      align-content: center;
+      align-items: center;
+      position: relative;
+      .item h6 {
+        font-weight: 100;
+      }
+      .item.focus h6 {
+        border-bottom: 3px solid white;
+      }
+      .plain-dot {
+        background-color: white;
+        height: 0.5rem;
+        width: 0.5rem;
+        border-radius: 50%;
+        margin: auto;
+      }
+      .line {
+        border-top: 0.2px solid white;
+        position: absolute;
+        border-top: 0.2px solid white;
+        top: 31.4%;
+      }
+      #co-engineering-line {
+        width: 33%;
+        left: 18.5%;
+      }
+      #bid-line {
+        width: 31%;
+        right: 4.5%;
+      }
+      #production-planning-line {
+        width: 11%;
+        left: 13%;
+      }
+      #production-manufacturing-line {
+        width: 19%;
+        left: 39%;
+      }
+      #production-finalizing-line {
+        width: 25.5%;
+        right: 3.5%
+      }
+    }
   }
-  .accordeon.open {
+  .accordion.open {
     background: $c-turquoise-opaq;
+    flex: 4 0 75%;
+    .retracted {
+      display: none;
+    }
+    .expanded {
+      display: block;
+    }
+  }
+
+  .accordion.closed {
+    flex: 1 0 auto;
+    .retracted {
+      display: block;
+    }
+    .expanded {
+      display: none;
+    }
   }
 
 }

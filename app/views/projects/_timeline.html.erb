@@ -1,14 +1,28 @@
 <% if @project && @project.persisted? %>
   <div class="nav-wrapper" id='timeline'>
-    <div class="row">
-      <div class="col s9">
-        <div class="accordeon open">
-
+    <div id='part1' class="accordion <%= @project.cycle == 'co-engineering' ? 'open' : 'closed' %>">
+      <h5 class="timeline-title">Co-Engineering</h5>
+      <div class="retracted center-align">
+        <i class="material-icons large">remove_red_eye</i>
+        <h6>Overview</h6>
+      </div>
+      <div class="expanded">
+        <div class="axis">
+          <%= render 'project_states/co-engineering_expanded' %>
         </div>
       </div>
-      <div class="col s3">
-        <div class="accordeon">
 
+    </div>
+    <div id='part2' class="accordion <%= @project.cycle == 'production' ? 'open' : 'closed' %>">
+      <h5 class="timeline-title">Production</h5>
+      <div class="retracted center-align">
+
+        <i class="material-icons large">remove_red_eye</i>
+        <h6>Overview</h6>
+      </div>
+      <div class="expanded">
+        <div class="axis">
+          <%= render 'project_states/production_expanded' %>
         </div>
       </div>
     </div>

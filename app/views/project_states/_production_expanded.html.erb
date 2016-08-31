@@ -1,0 +1,34 @@
+<span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Analysis' %>">assignment</i>
+  <h5>Analysis</h5>
+</span>
+<span id='production-planning-line' class='line'></span>
+<span class="item center-align <%= 'focus' if @state_machine.current_state == 'Production orders' %>">
+  <div class="plain-dot"></div>
+  <h6>Production orders</h6>
+</span>
+
+<span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Manufacturing' %>">build</i>
+  <h5>Manufacturing</h5>
+</span>
+<span id='production-manufacturing-line' class='line'></span>
+<% ProjectStateMachine.production_manufacturing.each do | state | %>
+  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
+    <div class="plain-dot"></div>
+    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
+  </span>
+<% end %>
+
+<span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Manufacturing' %>">sync</i>
+  <h5>Finalizing</h5>
+</span>
+<span id='production-finalizing-line' class='line'></span>
+<% ProjectStateMachine.production_finalizing.each do | state | %>
+  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
+    <div class="plain-dot"></div>
+    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
+  </span>
+<% end %>
+

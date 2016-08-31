@@ -72,28 +72,36 @@ class ProjectStateMachine
     can_transition_to?(previous_state) ? transition_to!(previous_state) : raise
   end
 
-  def self.feasibility?
+  def self.feasibility
     [:pending, :design_analysis, :feasibility]
   end
 
-  def self.bid?
+  def self.bid
     [:bid, :pricing_estimates, :bid_review]
   end
 
-  def self.production?
+  def self.production
     [ :planning, :production_orders, :manufacturing, :finishing, :quality_control,
       :payment, :shipping, :satisfaction ]
   end
 
+  def self.production_manufacturing
+    [:finishing, :quality_control]
+  end
+
+  def self.production_finalizing
+    [:payment, :shipping, :satisfaction]
+  end
+
   def phasis
     state_sym = current_state.to_sym
-    if in_state?(self.class.feasibility?)
+    if in_state?(self.class.feasibility)
       return "Adapt & Finalize"
-    elsif in_state?(self.class.bid?)
+    elsif in_state?(self.class.bid)
       return "Bid"
-    elsif in_state?(self.class.production?) && self.class.production?.find_index(state_sym) < 2
+    elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) < 2
       return "Analisys"
-    elsif in_state?(self.class.production?) && self.class.production?.find_index(state_sym) > 4
+    elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) > 4
       return "Finalizing"
     else
       return "Manufacturing"
