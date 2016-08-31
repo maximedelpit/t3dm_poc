@@ -1,0 +1,40 @@
+<ul>
+  <li>Quotation date: <%= formatted_date(@order.updated_at) %></li>
+  <li>Estimated deadline: <%#= formatted_date(@order.due_date) %></li>
+</ul>
+
+<table class='responsive-table small-padding'>
+  <thead>
+    <tr>
+      <th style='width: 60%;'>Description</th>
+      <th style='width: 20%;'>Duration (in days)</th>
+      <th style='width: 20%;'>Unit Price (€)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% order.order_lines.uniq.each do | order_line | %>
+      <tr>
+        <td><%= order_line.description %></td>
+        <td><%= order_line.duration %></td>
+        <td><%= order_line.unit_price %> €</td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='1'></td>
+      <td><strong>Price / unit</strong></td>
+      <td><strong>X €</strong></td>
+    </tr>
+    <tr>
+      <td colspan='1'></td>
+      <td><strong>Quantities</strong></td>
+      <td><strong>Y</strong></td>
+    </tr>
+    <tr>
+      <td colspan='1'></td>
+      <td><strong>Total exc. VAT</strong></td>
+      <td><strong>2 €</strong></td>
+    </tr>
+  </tfoot>
+</table>

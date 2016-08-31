@@ -22,6 +22,25 @@ textarea.materialize-textarea {
     }
   }
   form {
-    min-height: 20vh;
+    min-height: 23vh;
+  }
+}
+
+.table_form {
+  table {
+    margin-bottom: 2rem;
+  }
+  tbody td {
+    padding: 0 15px 5px 15px;
+    .input-field.col {
+      padding: 0;
+      margin: 0;
+      input, select, textarea {
+        margin: 0;
+      }
+    }
+  }
+  td.icon-td {
+    padding: 10px 15px 0px 15px;
   }
 }

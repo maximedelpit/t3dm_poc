@@ -1,0 +1,23 @@
+<span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Adapt & Finalize' %>">settings</i>
+  <h5>Adapt & Finalize</h5>
+</span>
+<span id='co-engineering-line' class='line'></span>
+<% ProjectStateMachine.feasibility.each do | state | %>
+  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
+    <div class="plain-dot"></div>
+    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
+  </span>
+<% end %>
+<span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Bid' %>">euro_symbol</i>
+  <h5>Bid</h5>
+</span>
+<span id='bid-line' class='line'></span>
+<% ProjectStateMachine.bid.each do | state | %>
+  <% next if state == :bid %>
+  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
+    <div class="plain-dot"></div>
+    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
+  </span>
+<% end %>

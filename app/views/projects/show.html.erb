@@ -5,9 +5,7 @@
 
 <!-- Step overview -->
 <div id='step-focus' class="col s7 full light-vt-borders">
-  <h4 class='part-title'>Step Focus</h4>
-  <%= render "project_states/#{@state_machine.current_state}" %>
-  <%= render 'project_states/transition_buttons', state_machine: @state_machnine %>
+  <%= render 'projects/step_focus', state_machine: @state_machine %>
 </div>
 
 <!-- Topics overview -->

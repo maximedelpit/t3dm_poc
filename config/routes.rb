@@ -10,8 +10,10 @@ Rails.application.routes.draw do
       resources :comments, shallow: true, only: [:create, :update]
     end
     resources :project_states, only: :update
+    resources :orders, only: [:create, :update]
   end
 
+  resources :order_lines, only: :destroy
   resources :meetings
 
   require "sidekiq/web"
