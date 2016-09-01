@@ -3,9 +3,9 @@
   <h5>Routing plan</h5>
 </span>
 <span id='production-planning-line' class='line'></span>
-<span class="item center-align <%= 'focus' if @state_machine.current_state == 'Production orders' %>">
+<span class="item center-align <%= 'focus' if @state_machine.current_state == 'manufacturing_orders' %>">
   <div class="plain-dot"></div>
-  <h6>Production orders</h6>
+  <h6>Manufacturing orders</h6>
 </span>
 
 <span class="item center-align">
@@ -21,7 +21,7 @@
 <% end %>
 
 <span class="item center-align">
-  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Manufacturing' %>">sync</i>
+  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Finalizing' %>">sync</i>
   <h5>Finalizing</h5>
 </span>
 <span id='production-finalizing-line' class='line'></span>

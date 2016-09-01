@@ -2,8 +2,8 @@ class ProjectStateMachine
   include Statesman::Machine
 
   STATES = [ :pending, :design_analysis, :feasibility, :bid, :pricing_estimates,
-             :bid_review, :routing_plan, :production, :production_orders, :finishing,
-             :quality_control, :payment, :shipping, :satisfaction
+             :bid_review, :routing_plan, :manufacturing_orders, :manufacturing, :finishing,
+             :quality_control, :shipping, :payment, :satisfaction
   ]
 
   STATES.each do | value |
@@ -50,7 +50,7 @@ class ProjectStateMachine
     project.update(cycle: 'production')
   end
   # ... TO DO => anything to do therer?
-  after_transition(from: :quality_control, to: :payment ) do |project, transition|
+  after_transition(from: :quality_control, to: :shipping ) do |project, transition|
     # TO DO: merge production branch to master
   end
   before_transition(from: :routing_plan, to: :bid_review ) do |project, transition|
@@ -82,8 +82,8 @@ class ProjectStateMachine
   end
 
   def self.production
-    [ :routing_plan, :production_orders, :manufacturing, :finishing, :quality_control,
-      :payment, :shipping, :satisfaction ]
+    [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control,
+      :shipping, :payment, :satisfaction ]
   end
 
   def self.production_manufacturing
@@ -91,7 +91,7 @@ class ProjectStateMachine
   end
 
   def self.production_finalizing
-    [:payment, :shipping, :satisfaction]
+    [:shipping, :payment, :satisfaction]
   end
 
   def phasis
@@ -112,13 +112,13 @@ class ProjectStateMachine
   def current_base_branch
     # does not deal with back to prev state since
     state = current_state.to_sym
-    if [:pending, :bid_review, :payment, :shipping, :satisfaction].include?(state)
+    if [:pending, :bid_review, :shipping, :payment, :satisfaction].include?(state)
       return "master"
     elsif state == :design_analysis
       return 'feasability'
     elsif state == :bid || state == :pricing_estimates
       return 'bid'
-    elsif [ :routing_plan, :production_orders, :manufacturing, :finishing, :quality_control].include?(state)
+    elsif [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control].include?(state)
       return "production"
     end
   end

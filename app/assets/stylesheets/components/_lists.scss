@@ -19,6 +19,16 @@ ul.list-inline {
   li.fade {
     color: $c-gray-light;
   }
+  li.main-item {
+    flex: 1 0 auto;
+    h1, h2, h3, h4, h5, h6, p {
+      margin: 0;
+    }
+  }
+}
+
+ul.list-inline.space-between {
+  justify-content: space-between;
 }
 
 
@@ -89,4 +99,9 @@ ul.list-inline {
 .scroll-collection {
   height: 40vh;
   overflow-y: auto
+}
+
+
+#prod-tracking {
+
 }

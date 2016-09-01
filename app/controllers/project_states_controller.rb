@@ -20,7 +20,7 @@ class ProjectStatesController < ApplicationController
   private
 
   def project_state_params
-    params.permit(:next, :previous, :project_id, :id)
+    params.permit(:next, :previous, project: [:project_id, :id,])
   end
 
   def get_state_useful_resource

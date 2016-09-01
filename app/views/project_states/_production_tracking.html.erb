@@ -1,0 +1,23 @@
+<ul class='col s12'>
+  <% prod_state_monitoring.each do | state, value | %>
+    <li class="mgb-10">
+      <ul class='list-inline space-between row'>
+        <li>
+          <%if value && @state_machine.current_state == state.to_s %>
+            <i class="material-icons c-orange">indeterminate_check_box</i>
+          <% elsif value %>
+            <i class="material-icons c-green">check_box</i>
+          <% else %>
+            <i class="material-icons">check_box_outline_blank</i>
+          <% end %>
+        </li>
+
+        <li class='main-item'>
+          <h6><strong><%= state.to_s.gsub('_', ' ').capitalize %></strong></h6>
+          <p class='c-gray-light'><em><%= state_status(@state_machine, state) %></em></p>
+        </li>
+        <li><a href="#!" class=""><i class="material-icons c-gray-light">link</i></a></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
