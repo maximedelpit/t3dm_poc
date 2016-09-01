@@ -1,15 +1,16 @@
 <div id='instructions' class="z-depth-1">
-<% if current_user.category == 'client' %>
-    <p>To deliver the best service, we would like to make a brief on the project.</p>
-    <p>Please select a date to plan a conf-call meeting with one of our expert.</p>
-<% elsif current_user.category == 'methods' %>
-  <p>It is now time, to have a conf-calll with the client to discuss the project feasability.</p>
-  <p>The client will propose dates, please confirm one.</p>
-<% else %>
-  <p>A conf-call is on-the verge to being set. Do not hesitate to open a topic to give directives before the call.</p>
-<% end %>
+  <span class='close-box'><i class="material-icons c-orange">close</i></span>
+  <% if current_user.category == 'client' %>
+      <p>To deliver the best service, we would like to make a brief on the project.</p>
+      <p>Please select a date to plan a conf-call meeting with one of our expert.</p>
+  <% elsif current_user.category == 'methods' %>
+    <p>It is now time, to have a conf-calll with the client to discuss the project feasability.</p>
+    <p>The client will propose dates, please confirm one.</p>
+  <% else %>
+    <p>A conf-call is on-the verge to being set. Do not hesitate to open a topic to give directives before the call.</p>
+  <% end %>
 </div>
-<br><br>
+<br>
 
 <div id="feasability-step">
   <% if current_user.category == 'client' %>

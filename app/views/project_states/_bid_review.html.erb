@@ -1,0 +1,27 @@
+<div id='instructions' class="z-depth-1">
+  <span class='close-box'><i class="material-icons c-orange">close</i></span>
+<% if current_user.category == 'client' %>
+  <p>Please review our quotation.</p>
+  <p>You can access all files and topics</p>
+  <p>Feel free to open topics</p>
+  <p>Submit your last STL version before accepting the offer.</p>
+
+<% else %>
+  <p>We are waiting for client's agreement</p>
+  <p>Monitor topics if client has questions</p>
+<% end %>
+</div>
+<br>
+
+<%= render 'orders/show', order: @order %>
+<% if current_user.category == 'client' %>
+  <!-- TO DO ISSUE WITH REMOTE TRUE -->
+  <%= simple_form_for @project, :url => project_path(@project, upload: true, next: true), html: {method: :put} do |f| %>
+    <%= f.error_notification %>
+    <div class="row">
+      <%= f.input "file", as: :file, label: 'Upload STL', wrapper_html: { class: 's6' } %>
+      <%= f.input "path", as: :hidden, input_html: {value: "3D Models"} %>
+    </div>
+    <%= f.button :submit, 'Accept Offer', id: 'remotipart-override' %>
+  <% end %>
+<% end %>

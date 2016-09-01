@@ -4,8 +4,8 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.order_lines.each { |ol| ol.project_id =  @project.id}
     @order.state = 'pending'
-    binding.pry
     @order.save
   end
 
@@ -25,9 +25,8 @@ class OrdersController < ApplicationController
 
   def order_params
     # TO DO => change generation with project order items... and remove project_id hidden_fields
-    params.require(:order).permit(  :due_date, :quantity, :price, order_lines_attributes: [
-                                      :id, :description, :unit_price, :duration, :project_id, :_destroy
-                                    ]
-                                  )
+    params.require(:order).permit(  :due_date, :quantity, :price,
+                                    order_lines_attributes: [:id, :description, :unit_price, :duration, :project_id, :_destroy]
+                                )
   end
 end

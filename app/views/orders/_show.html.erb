@@ -1,6 +1,10 @@
 <ul>
   <li>Quotation date: <%= formatted_date(@order.updated_at) %></li>
-  <li>Estimated deadline: <%#= formatted_date(@order.due_date) %></li>
+  <li>Estimated deadline: <%= formatted_date(@order.due_date) %></li>
+  <li>
+    This quotation remains valid for 30 days.
+    <%= (@order.updated_at.to_date + 30.days - Date.today).to_i %> days left.
+  </li>
 </ul>
 
 <table class='responsive-table small-padding'>

@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
         @ref_time = @meeting.start_time.to_s(:time)
       end
     end
-    if @state_machine.phasis != " Adapt & Finalize"
+    if @state_machine.phasis != "Adapt & Finalize"
       @order = @project.last_order || Order.new
     end
   end
@@ -63,14 +63,17 @@ class ProjectsController < ApplicationController
   def update
     # TO DO manage permitted params
     # Make a repository controller
-    if params[:upload]
-      sha_key = params[:sha].keys[0]
-      @file = params[:sha][sha_key][:file]
+    if params[:upload] == 'true'
       manage_file_upload
-      dir_path = params[:sha][sha_key][:path]
       # For the moment no new branch
-      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", dir_path, handle_pull_request)
+      RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", @dir_path, handle_pull_request)
       @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
+    end
+    @project.state_machine.next if params[:next] == 'true'
+    @project.state_machine.next if params[:previous] == 'true'
+    respond_to do |format|
+      format.html {redirect_to project_path(@project)}
+      format.js {}
     end
   end
 
@@ -89,9 +92,15 @@ class ProjectsController < ApplicationController
   end
 
   def project_update_params
-    params.permit(:sha, :upload, :pull_request, :repo)
-    params[:sha].each do |k, v|
-      params[:sha].delete(k) if v[:path] == ""
+    # #BOURIN +> à investiguer remotipart
+    params.permit(:repo, :project, :next, :upload, :previous, :utf8, :_method, :commit, :remotipart_submitted, :authenticity_token, :'X-Requested-With', :'X-Http-Accept', :id)
+    if params[:sha]
+      params.permit(:sha, :upload, :pull_request, :repo)
+      params[:sha].each do |k, v|
+        params[:sha].delete(k) if v[:path] == ""
+      end
+    else
+      params.require(:project).permit(:file, :path)
     end
   end
 
@@ -100,6 +109,14 @@ class ProjectsController < ApplicationController
   end
 
   def manage_file_upload
+    if params[:sha]
+      sha_key = params[:sha].keys[0]
+      @file = params[:sha][sha_key][:file]
+      @dir_path = params[:sha][sha_key][:path]
+    else
+      @file = params[:project][:file]
+      @dir_path = params[:project][:path]
+    end
     if @file
       @file_path = @file.tempfile.path
       @file_name = @file.original_filename

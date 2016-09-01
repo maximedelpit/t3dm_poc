@@ -20,7 +20,7 @@ class ProjectStatesController < ApplicationController
   private
 
   def project_state_params
-    params.permit(:next, :previous)
+    params.permit(:next, :previous, project: [:project_id, :id,])
   end
 
   def get_state_useful_resource
@@ -31,6 +31,10 @@ class ProjectStatesController < ApplicationController
           @ref_date = @meeting.start_time.to_date.to_s
           @ref_time = @meeting.start_time.to_s(:time)
         end
+      when "pricing_estimates"
+        @order = @project.last_order || Order.new
+      else
+        @order = @project.last_order
       end
   end
 end

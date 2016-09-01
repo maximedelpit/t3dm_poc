@@ -2,8 +2,8 @@ class ProjectStateMachine
   include Statesman::Machine
 
   STATES = [ :pending, :design_analysis, :feasibility, :bid, :pricing_estimates,
-             :bid_review, :planning, :production, :production_orders, :finishing,
-             :quality_control, :payment, :shipping, :satisfaction
+             :bid_review, :routing_plan, :manufacturing_orders, :manufacturing, :finishing,
+             :quality_control, :shipping, :payment, :satisfaction
   ]
 
   STATES.each do | value |
@@ -43,16 +43,17 @@ class ProjectStateMachine
   end
   after_transition(from: :pricing_estimates, to: :bid_review) do |project, transition|
     # TO DO: merge bid branch to master
+    project.last_order.update(state: 'propal') if project.last_order.state == 'pending'
   end
-  before_transition(from: :bid_review, to: :planning ) do |project, transition|
+  before_transition(from: :bid_review, to: :routing_plan ) do |project, transition|
     # TO DO: create production branch
     project.update(cycle: 'production')
   end
   # ... TO DO => anything to do therer?
-  after_transition(from: :quality_control, to: :payment ) do |project, transition|
+  after_transition(from: :quality_control, to: :shipping ) do |project, transition|
     # TO DO: merge production branch to master
   end
-  before_transition(from: :planning, to: :bid_review ) do |project, transition|
+  before_transition(from: :routing_plan, to: :bid_review ) do |project, transition|
     project.update(cycle: 'co-engineering')
   end
 
@@ -81,8 +82,8 @@ class ProjectStateMachine
   end
 
   def self.production
-    [ :planning, :production_orders, :manufacturing, :finishing, :quality_control,
-      :payment, :shipping, :satisfaction ]
+    [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control,
+      :shipping, :payment, :satisfaction ]
   end
 
   def self.production_manufacturing
@@ -90,7 +91,7 @@ class ProjectStateMachine
   end
 
   def self.production_finalizing
-    [:payment, :shipping, :satisfaction]
+    [:shipping, :payment, :satisfaction]
   end
 
   def phasis
@@ -100,7 +101,7 @@ class ProjectStateMachine
     elsif in_state?(self.class.bid)
       return "Bid"
     elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) < 2
-      return "Analisys"
+      return "Routing plan"
     elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) > 4
       return "Finalizing"
     else
@@ -111,13 +112,13 @@ class ProjectStateMachine
   def current_base_branch
     # does not deal with back to prev state since
     state = current_state.to_sym
-    if [:pending, :bid_review, :payment, :shipping, :satisfaction].include?(state)
+    if [:pending, :bid_review, :shipping, :payment, :satisfaction].include?(state)
       return "master"
     elsif state == :design_analysis
       return 'feasability'
     elsif state == :bid || state == :pricing_estimates
       return 'bid'
-    elsif [ :planning, :production_orders, :manufacturing, :finishing, :quality_control].include?(state)
+    elsif [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control].include?(state)
       return "production"
     end
   end

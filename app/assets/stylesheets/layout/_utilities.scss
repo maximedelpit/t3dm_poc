@@ -82,6 +82,22 @@
   }
 }
 
+.c-orange {
+  color: $c-orange;
+}
+
+.c-gray {
+  color: $c-gray;
+}
+
+.c-gray-light {
+  color: $c-gray-light;
+}
+
+.c-green {
+  color: $c-green;
+}
+
 .attachment-link {
   float:right;
   margin-right: 2rem;
@@ -117,4 +133,17 @@ table.small-padding {
   td {
     padding: 5px;
   }
+}
+
+
+.mgb-10 {
+  margin-bottom: 10px;
+}
+.mgb-15 {
+  margin-bottom: 15px;
+}
+
+i {
+  cursor: pointer;
+  cursor: hand;
 }

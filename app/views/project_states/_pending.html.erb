@@ -1,14 +1,15 @@
 <div id='instructions' class="z-depth-1">
-<% if current_user.category == 'client' %>
-    <p>We are reviewing your project, and we will be back to you soon.
-      You can add information to you project by drag & dropping files on the folder structure or edit your project.</p>
-<% elsif current_user.category == 'methods' %>
-  <p>Please review the project and click on Next to start design analysis phasis</p>
-<% else %>
-  <p>This an overview of the project at date.</p>
-<% end %>
+  <span class='close-box'><i class="material-icons c-orange">close</i></span>
+  <% if current_user.category == 'client' %>
+      <p>We are reviewing your project, and we will be back to you soon.
+        You can add information to you project by drag & dropping files on the folder structure or edit your project.</p>
+  <% elsif current_user.category == 'methods' %>
+    <p>Please review the project and click on Next to start design analysis phasis</p>
+  <% else %>
+    <p>This an overview of the project at date.</p>
+  <% end %>
 </div>
-<br><br>
+<br>
 
 <div id='pending-state'>
   <% if current_user.category == 'client' || current_user.category == 'methods' %>
