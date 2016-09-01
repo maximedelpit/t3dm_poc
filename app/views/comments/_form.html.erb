@@ -1,6 +1,6 @@
 <%= simple_form_for [@project, @topic, Comment.new], method: :post, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
   <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
-  <span class="fileinput-node">
+  <span class="fileinput-node icon">
     <i class="material-icons attachment-icon">attach_file</i>
     <%= f.input :attachment, as: :attachinary, label: false %>
     <span class="attchachinary-filename"></span>

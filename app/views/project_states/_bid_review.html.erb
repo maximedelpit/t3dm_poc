@@ -1,0 +1,22 @@
+<div id='instructions' class="z-depth-1">
+<% if current_user.category == 'client' %>
+  <p>Please review our quotation.</p>
+  <p>You can access all files and topics</p>
+  <p>Feel free to open topics</p>
+  <p>Submit your last STL version before accepting the offer.</p>
+
+<% else %>
+  <p>We are waiting for client's agreement</p>
+  <p>Monitor topics if client has questions</p>
+<% end %>
+</div>
+<br><br>
+
+<%= render 'orders/show', order: @order %>
+<% if current_user.category == 'client' %>
+  <%= simple_form_for @project, remote: true do |f|%>
+    <%= f.error_notification %>
+    <%= f.input "file", as: :file, label: 'Upload Attachment', wrapper_html: { class: '6' } %>
+    <%= f.button :submit, 'Accept Offer' %>
+  <% end %>
+<% end %>

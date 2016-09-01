@@ -14,11 +14,7 @@
 <br><br>
 
 <% if current_user.category == 'client' %>
-  <% if @order.id.nil? || @order.state == 'pending' %>
-    <p>We are estimating price & deadlines. We will come back to you soon.</p>
-  <% else %>
-    <%= render 'orders/show', order: @order %>
-  <% end %>
+  <p>We are estimating price & deadlines. We will come back to you soon.</p>
 <% elsif current_user.category == 'methods' %>
   <p>The client asked for a quotation, please build it</p>
   <%= render 'orders/pricing_form', order: @order %>

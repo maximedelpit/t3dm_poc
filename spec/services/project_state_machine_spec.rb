@@ -49,13 +49,13 @@ RSpec.describe ProjectStateMachine do
         expect(machine.object.cycle).to eq('co-engineering')
       end
     end
-    it 'should set project cycle to Production before planning state' do
-      subject.class.after_transition(from: :bid_review, to: :planning) do |machine|
+    it 'should set project cycle to Production before routing_plan state' do
+      subject.class.after_transition(from: :bid_review, to: :routing_plan) do |machine|
         expect(machine.object.cycle).to eq('production')
       end
     end
-    it 'should set project cycle to Co-Engineering before coming back from planning to bid_review' do
-      subject.class.after_transition(from: :planning, to: :bid_review) do |machine|
+    it 'should set project cycle to Co-Engineering before coming back from routing_plan to bid_review' do
+      subject.class.after_transition(from: :routing_plan, to: :bid_review) do |machine|
         expect(machine.object.cycle).to eq('co-engineering')
       end
     end
