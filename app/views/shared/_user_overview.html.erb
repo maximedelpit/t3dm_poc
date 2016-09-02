@@ -12,7 +12,7 @@
         <% if size == 'large' %>
           <hr>
           <span class='after-break-line'><%= link_to 'Edit', edit_user_registration_path %></span> -
-          <span class='after-break-line'><%= link_to 'Logout', destroy_user_session_path %></span>
+          <span class='after-break-line'><%= link_to 'Logout', destroy_user_session_path, method: :delete %></span>
         <% end %>
     </span>
   </div>
