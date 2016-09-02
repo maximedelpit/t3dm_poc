@@ -1,0 +1,11 @@
+<% if topic.state == 'open' %>
+  <ul class="list-inline space-around">
+     <li>
+     <%= link_to 'Validate', project_topic_path(@project, topic, topic_action: 'merged'), method: :put, class: 'btn' %>
+     </li>
+    <li>
+      <%= link_to 'Close', project_topic_path(@project, topic, topic_action: 'closed'), method: :put, class: 'btn gray-light' %>
+    </li>
+    <li><%= link_to 'Delete', project_topic_path(@project, topic, delete: true), method: :put, class: 'btn gray-light' %></li>
+  </ul>
+<% end %>

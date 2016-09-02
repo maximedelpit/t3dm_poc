@@ -53,3 +53,15 @@
   min-width: 40px;
   padding: 0 5px;
 }
+
+.btn.gray {
+  background-color: $c-gray;
+}
+
+.btn.gray-light {
+  background-color: $c-gray-light;
+}
+
+.btn.gray-lighter {
+  background-color: $c-gray-lighter;
+}

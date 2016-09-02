@@ -35,3 +35,47 @@
 
   }
 }
+
+.swal2-modal {
+  border-radius: 2px;
+  h2 {
+    line-height: 25px;
+  }
+  .swal2-content {
+    font-size: $medium-size;
+    line-height: 20px;
+    margin-bottom: 2rem;
+  }
+
+  .swal2-input {
+    display: block;
+    border: none;
+    border-bottom: 1px solid gray;
+    border-radius: 0px;
+    &:focus, &:active {
+      outline: none;
+      box-shadow: none;
+      border-top: none;
+      border-right: none;
+      border-left: none;
+    }
+  }
+  .swal2-input:not([type="file"]):focus, .swal2-textarea:focus {
+    outline: none;
+    box-shadow: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+  .swal2-confirm {
+    border-left-color: $c-turquoise;
+    border-right-color: $c-turquoise;
+    background-color: $c-turquoise
+  }
+  .swal2-cancel {
+    border-left-color: $c-gray-light;
+    border-right-color: $c-gray-light;
+    background-color: $c-gray-light
+  }
+
+}

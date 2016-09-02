@@ -18,18 +18,15 @@
 
 <div id='design-analisys-state'>
   <div class="col s12">
+    <h4>Project Title: <%= @project.title %></h4>
     <ul>
-      <li><strong>Project Title: <%= @project.title %></strong></li>
       <li>Client name: <%= @project.client %></li>
       <li>Main Contact: <%= @project.project_users.first.user.name %></li>
       <li>Thalès ref: <%= @project.thales_id %></li>
       <li>Client ref: <%= @project.client_project_id %></li>
     </ul>
-    <br>
-    <ul>
-      <li><%= @project.part_functionality %></li>
-      <li><%= simple_format @project.notes %></li>
-    </ul>
+    <p>Part Functionnality: <%= @project.part_functionality %></p>
+    <p><em>Notes: <%= simple_format @project.notes %></em></p>
     <table class='responsive-table'>
       <thead>
         <tr>

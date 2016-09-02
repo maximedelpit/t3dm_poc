@@ -7,11 +7,16 @@
           </h4>
         </li>
         <li>
+          <a class="btn-icon">
+            <%= state_button_tag(@topic_hash[:state]) %>
+          </a>
+        </li>
+        <li>
           <a class="btn-icon-large"><i class="material-icons turquoise">add_circle_outline</i></a>
         </li>
       </ul>
       <div class="collapsible-body" id='comment-form'>
-        <p>YOOOOOOoo</p>
+        <p>TO DO Show Details</p>
         <%#= render 'comments/new', topic: Comment.new %>
       </div>
     </li>

@@ -8,9 +8,13 @@ class CommentsController < ApplicationController
     mentionned_users = check_mentions(@comment.content) if @comment.content
     mentionned_users.each {|u| @comment.mentions.build(user: u)}
     @comment.save
-    if @comment.attachment.format.nil?
+    if @comment.attachment && @comment.attachment.format.nil?
       @comment.attachment.format = @comment.attachment.public_id.split('.').last
       @comment.attachment.save
+    end
+    respond_to do | format |
+      format.html {redirect_to project_topic_path(@topic.project, @topic)}
+      format.js {}
     end
   end
 

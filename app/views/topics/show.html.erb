@@ -3,13 +3,16 @@
   </div>
 <% if @topic.type == 'PullRequest' %>
   <!-- Project Overview -->
-  <div class="col s7 full">
+  <div class="col s6 full">
+    <h1> 3D Preview</h1><br><br><br><br><h1>Work In Progress</h1>
+    <%= render 'topics/pull_request_actions', topic: @topic %>
   </div>
-  <div class="col s3 full light-vt-border-left">
+  <div class="col s4 full light-vt-border-left">
     <%= render 'topics/comments', size: 'mini' %>
   </div>
 <% else %>
   <div class="col s10 full">
     <%= render 'topics/comments', size: 'sm' %>
+    <%= render 'topics/issue_actions', topic: @topic %>
   </div>
 <% end %>

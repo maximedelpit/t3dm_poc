@@ -12,6 +12,7 @@
 </div>
 <br>
 
+<h4>Feasibility Meeting</h4>
 <div id="feasability-step">
   <% if current_user.category == 'client' %>
     <% if @meeting.id && @meeting.start_time.to_date == Date.today %>
@@ -23,7 +24,7 @@
       <%= render 'project_states/new_meeting_form', meeting: @meeting %>
     <% end %>
   <% elsif current_user.category == 'methods' %>
-    <% if @meeting.start_time.to_date == Date.today %>
+    <% if @meeting.id && @meeting.start_time.to_date == Date.today %>
       <p>You have a meeting planned today at: <%= @meeting.start_time.to_s(:time)%></p>
       <a href="">JOIN MEETING</a>
     <% elsif @meeting.id %>

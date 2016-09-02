@@ -31,6 +31,9 @@ ul.list-inline.space-between {
   justify-content: space-between;
 }
 
+ul.list-inline.space-around {
+  justify-content: space-aroud;
+}
 
 .dropdown-content li > a, .dropdown-content li > span {
   font-size: $text-size;

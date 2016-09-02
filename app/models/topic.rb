@@ -3,7 +3,7 @@ class Topic < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :state, :user, :project, presence: true
   validates :type, presence: true, inclusion: { in: %w(PullRequest Issue) }

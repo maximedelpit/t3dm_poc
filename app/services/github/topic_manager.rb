@@ -33,4 +33,16 @@ class TopicManager
   def get_topic_hash(topic_number)
       return @octokit_client.issue(@project.repo_uri, topic_number)
   end
+
+  def merge_topic_pr(topic_number, commit_message = '', options = {})
+    return @octokit_client.merge_pull_request(@project.repo_uri, topic_number, commit_message, options)
+  end
+
+  def close_issue(topic_number, options = {})
+    @octokit_client.close_issue(@project.repo_uri, topic_number, options)
+  end
+
+  def reopen_issue(topic_number, options = {})
+    @octokit_client.reopen_issue(@project.repo_uri, topic_number, options)
+  end
 end

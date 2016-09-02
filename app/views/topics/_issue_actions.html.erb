@@ -1,0 +1,11 @@
+<ul class="list-inline space-around">
+  <li>
+     <% if topic.state == 'open' %>
+      <%= link_to 'Close', project_topic_path(@project, topic, topic_action: 'closed'), method: :put, class: 'btn' %>
+    <% elsif topic.state == 'closed' %>
+      <%= link_to 'Re-open', project_topic_path(@project, topic, topic_action: 'open'), method: :put, class: 'btn' %>
+    <% end %>
+  </li>
+  <li><%= link_to 'Delete', project_topic_path(@project, topic, delete: true), method: :put, class: 'btn gray-light' %></li>
+</ul>
+
