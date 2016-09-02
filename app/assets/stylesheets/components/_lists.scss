@@ -104,7 +104,13 @@ ul.list-inline.space-around {
   overflow-y: auto
 }
 
-
-#prod-tracking {
-
+.vertical-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 10vh;
+    li {
+      height: 10vh;
+      margin: auto;
+    }
 }

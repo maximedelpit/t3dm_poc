@@ -1,15 +1,35 @@
-<h2>Log in</h2>
+<!-- <h2>Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%#= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <%#= f.input :email, required: false, autofocus: true %>
+    <%#= f.input :password, required: false %>
+    <%#= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%#= f.button :submit, "Log in" %>
   </div>
-<% end %>
+<%# end %>
 
-<%= render "devise/shared/links" %>
+<%#= render "devise/shared/links" %>
+
+
+ -->
+<ul class="vertical-flex center-align">
+  <li><h1>This is a prototype for Thalès T3DM</h1></li>
+  <li>
+    <p>Connect with github account (gmail address in github) to benefit full features</p>
+    <p>We recommand to use Google Chorme for performance and display</p>
+  </li>
+  <li>
+     <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "#{OmniAuth::Utils.camelize(provider)} Connect", omniauth_authorize_path(resource_name, provider), class: 'btn' %><br />
+      <% end -%>
+    <% end -%>
+  </li>
+
+  <li>Made with <i class="material-icons attachment-icon">favorite</i> by GOOSE</li>
+</ul>
+

@@ -39,7 +39,7 @@ class Project < ApplicationRecord
                                 :surface, :dimension, :quality_control,
                                 reject_if: :all_blank, allow_destroy: true
 
-  scope :in_phasis, -> (filter) {in_state(ProjectStateMachine.send("#{filter}?")).distinct}
+  scope :in_phasis, -> (filter) {in_state(ProjectStateMachine.send("#{filter}")).distinct}
 
   include Project::ExternalInput
 

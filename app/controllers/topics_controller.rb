@@ -40,6 +40,7 @@ class TopicsController < ApplicationController
     end
     edit_state(github_response)
     @topic.save
+    redirect_to project_topic_path(@project, @topic)
   end
 
   private
