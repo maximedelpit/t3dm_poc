@@ -36,4 +36,9 @@ $(document).ready(function() {
   $('.clockpicker').clockpicker({
     autoclose: true
   });
+
+
+  $('#user_category').on('change', function(event) {
+    $(this).parents('form').submit();
+  })
 });

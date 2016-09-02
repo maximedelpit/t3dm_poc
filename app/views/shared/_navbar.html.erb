@@ -5,15 +5,20 @@
       <%= image_tag "logo.png" %>
     <% end %>
 
+
     <!-- Burger button for small device -->
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">view_headline</i></a>
 
     <!-- Right Navigation -->
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <!-- Different navigation if login or not -->
-      <% if user_signed_in? %>
+      <% if user_signed_in? && @project %>
+        <li>
+          <%= simple_form_for :user, url: project_project_state_path(@project), method: :put do |f| %>
+            <%= f.input :category, collection: ['client', 'methods', 'production'], wrapper_html: { class: 's2' }, html: {value: current_user.category} %>
+          <%end %>
+        </li>
         <li><%= render 'shared/user_overview', user: current_user, size: size %></li>
-
 
         <!-- Notification -->
         <li>

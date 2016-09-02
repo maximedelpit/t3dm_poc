@@ -2,6 +2,10 @@ class ProjectStatesController < ApplicationController
   before_action :project_state_params, only: :update
 
   def update
+    # TO DELETE
+    if params[:user]
+      current_user.update(category: params[:user][:category])
+    end
     @project = Project.find(params[:project_id])
     @state_machine = @project.state_machine
     if params[:next]
@@ -20,7 +24,7 @@ class ProjectStatesController < ApplicationController
   private
 
   def project_state_params
-    params.permit(:next, :previous, project: [:project_id, :id,])
+    params.permit(:next, :previous, project: [:project_id, :id,], user: [:category])
   end
 
   def get_state_useful_resource

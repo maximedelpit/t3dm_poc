@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
    def configure_permitted_parameters
     # Defines profile type at user creation => permitted params management => Devise
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password,
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password,
                                                             :password_confirmation,
                                                             :category, :entity,
                                                             :provider, :uid, :name, :picture,
