@@ -12,7 +12,7 @@
     <!-- Right Navigation -->
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <!-- Different navigation if login or not -->
-      <% if user_signed_in? && @project %>
+      <% if user_signed_in? && @project.id %>
         <li>
           <%= simple_form_for :user, url: project_project_state_path(@project), method: :put do |f| %>
             <%= f.input :category, collection: ['client', 'methods', 'production'], wrapper_html: { class: 's2' }, html: {value: current_user.category} %>
