@@ -9,7 +9,6 @@ class ProjectsController < ApplicationController
       @projects = Project.all
       # @projects = current_user.projects
     end
-    binding.pry
     respond_to do |format|
       format.html {}
       format.js {}
