@@ -6,6 +6,18 @@
   margin: 0;
   text-align: center;
   color: white;
+  opacity: 0.6;
+  padding: 1rem 2rem;
+  position: relative;
+  button.close {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.2rem 1rem;
+    font-size: 16px;
+  }
 }
 .alert-info {
   background: $success-color;
@@ -21,7 +33,7 @@
   border-radius: 3px;
   background-color: rgba(255, 166, 90, 0.05);
   position: relative;
-  .close-box {
+  .close {
     position: absolute;
     top: 0;
     right: 0;

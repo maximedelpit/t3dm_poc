@@ -3,10 +3,13 @@ class ProjectsController < ApplicationController
   before_action :project_update_params, only: :update
   def index
     if params[:filters]
-      @projects = current_user.projects.in_phasis(params[:filters])
+      # @projects = current_user.projects.in_phasis(params[:filters])
+      @projects = Project.in_phasis(params[:filters])
     else
-      @projects = current_user.projects
+      @projects = Project.all
+      # @projects = current_user.projects
     end
+    binding.pry
     respond_to do |format|
       format.html {}
       format.js {}
