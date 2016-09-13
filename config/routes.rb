@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     end
     resources :project_states, only: :update
     resources :orders, only: [:create, :update]
+    member do
+      get 'file/:sha', to: 'repositories#show'
+    end
   end
 
   resources :order_lines, only: :destroy
