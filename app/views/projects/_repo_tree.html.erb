@@ -1,9 +1,13 @@
-<li data-sha='<%= data.sha %>' data-url='<%= data.url %>' data-gtype='<%= data.type %>' data-jstree='{ "type" : "<%= data.extension %>"}', data-path='<%= data.path %>' >
+<li data-sha='<%= data.sha %>' data-url='<%= data.url %>' data-gtype='<%= data.type %>' data-jstree='{ "type" : "<%= data.type %>"}', data-path='<%= data.path %>' data-ext='<%= data.extension %>' data-project='<%= @project.id %>' >
   <span class="fileinput-node">
-    <%= data.name %>
     <% if data.type == 'tree' %>
+      <%= data.name %>
       <%= file_field_tag  "sha[#{data.sha}[file]]", accept: "*", class:'input-tree clean-input' %>
       <%= hidden_field_tag "sha[#{data.sha}[path]]", nil, {class:'sha-path-input clean-input'} %>
+    <% elsif data.type == 'blob' %>
+      <%= link_to data.name, '', class:'github-link' %>
+    <% else %>
+      <%= data.name %>
     <% end %>
   </span>
   <%= yield %>
