@@ -29,13 +29,11 @@ class ProjectStatesController < ApplicationController
 
   def get_state_useful_resource
     case @state_machine.current_state
-      when "feasibility"
-        @meeting = Meeting.where(project_id: @project.id, object: 'Setup').first_or_initialize
-        if @meeting.start_time
-          @ref_date = @meeting.start_time.to_date.to_s
-          @ref_time = @meeting.start_time.to_s(:time)
-        end
-      when "pricing_estimates"
+      when "adapt_and_finalize"
+        @order = nil
+      when "desing_analysis"
+        @order = nil
+      when "quotation"
         @order = @project.last_order || Order.new
       else
         @order = @project.last_order

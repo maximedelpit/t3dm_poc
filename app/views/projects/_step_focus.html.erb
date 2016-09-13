@@ -4,5 +4,9 @@
     <%= render 'project_states/transition_buttons', state_machine: state_machine %>
   </li>
 </ul>
-<%= render "project_states/#{state_machine.current_state}" %>
+<% if state_machine.in_state?(ProjectStateMachine.production) %>
+  <%= render "project_states/production_steps", state_machine: state_machine %>
+<% else %>
+  <%= render "project_states/#{state_machine.current_state}", state_machine: state_machine %>
+<% end %>
 

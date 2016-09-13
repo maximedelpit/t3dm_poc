@@ -1,13 +1,13 @@
 class ProjectStateMachine
   include Statesman::Machine
 
-  STATES = [ :pending, :design_analysis, :feasibility, :bid, :pricing_estimates,
-             :bid_review, :routing_plan, :manufacturing_orders, :manufacturing, :finishing,
+  STATES = [ :adapt_and_finalize, :design_analysis, :quotation, :bid, :preparation,
+             :printing, :heat_treatment, :cutting, :machining, :finishes, :surface_treatment,
              :quality_control, :shipping, :payment, :satisfaction
   ]
 
   STATES.each do | value |
-    if value == :pending
+    if value == :adapt_and_finalize
       state value, initial: true
     else
       state value
@@ -26,34 +26,28 @@ class ProjectStateMachine
     end
   end
 
-  before_transition(to: :pending) do |project, transition|
+  before_transition(to: :adapt_and_finalize) do |project, transition|
     project.update(cycle: 'co-engineering')
   end
-  before_transition(from: :pending, to: :design_analysis) do |project, transition|
-    # TO DO: create feasibility branch
+  before_transition(from: :adapt_and_finalize, to: :design_analysis) do |project, transition|
+    # TO DO: create design_analysis branch
   end
-  after_transition(from: :design_analysis, to: :feasibility) do |project, transition|
-    # TO DO: merge feasibility branch to master
+  after_transition(from: :design_analysis, to: :quotation) do |project, transition|
+    # TO DO: merge design_analysis branch to master
+    # TO DO: create quotation branch
   end
-  before_transition(from: :feasibility, to: :bid) do |project, transition|
+  after_transition(from: :quotation, to: :bid) do |project, transition|
+    # TO DO: merge quotation branch to master
     # TO DO: create bid branch
-  end
-  before_transition(from: :bid, to: :pricing_estimates) do |project, transition|
-    # TO DO: ???? Pull request & commits
-  end
-  after_transition(from: :pricing_estimates, to: :bid_review) do |project, transition|
-    # TO DO: merge bid branch to master
     project.last_order.update(state: 'propal') if project.last_order.state == 'pending'
   end
-  before_transition(from: :bid_review, to: :routing_plan ) do |project, transition|
+  before_transition(from: :bid, to: :preparation ) do |project, transition|
+    # TO DO: merge bid branch to master
     # TO DO: create production branch
     project.update(cycle: 'production')
   end
   # ... TO DO => anything to do therer?
-  after_transition(from: :quality_control, to: :shipping ) do |project, transition|
-    # TO DO: merge production branch to master
-  end
-  before_transition(from: :routing_plan, to: :bid_review ) do |project, transition|
+  before_transition(from: :preparation, to: :bid ) do |project, transition|
     project.update(cycle: 'co-engineering')
   end
 
@@ -73,53 +67,22 @@ class ProjectStateMachine
     can_transition_to?(previous_state) ? transition_to!(previous_state) : raise
   end
 
-  def self.feasibility
-    [:pending, :design_analysis, :feasibility]
-  end
-
-  def self.bid
-    [:bid, :pricing_estimates, :bid_review]
+  def self.co_engineering
+    [:adapt_and_finalize, :design_analysis, :quotation, :bid]
   end
 
   def self.production
-    [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control,
-      :shipping, :payment, :satisfaction ]
-  end
-
-  def self.production_manufacturing
-    [:finishing, :quality_control]
-  end
-
-  def self.production_finalizing
-    [:shipping, :payment, :satisfaction]
-  end
-
-  def phasis
-    state_sym = current_state.to_sym
-    if in_state?(self.class.feasibility)
-      return "Adapt & Finalize"
-    elsif in_state?(self.class.bid)
-      return "Bid"
-    elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) < 2
-      return "Routing plan"
-    elsif in_state?(self.class.production) && self.class.production.find_index(state_sym) > 4
-      return "Finalizing"
-    else
-      return "Manufacturing"
-    end
+    [:preparation, :printing, :heat_treatment, :cutting, :machining, :finishes, :surface_treatment,
+     :quality_control, :shipping, :payment, :satisfaction]
   end
 
   def current_base_branch
     # does not deal with back to prev state since
     state = current_state.to_sym
-    if [:pending, :bid_review, :shipping, :payment, :satisfaction].include?(state)
+    if [:adapt_and_finalize, :payment, :satisfaction].include?(state)
       return "master"
-    elsif state == :design_analysis
-      return 'feasability'
-    elsif state == :bid || state == :pricing_estimates
-      return 'bid'
-    elsif [ :routing_plan, :manufacturing_orders, :manufacturing, :finishing, :quality_control].include?(state)
-      return "production"
+    else
+      return current_state
     end
   end
 end

@@ -1,0 +1,51 @@
+<!-- REVIEWED -->
+<!-- TO REVIEW ISNTRUCTIONS HERE -->
+<div id='instructions' class="z-depth-1">
+  <span class='close'><i class="material-icons c-orange">close</i></span>
+<% if current_user.category == 'client' %>
+  <p>We agreed on project design & feasibility. It is now time for quotation</p>
+  <p>Please fill the following steps:</p>
+  <ol>
+    <li>Review project & topics</li>
+    <li>Upload (drag & drop) last files version (you are resposible for this step)</li>
+    <li>Fill the quotation fields</li>
+  </ol>
+<% elsif current_user.category == 'methods' %>
+  <p>Based on the customer feedback, please fine tune the project and use topic.</p>
+  <p>We will wait for the client to ask for a quotation then</p>
+<% else %>
+  <p>We are waiting for the client go.</p>
+  <p>Reading the topics will keep you up-to-date.</p>
+<% end %>
+</div>
+<br>
+
+
+<div class="col s12">
+  <% if current_user.category == 'client' %>
+    <% if @order.state.nil? %>
+      <%= simple_form_for [@project, @order] do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :due_date, as: :string, input_html: { class: 'datepicker'}, label: 'Deadline', wrapper_html: { class: 's6' } %>
+        <%= f.input :quantity, wrapper_html: { class: 's6' } %>
+        <%= f.button :submit, 'Request quotation', class:'btn-mini', wrapper_html: { class: 's12' } %>
+      <% end %>
+    <% else %>
+      <h3>We are building your quotation... We will come back to you soon.</h3>
+    <% end %>
+  <% elsif current_user.category == 'methods' %>
+    <% if @order.state %>
+      <h3>The client asked for a quotation, please build it</h3>
+      <%= render 'orders/pricing_form', order: @order %>
+    <% else %>
+      <h3>Waiting for client quotation request.</h3>
+    <% end %>
+  <% else %>
+    <h3>Waiting for quotation</h3>
+  <% end %>
+  <br>
+  <div class="col s12">
+    <h5>Project Details</h5>
+    <%= render 'projects/summary' %>
+  </div>
+</div>

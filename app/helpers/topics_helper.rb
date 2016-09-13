@@ -1,3 +1,4 @@
+# TO DO  => review UX
 module TopicsHelper
   def topic_button_color(state)
     if state == 'closed'

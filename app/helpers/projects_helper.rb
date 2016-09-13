@@ -3,8 +3,7 @@ module ProjectsHelper
     breadcrumb = {}
     if project_breadcrumb_conditions
       breadcrumb[:cycle] = @project.cycle.capitalize
-      breadcrumb[:phasis]=  @project.state_machine.phasis.capitalize
-      breadcrumb[:state] = @project.state_machine.current_state.capitalize
+      breadcrumb[:state] = @project.state_machine.current_state.gsub('_', ' ').capitalize
     else
     end
     return breadcrumb

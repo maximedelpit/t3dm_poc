@@ -28,17 +28,17 @@
     <tr>
       <td colspan='1'></td>
       <td><strong>Price / unit</strong></td>
-      <td><strong>X €</strong></td>
+      <td><strong>€<%= order.unit_price %></strong></td>
     </tr>
     <tr>
       <td colspan='1'></td>
       <td><strong>Quantities</strong></td>
-      <td><strong>Y</strong></td>
+      <td><strong><%= order.quantity %></strong></td>
     </tr>
     <tr>
       <td colspan='1'></td>
       <td><strong>Total exc. VAT</strong></td>
-      <td><strong>2 €</strong></td>
+      <td><strong>€<%= order.total %></strong></td>
     </tr>
   </tfoot>
 </table>

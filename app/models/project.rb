@@ -5,17 +5,17 @@ class Project < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   has_many :specs, dependent: :destroy
-  has_one :purpose
-  has_one :material
-  has_one :heat_treatment
-  has_one :surface
-  has_one :dimension
-  has_one :quality_control
-  has_many :topics
-  has_many :meetings
-  has_many :order_lines
-  has_many :orders, through: :order_lines
-  has_many :transitions, class_name: "ProjectTransition", autosave: false
+  has_one :purpose, dependent: :destroy
+  has_one :material, dependent: :destroy
+  has_one :heat_treatment, dependent: :destroy
+  has_one :surface, dependent: :destroy
+  has_one :dimension, dependent: :destroy
+  has_one :quality_control, dependent: :destroy
+  has_many :topics, dependent: :destroy
+  has_many :meetings, dependent: :destroy
+  has_many :order_lines, dependent: :destroy
+  has_many :orders, through: :order_lines, dependent: :destroy
+  has_many :transitions, class_name: "ProjectTransition", autosave: false, dependent: :destroy
 
 
   # validates :state, :cycle, presence: true
@@ -49,15 +49,15 @@ class Project < ApplicationRecord
   end
 
   def clients
-    users.where(catergory: 'client')
+    users.where(category: 'client')
   end
 
   def productors
-    users.where(catergory: 'productor')
+    users.where(category: 'productor')
   end
 
   def method_officors
-    users.where(catergory: 'method officors')
+    users.where(category: 'method officors')
   end
 
   def check_spec_standards
@@ -73,10 +73,6 @@ class Project < ApplicationRecord
 
   def repo_uri
     "#{github_owner}/#{repo_name}"
-  end
-
-  def current_branch
-    self.state_machine
   end
 
   def self.find_from_repo_name(repo_name)
@@ -100,7 +96,7 @@ class Project < ApplicationRecord
   private_class_method :transition_class
 
   def self.initial_state
-    :pending
+    :adapt_and_finalize
   end
 
   def self.last_state

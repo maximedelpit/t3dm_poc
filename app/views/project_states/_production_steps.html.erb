@@ -1,0 +1,18 @@
+<div id='instructions' class="z-depth-1">
+  <span class='close'><i class="material-icons c-orange">close</i></span>
+  <% if current_user.category == 'production' %>
+    <p>Please provide feedback to client on production</p>
+    <p>You can upload files on specific phasis</p>
+    <p>You can open topics if needed.</p>
+  <% else %>
+    <p>You can follow production process.</p>
+    <p>You can open topics if needed.</p>
+  <% end %>
+</div>
+<br>
+
+<h5>Production tracking</h5>
+<% if state_machine.current_state == 'shipping' %>
+  <div class="as-track-button" data-size="small" data-domain="track.aftership.com"  data-tracking-number="1ZA6F598D992381375"  data-hide-tracking-number="true"></div>
+<% end %>
+<%= render 'project_states/production_tracking' %>

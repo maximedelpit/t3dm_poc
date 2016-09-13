@@ -24,4 +24,28 @@ module ProjectStatesHelper
       return 'To Do'
     end
   end
+
+  def co_engineering_icons
+    return {
+      adapt_and_finalize: 'settings',
+      design_analysis: 'lightbulb_outline',
+      quotation: 'show_chart',
+      bid: 'euro_symbol'
+    }
+  end
+
+
+  def production_icons
+    return {
+      preparation: 'assignment',
+      printing: 'print',
+      heat_treatment: 'whatshot',
+      cutting: 'content_cut',
+      machining: 'open_with', #settings_overscan
+      finishes: 'sync',
+      surface_treatment: 'subject',
+      quality_control: 'equalizer',
+      shipping: 'local_shipping'
+    }
+  end
 end

@@ -1,29 +1,31 @@
+<!-- REVIEWED -->
 <div id='instructions' class="z-depth-1">
   <span class='close'><i class="material-icons c-orange">close</i></span>
 <% if current_user.category == 'client' %>
-  <p>We hope you enjoyed your meeting with our team members.</p>
-  <p>This is now time for asking for a quotation</p>
-  <p>Please ensure to validate all topics to go to next step.</p>
-<% elsif current_user.category == 'methods' %>
-  <p>Based on the customer feedback, please fine tune the project and use topic.</p>
-  <p>We will wait for the client to ask for a quotation then</p>
+  <p>Please review our quotation.</p>
+  <p>You can access all files and topics</p>
+  <p>Feel free to open topics</p>
+  <p>Submit your last STL version before accepting the offer.</p>
+
 <% else %>
-  <p>We are waiting for the client go.</p>
-  <p>Reading the topics will keep you up-to-date.</p>
+  <p>We are waiting for client's agreement</p>
+  <p>Monitor topics if client has questions</p>
 <% end %>
 </div>
 <br>
 
+<%= render 'orders/show', order: @order %>
 <% if current_user.category == 'client' %>
-  <% if @topics.all? {|topic| topic.state == 'closed'} %>
-    <p>All topics are closed, you can now ask for a quotation.</p>
-    <%= link_to project_project_state_path(@project, next: true), method: :put, class: 'waves-effect waves-light btn', remote: true do %>
-      <i class="material-icons right">shopping_cart</i>Ask for a quotation
-    <% end %>
-  <% else %>
-    <p>Please close all topics before asking for a quotation</p>
+  <!-- TO DO ISSUE WITH REMOTE TRUE -->
+  <%#= simple_form_for @project, :url => project_path(@project, upload: true, next: true), html: {method: :put} do |f| %>
+  <%= simple_form_for @project, :url => project_path(@project, next: true), html: {method: :put} do |f| %>
+    <%= f.error_notification %>
+    <div class="row">
+      <%#= f.input "file", as: :file, label: 'Upload STL', wrapper_html: { class: 's6' } %>
+      <%#= f.input "path", as: :hidden, input_html: {value: "3D Models"} %>
+      <!-- BOURIN -->
+      <%= f.input :due_date, as: :hidden, input_html: {value: @order.due_date} %>
+    </div>
+    <%= f.button :submit, 'Accept Offer', id: 'remotipart-override' %>
   <% end %>
-<% elsif current_user.category == 'methods' %>
-  <p>We are waiting client feed back to start pricing estimates</p>
-<% else %>
 <% end %>
