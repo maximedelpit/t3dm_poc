@@ -1,0 +1,4 @@
+<% if @file[:extension] == '.stl' %>
+  <script src="https://embed.github.com/view/3d/<%= @project.repo_uri %>/master/<%= @file[:extension]%>"></script>
+
+<% end %>

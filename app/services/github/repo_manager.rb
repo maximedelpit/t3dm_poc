@@ -52,7 +52,14 @@ class RepoManager
   #Get a content blob
     # @octokit_client.contents(@project.repo_uri, path:"3D Models/0_index_projet_list.jpg", sha: "84bb468c935ea2032d2dff95c02a4e7970f0fd10")
 
+  def get_blob(sha)
+    return @octokit_client.blob(@project.repo_uri, sha)
+  end
 
+  def get_content(path)
+    # less than 1mb only
+    test = @octokit_client.contents(@project.repo_uri, path: path)
+  end
 
   private
 
@@ -173,6 +180,12 @@ class RepoManager
     # Used to add ancestry within github main tree
     # We sort them by path
     # maybe use sha for ancestry items ?
+    # file = "/path/to/xyz.mp4"
+    # TO DO => refacto
+    # comp = File.basename file        # => "xyz.mp4"
+    # extn = File.extname  file        # => ".mp4"
+    # name = File.basename file, extn  # => "xyz"
+    # path = File.dirname  file        # => "/path/to
     repo_tree.sort_by do |item|
       split_path = item.path.split('/')
       item[:id] = item.sha
@@ -180,7 +193,7 @@ class RepoManager
       item[:ancestry] = split_path.select {|v| v != item[:name]}.join('/')
       item[:ancestry] = nil if item[:ancestry].empty?
       item[:parent] = split_path[-2]
-      item.type == 'tree' ? item[:extension] = 'folder' : item[:extension] = 'file'
+      item.type == 'tree' ? item[:extension] = 'folder' : item[:extension] = File.extname(item.path)
       # split_path.length == 1 ? item[:node] = item[:id] : item[:node] = split_path[-2]
       item.path
     end
