@@ -23,14 +23,8 @@ class ProjectsController < ApplicationController
     # @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture(@project.state_machine.current_base_branch)
     @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     @topic_hashes = TopicManager.new(current_user.id, @project.id).get_project_topics(@topics)
-    if @state_machine.current_state == 'feasibility'
-      @meeting = Meeting.where(project_id: @project.id, object: 'Setup').first_or_initialize
-      if @meeting.start_time
-        @ref_date = @meeting.start_time.to_date.to_s
-        @ref_time = @meeting.start_time.to_s(:time)
-      end
-    end
-    if @state_machine.phasis != "Adapt & Finalize"
+
+    if !["adapt_and_finalize", "design_analisys"].include?(@state_machine.current_state)
       @order = @project.last_order || Order.new
     end
   end
@@ -65,6 +59,7 @@ class ProjectsController < ApplicationController
   def update
     # TO DO manage permitted params
     # Make a repository controller
+    @project.update(project_params)
     if params[:upload] == 'true'
       manage_file_upload
       # For the moment no new branch

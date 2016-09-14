@@ -19,6 +19,8 @@
     }
     i.focus {
       border: 1px solid white;
+      border-radius: 50%;
+      background: rgba(255,255,255, 0.3);
     }
     .axis {
       padding: 0 2rem;
@@ -42,29 +44,8 @@
       }
       .line {
         border-top: 0.2px solid white;
-        position: absolute;
-        border-top: 0.2px solid white;
-        top: 31.4%;
-      }
-      #co-engineering-line {
-        width: 43%;
-        left: 15.5%;
-      }
-      #bid-line {
-        width: 25%;
-        right: 4.5%;
-      }
-      #production-planning-line {
-        width: 14%;
-        left: 13%;
-      }
-      #production-manufacturing-line {
-        width: 19%;
-        left: 39%;
-      }
-      #production-finalizing-line {
-        width: 25.5%;
-        right: 3.5%
+        width: 15%;
+        padding: 12px 0
       }
     }
   }

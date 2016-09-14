@@ -41,4 +41,11 @@ $(document).ready(function() {
   $('#user_category').on('change', function(event) {
     $(this).parents('form').submit();
   })
+
+  $('.modal-trigger').leanModal({
+    ready: function() { Materialize.updateTextFields(); },
+    complete: function() { Materialize.updateTextFields(); },
+  });
+
+   $('.materialboxed').materialbox();
 });

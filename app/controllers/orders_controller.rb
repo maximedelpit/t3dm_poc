@@ -6,6 +6,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.order_lines.each { |ol| ol.project_id =  @project.id}
     @order.state = 'pending'
+    ProjectStateMachine.production[0..-3].each do |state|
+      @order.order_lines.build(description: state.to_s.gsub('_', ' ').capitalize, project_id: @project.id)
+    end
+    @project.update(due_date: @order.due_date)
     @order.save
   end
 

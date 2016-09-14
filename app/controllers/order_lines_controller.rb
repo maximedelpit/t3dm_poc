@@ -1,4 +1,3 @@
-
 class OrdersController < ApplicationController
 
   def destroy

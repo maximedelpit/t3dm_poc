@@ -1,0 +1,29 @@
+<ul>
+  <li><strong>Project Title: <%= @project.title %></strong></li>
+  <li>Client name: <%= @project.client %></li>
+  <li>Main Contact: <%= @project.project_users.first.user.name %></li>
+  <li>Thalès ref: <%= @project.thales_id %></li>
+  <li>Client ref: <%= @project.client_project_id %></li>
+</ul>
+<ul>
+  <li>Part Functionnality: <%= @project.part_functionality %></li>
+  <li>Notes <%= simple_format @project.notes %></li>
+</ul>
+<table class='responsive-table'>
+  <thead>
+    <tr>
+      <th>Specs</th>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @project.specs.each do | spec | %>
+      <tr>
+        <td><%= spec.type %></td>
+        <td><%= spec.title %></td>
+        <td><%= spec.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

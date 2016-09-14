@@ -1,10 +1,13 @@
+# TO ADAPT TO NESTED FORM
 class MeetingsController < ApplicationController
   require 'icalendar'
 
   def create
     @meeting = Meeting.new(meeting_params)
+    @attendees_params.each {|user_id| @meeting.attendees.build(user_id: user_id)}
     @meeting.state = 'pending'
     deduce_hours
+    binding.pry
     @meeting.save
   end
 
@@ -44,15 +47,21 @@ class MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(:date, :time, :project_id, :object)
+    meeting_params = params.require(:meeting).permit(:date, :time, :duration, :project_id, :object,
+                                    :live, attendee_ids: []
+                                   )
+    @attendees_params = meeting_params[:attendee_ids].collect {|x|  x == '' ? current_user.id : x}
+    meeting_params.delete(:attendee_ids)
+    return meeting_params
   end
 
   def deduce_hours
     return nil if meeting_params[:date].empty? || meeting_params[:time].empty?
+    duration = meeting_params[:duration].to_i || 30
     @meeting.date = meeting_params[:date]
     @meeting.time = meeting_params[:time]
     @meeting.start_time = "#{@meeting.date} #{@meeting.time}".to_datetime
-    @meeting.end_time = @meeting.start_time + 30.minutes
+    @meeting.end_time = @meeting.start_time + duration.minutes
     @ref_date = @meeting.date
     @ref_time = @meeting.time
   end

@@ -2,48 +2,54 @@
   <span class='close'><i class="material-icons c-orange">close</i></span>
 <% if current_user.category == 'client' %>
     <p>We are reviewing your project's feasability.</p>
-    <p>Please ensure to validate all topics (on the right) to go to next step.</p>
+    <p>Please answer topics to ensure feasibility of your project.</p>
     <p>Do not hesitate to open topics if needed or upload files if necessary.</p>
 <% elsif current_user.category == 'methods' %>
   <p>You know need to assess the project feasability.</p>
   <p>Open topics to communicate or ask infos to the client or within your team.</p>
-  <p>You can upload new version of files and track changes</p>
-  <p>Please ensure all topics are closed before going to next step</p>
+  <p>You can upload new version of files and track changes.</p>
+  <p>Please ensure all topics are reviewed before going to next step</p>
 <% else %>
-  <p>This an overview of the project at date.</p>
+  <p>This an overview of the project today.</p>
   <p>Reading the topics will keep you up-to-date .</p>
 <% end %>
 </div>
 <br>
 
 <div id='design-analisys-state'>
-  <div class="col s12">
-    <h4>Project Title: <%= @project.title %></h4>
-    <ul>
-      <li>Client name: <%= @project.client %></li>
-      <li>Main Contact: <%= @project.project_users.first.user.name %></li>
-      <li>Thalès ref: <%= @project.thales_id %></li>
-      <li>Client ref: <%= @project.client_project_id %></li>
-    </ul>
-    <p>Part Functionnality: <%= @project.part_functionality %></p>
-    <p><em>Notes: <%= simple_format @project.notes %></em></p>
-    <table class='responsive-table'>
-      <thead>
-        <tr>
-          <th>Specs</th>
-          <th>Option</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @project.specs.each do | spec | %>
+  <% if current_user.category == 'methods' %>
+    <div class="col s12">
+      <%= render 'projects/form', specs: @project.specs %>
+    </div>
+  <% else %>
+    <div class="col s12">
+      <h4>Project Title: <%= @project.title %></h4>
+      <ul>
+        <li>Client name: <%= @project.client %></li>
+        <li>Main Contact: <%= @project.project_users.first.user.name %></li>
+        <li>Thalès ref: <%= @project.thales_id %></li>
+        <li>Client ref: <%= @project.client_project_id %></li>
+      </ul>
+      <p>Part Functionnality: <%= @project.part_functionality %></p>
+      <p><em>Notes: <%= simple_format @project.notes %></em></p>
+      <table class='responsive-table'>
+        <thead>
           <tr>
-            <td><%= spec.type %></td>
-            <td><%= spec.title %></td>
-            <td><%= spec.description %></td>
+            <th>Specs</th>
+            <th>Option</th>
+            <th>Description</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <% @project.specs.each do | spec | %>
+            <tr>
+              <td><%= spec.type %></td>
+              <td><%= spec.title %></td>
+              <td><%= spec.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>

@@ -1,34 +1,9 @@
-<span class="item center-align">
-  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Routing plan' %>">assignment</i>
-  <h5>Routing plan</h5>
+<% production_icons.each do |key, value | %>
+  <span class="item center-align">
+  <i class="material-icons large <%= 'focus' if @state_machine.current_state == key.to_s%>"><%= value %></i>
+  <h6><%= key.to_s.gsub('_', ' ').capitalize %></h6>
 </span>
-<span id='production-planning-line' class='line'></span>
-<span class="item center-align <%= 'focus' if @state_machine.current_state == 'manufacturing_orders' %>">
-  <div class="plain-dot"></div>
-  <h6>Manufacturing orders</h6>
-</span>
-
-<span class="item center-align">
-  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Manufacturing' %>">build</i>
-  <h5>Manufacturing</h5>
-</span>
-<span id='production-manufacturing-line' class='line'></span>
-<% ProjectStateMachine.production_manufacturing.each do | state | %>
-  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
-    <div class="plain-dot"></div>
-    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
-  </span>
+<% if key != production_icons.keys.last %>
+  <span class='line'></span>
 <% end %>
-
-<span class="item center-align">
-  <i class="material-icons large <%= 'focus' if @state_machine.phasis == 'Finalizing' %>">sync</i>
-  <h5>Finalizing</h5>
-</span>
-<span id='production-finalizing-line' class='line'></span>
-<% ProjectStateMachine.production_finalizing.each do | state | %>
-  <span class="item center-align <%= 'focus' if @state_machine.current_state == state.to_s %>">
-    <div class="plain-dot"></div>
-    <h6><%= state.to_s.gsub('_', ' ').capitalize %></h6>
-  </span>
 <% end %>
-
