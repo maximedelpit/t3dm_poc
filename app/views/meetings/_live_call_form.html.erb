@@ -1,0 +1,12 @@
+<div class="row">
+  <%= simple_form_for meeting, remote: true do |f| %>
+    <%= f.error_notification %>
+    <%#= date_field_tag 'project[date]', @project.due_date, class: 'datepicker' %>
+    <%= f.input :date, as: :hidden, input_html: { value: Date.today } %>
+    <%= f.input :time, as: :hidden, input_html: { value: Time.now.strftime("%I:%M%p") } %>
+    <%= f.input :live, as: :hidden, input_html: { value: true } %>
+    <%= f.association :attendees, collection: User.where.not(id: current_user.id), include_blank: true, input_html: { multiple: true}, wrapper_html: { class: 's12' } %>
+    <%= f.button :submit, 'Call', class:'btn' %>
+  <% end %>
+</div>
+

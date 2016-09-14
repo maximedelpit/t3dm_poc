@@ -1,5 +1,5 @@
 // OVERIDDE MATERIALIZE
-.btn-floating {
+.btn-floating.text {
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -65,3 +65,32 @@
 .btn.gray-lighter {
   background-color: $c-gray-lighter;
 }
+
+.fixed-action-btn.horizontal.left {
+  ul {
+    text-align: left;
+    left: 84px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    height: 100%;
+    right: auto;
+    width: 500px;
+  }
+}
+
+#conf-call-btn-form {
+  ul {
+    width: 14rem;
+    li {
+      a.btn-floating  {
+        margin-right: 0px;
+        i {
+          font-size: 1.6rem;
+          line-height: 39px;
+        }
+      }
+    }
+  }
+}
+

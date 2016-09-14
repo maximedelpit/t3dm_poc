@@ -88,7 +88,7 @@ class RepoManager
   end
 
   def repo_basic_architecture
-    directories = ["3D Models", "2D Plans", "Specs", "Commercial Proposition", "Routing" "Quality Control", "Shipment", "Defaults", "Suppliers"]
+    directories = ["3D Models", "2D Plans", "Specs", "Commercial Proposition", "Routing", "Quality Control", "Shipment", "Defaults", "Suppliers"]
     trees = []
     directories.each do |dir_name|
       # trees << { path: dir_name, mode:"040000", type: "tree", sha: get_branch_ref_tree_sha("master")  }

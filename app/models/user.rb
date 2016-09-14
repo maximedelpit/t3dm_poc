@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :projects, through: :project_users
   has_many :comments
   has_many :mentions
+  has_many :attendees
 
   validates :token, :uid, :github_login, :name, :category, :entity, presence: true
   validates :token, :uid, :email, uniqueness: true
@@ -30,8 +31,8 @@ class User < ApplicationRecord
 
   def set_entity
     # TO DO => remove since temporary
-    # self.entity = 'Max Corp'
-    # self.category = 'client'
+    self.entity = 'Max Corp'
+    self.category = 'client'
   end
 
   def initials

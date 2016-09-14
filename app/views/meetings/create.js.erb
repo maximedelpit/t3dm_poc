@@ -1,10 +1,18 @@
 <% if @meeting.valid? %>
-  var form = '<%= j render "project_states/edit_meeting_form", meeting: @meeting %>'
-  $('#feasability-step').html(form);
-  $('#feasability-step').prepend('Your meeting is planned, you can update it if needed');
+  <% if params[:meeting][:live] %>
+    $('.form-part').toggleClass('hidden');
+    conf_iframe = '<iframe src="https://appear.in/<%= j @meeting.room_name %>" frameborder="0"></iframe>'
+    $('.conf-part').html(conf_iframe);
+  <% else %>
+    $('#modal1').closeModal();
+    swal(
+      'Success!',
+      'Meeting created, an invitation has been sent!',
+      'success'
+    );
+  <% end %>
 <% else %>
-  var form = '<%= j render "project_states/new_meeting_form", meeting: @meeting %>'
-  $('#feasability-step').html(form);
+  // TO DO
 <% end %>
 
 $('.datepicker').pickadate({
