@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   </head>
   <body>
     <% if params[:controller] == 'projects' && params[:action] == 'index' %>
@@ -28,7 +27,7 @@
       </section>
     </div>
 
-    <%= render 'meetings/conf_call_meeting_form' %>
+    <%= render 'meetings/conf_call_meeting_actions' %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
     <%= cloudinary_js_config %>

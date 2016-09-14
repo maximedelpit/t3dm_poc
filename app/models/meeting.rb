@@ -8,6 +8,7 @@ class Meeting < ApplicationRecord
 
   accepts_nested_attributes_for :attendees, allow_destroy: true, reject_if: :all_blank
 
+  scope :to_come, -> {where("state = ? AND start_time >= ?", 'pending', Date.today.to_time)}
   attr_accessor :date
   attr_accessor :time
   attr_accessor :duration

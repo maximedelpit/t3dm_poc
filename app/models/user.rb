@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :mentions
   has_many :attendees
+  has_many :meetings, through: :attendees
 
   validates :token, :uid, :github_login, :name, :category, :entity, presence: true
   validates :token, :uid, :email, uniqueness: true

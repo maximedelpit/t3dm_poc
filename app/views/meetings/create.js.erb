@@ -1,8 +1,9 @@
 <% if @meeting.valid? %>
   <% if params[:meeting][:live] %>
-    $('.form-part').toggleClass('hidden');
-    conf_iframe = '<iframe src="https://appear.in/<%= j @meeting.room_name %>" frameborder="0"></iframe>'
-    $('.conf-part').html(conf_iframe);
+    var conf_iframe = '<iframe src="https://appear.in/<%= j @meeting.room_name %>" class="responsive-img materialboxed" width="100%" height="430px" frameborder="0"></iframe>'
+    $('#pending-call .conf-part').html(conf_iframe);
+    $('#live-call').closeModal()
+    $('#pending-call').openModal()
   <% else %>
     $('#modal1').closeModal();
     swal(
