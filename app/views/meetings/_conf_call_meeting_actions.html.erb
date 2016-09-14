@@ -1,11 +1,12 @@
 <% if user_signed_in? %>
-  <div class="fixed-action-btn horizontal left click-to-toggle" id='conf-call-btn-form'>
+  <div class="fixed-action-btn horizontal left click-to-toggle" id='conf-call-btn'>
     <a class="btn-floating btn-large red">
       <i class="material-icons">videocam</i>
     </a>
     <ul>
       <li><a class="btn-floating green modal-trigger" href="#live-call"><i class="material-icons">phone</i></a></li>
       <li><a class="btn-floating black modal-trigger" href="#plan-meeting"><i class="material-icons">schedule</i></a></li>
+      <li><a class="btn-floating orange modal-trigger" href="#pending-call"><i class="material-icons">pageview</i></a></li>
     </ul>
   </div>
 
@@ -13,17 +14,13 @@
 
 
    <!-- Modal Live Call -->
-   <div id="live-call" class="modal">
-     <div class="modal-content">
-       <h4>Live conf-call</h4>
-        <div class="form-part">
-          <p>Select attendees and start your conf-call. We will notify them</p>
-          <%= render 'meetings/live_call_form', meeting: Meeting.new() %>
-        </div>
-        <div class="conf-part hidden">
-        </div>
-     </div>
-   </div>
+  <div id="live-call" class="modal">
+    <div class="modal-content">
+        <h4>Live conf-call</h4>
+        <p>Select attendees and start your conf-call. We will notify them</p>
+        <%= render 'meetings/live_call_form', meeting: Meeting.new() %>
+    </div>
+  </div>
 
 
    <!-- Modal Plan Meeting -->
@@ -35,3 +32,12 @@
      </div>
    </div>
 <% end %>
+
+<!-- Modal Pending Call -->
+   <div id="pending-call" class="modal">
+     <div class="modal-content">
+       <h4>Pending Call</h4>
+        <div class="conf-part">
+        </div>
+     </div>
+   </div>

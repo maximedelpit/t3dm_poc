@@ -2,12 +2,15 @@
 class MeetingsController < ApplicationController
   require 'icalendar'
 
+  def index
+    @meetings = current_user.meetings.to_come
+  end
+
   def create
     @meeting = Meeting.new(meeting_params)
     @attendees_params.each {|user_id| @meeting.attendees.build(user_id: user_id)}
     @meeting.state = 'pending'
     deduce_hours
-    binding.pry
     @meeting.save
   end
 
@@ -57,11 +60,11 @@ class MeetingsController < ApplicationController
 
   def deduce_hours
     return nil if meeting_params[:date].empty? || meeting_params[:time].empty?
-    duration = meeting_params[:duration].to_i || 30
+    duration = meeting_params[:duration] || 30
     @meeting.date = meeting_params[:date]
     @meeting.time = meeting_params[:time]
     @meeting.start_time = "#{@meeting.date} #{@meeting.time}".to_datetime
-    @meeting.end_time = @meeting.start_time + duration.minutes
+    @meeting.end_time = @meeting.start_time + duration.to_i.minutes
     @ref_date = @meeting.date
     @ref_time = @meeting.time
   end

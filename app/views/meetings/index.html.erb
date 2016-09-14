@@ -1,0 +1,43 @@
+<div class='main scroll-y'>
+  <div class="row">
+    <table class="highlight">
+      <thead>
+        <tr>
+          <th data-field="object">Object</th>
+          <th data-field="project">Project</th>
+          <th data-field="start_time">Start Time</th>
+          <th data-field="end_time">End Time</th>
+          <th data-field="attendees">Attendees</th>
+          <th data-field=""></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @meetings.each do |meeting| %>
+          <tr>
+            <td><%= meeting.object %></td>
+            <td><%= meeting.project %></td>
+            <td><%= formatted_time(meeting.start_time) %></td>
+            <td><%= formatted_time(meeting.end_time) %></td>
+            <td>
+              <ul class='tabs row'>
+                <% meeting.users.each do |user| %>
+                    <li class='col'>
+                      <span class='center-align btn-floating text bg-<%= user.category %>'>
+                        <%= user.initials %>
+                      </span>
+                    </li>
+                <% end %>
+              </ul>
+            </td>
+            <td>
+              <button type="button" class="launch-conf btn" data-room-name="<%= meeting.room_name %>">Start</button>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
