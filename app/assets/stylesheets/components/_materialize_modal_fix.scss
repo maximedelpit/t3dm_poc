@@ -33,3 +33,15 @@
     justify-content: center;
   }
 }
+
+
+#pending-call.modal {
+  box-shadow: none;
+  background-color: transparent;
+  width: 80%;
+  max-height: 90%;
+  .modal-content {
+    background-color: transparent;
+    width: 100%
+  }
+}

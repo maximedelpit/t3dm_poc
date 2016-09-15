@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   resources :meetings
 
   require "sidekiq/web"
-  authenticate :user, lambda { |u| u.name == 'maximedelpit'} do
-    mount Sidekiq::Web => '/sidekiq'
-  end
+  mount Sidekiq::Web => '/sidekiq'
+
 
   mount Attachinary::Engine => "/attachinary"
+  mount ActionCable.server => '/cable'
+
 end

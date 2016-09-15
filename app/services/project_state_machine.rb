@@ -73,7 +73,11 @@ class ProjectStateMachine
 
   def self.production
     [:preparation, :printing, :heat_treatment, :cutting, :machining, :finishes, :surface_treatment,
-     :quality_control, :shipping, :payment, :satisfaction]
+     :quality_control, :shipping, :payment]
+  end
+
+  def self.done
+    [:satisfaction]
   end
 
   def current_base_branch

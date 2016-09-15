@@ -1,30 +1,37 @@
-<% image_url = "bg-l-nav.png" %>
+
 <div class="card project-card">
   <div class="card-image">
-    <%= image_tag image_url, class:'responsive-img' %>
+    <%= link_to project_path(project), class:'title' do %>
+      <% if project.picture %>
+        <%= cl_image_tag project.picture.path, width: 314, crop: :fill, class:'responsive-img' %>
+      <% else %>
+        <%= image_tag 'missing_3d_picture.png',  style: 'width:100%;', class:'responsive-img' %>
+      <% end %>
+    <% end %>
   </div>
-  <div class="card-content row">
-    <div class="col s7">
-      <h6><%= link_to project.title, project_path(project), class:'title' %></h6>
-      <p class='date'><%= formatted_date(project.created_at) %></p>
+  <div class="card-content row flex">
+    <div class="main-flex">
+      <h6><%= link_to truncate_project(project.title), project_path(project), class:'title' %></h6>
+      <!-- <p class='date'><%#= formatted_date(project.created_at) %></p> -->
       <p></p>
     </div>
-    <div class="col s5 bg-<%= project.cycle %>">
-      <%= project.cycle %>
-      <%= project.state_machine.current_state %>
+    <div class="small-size">
+      <%= project.state_machine.current_state.gsub('_', ' ').capitalize %>
     </div>
   </div>
-  <div class="card-action">
+  <div class="card-action bg-<%= project.state_machine.current_state %>">
     <div>
       <span id='progress-index'></span>
       <span class='date'>Due date: <%= formatted_date(project.due_date) %></span>
     </div>
 
     <%= link_to "#" do %>
-      <div class="badge-container">
-        <i class="material-icons small">notifications</i>
-        <div class="badge badge-red">3</div>
-      </div>
+      <% if project_user_activities(project) > 0 %>
+        <div class="badge-container">
+          <i class="material-icons small">notifications</i>
+          <div class="badge red"><%= project_user_activities(project) %></div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

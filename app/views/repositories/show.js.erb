@@ -33,5 +33,4 @@ $('iframe#gh-viewer', parent.document).remove()
   doc.write('<script class="gh-embed" src="https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path].gsub(" " ,"%20") %>"></script>');
   doc.close();
 <% else %>
-  <% binding.pry %>
 <% end %>

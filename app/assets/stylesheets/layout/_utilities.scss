@@ -29,22 +29,22 @@
 .bg-white {
   background: white !important;
 }
-.bg-client {
-  background: $c-sky-blue;
+.bg-client, .bg-adapt_and_finalize, .bg-bid {
+  background: $c-sky-blue !important;
 }
 
-.bg-methods {
-  background: $c-purple;
+.bg-methods, .bg-design_analysis, .bg-preparation, .bg-quotation {
+  background: $c-purple !important;
 }
 
 .bg-supplier {
-  background: $c-orange;
+  background: $c-orange !important;
 }
 
-.bg-production {
-  background: $c-light-green;
+.bg-production, .bg-printing, .bg-heat_treatment, .bg-cutting, .bg-machining,
+.bg-finishes, .bg-surface_treatment, .bg-quality_control, .bg-shipping  {
+  background: $c-light-green !important;
 }
-
 
 .part-title {
   font-weight: bold;

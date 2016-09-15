@@ -1,5 +1,13 @@
 class Project < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
+  include PublicActivity::Model
+  after_commit { NotificationsBroadcastJob.perform_later({
+                  resource_class: self.class.to_s,
+                  resource_id: self.id,
+                  user_id: 5,
+                  recipient_ids: self.project_users.pluck(:user_id),
+                  action: set_notif_action
+                })}
 
   # TO DO => check Trello for models assoc. & valid. to add
   has_many :project_users, dependent: :destroy
@@ -16,6 +24,8 @@ class Project < ApplicationRecord
   has_many :order_lines, dependent: :destroy
   has_many :orders, through: :order_lines, dependent: :destroy
   has_many :transitions, class_name: "ProjectTransition", autosave: false, dependent: :destroy
+  has_attachment :picture
+
 
 
   # validates :state, :cycle, presence: true
@@ -105,5 +115,15 @@ class Project < ApplicationRecord
 
   def last_order
     orders.last
+  end
+
+  def set_notif_action
+    if transaction_include_any_action?([:create])
+      return 'create'
+    elsif transaction_include_any_action?([:destroy])
+      return 'destroy'
+    else
+      return 'update'
+    end
   end
 end

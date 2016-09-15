@@ -1,5 +1,5 @@
 <nav class='nav-<%= size %>'>
-  <div class="nav-wrapper">
+  <div id= 'logo-nav' class="nav-wrapper">
     <!-- Logo -->
     <%= link_to root_path, class: "brand-logo" do %>
       <%= image_tag "logo.png" %>
@@ -27,7 +27,9 @@
           <%= link_to "#" do %>
             <div class="badge-container">
               <i class="material-icons small">notifications</i>
-              <div class="badge badge-red">3</div>
+              <% if @activities_count > 0 %>
+                <div class="badge red"><%= @activities_count %></div>
+              <% end %>
             </div>
           <% end %>
         </li>

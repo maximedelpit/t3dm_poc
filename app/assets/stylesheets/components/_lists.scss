@@ -32,7 +32,11 @@ ul.list-inline.space-between {
 }
 
 ul.list-inline.space-around {
-  justify-content: space-aroud;
+  justify-content: space-around;
+}
+
+ul.list-inline.space-around {
+  justify-content: flex-start;
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
@@ -94,7 +98,7 @@ ul.list-inline.space-around {
       right: 0;
     }
     .img-attachment-wrapper {
-      width: 3rem;
+        max-width: 6rem
     }
   }
 }

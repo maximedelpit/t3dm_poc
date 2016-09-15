@@ -1,6 +1,6 @@
 /* Main class */
 .nav-large {
-  height: 30vh;
+  height: 31vh;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), image-url('bg-l-nav.png');
   .nav-wrapper {
     padding: 7% 3% 3% 3%;
@@ -8,20 +8,23 @@
 }
 
 .nav-small {
-  height: 30vh;
+  height: 31vh;
   background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), image-url('bg-l-nav.png');
-  .nav-wrapper {
-    height: 6vh;
-    padding: 0% 2%;
+  #logo-nav {
     z-index: 10;
+  }
+  .nav-wrapper {
+    height: 7vh;
+    padding: 0% 2%;
     ul.right.hide-on-med-and-down {
-      height: 6vh;
+      height: 7vh;
     }
   }
 }
 
-.nav-wrapper .brand-logo img {
-  width: 70%;
+.nav-wrapper .brand-logo {
+  height: 50px;
+  img {
+    width: 70%;
+  }
 }
-
-

@@ -9,6 +9,7 @@
   </div>
   <%= f.input :part_functionality, wrapper_html: { class: 's12' }  %></br>
   <%= f.input :notes, wrapper_html: { class: 's12' }  %>
+  <%= f.input :picture, as: :file, input_html: {class: 'attachinary'} %>
   <h4 class="col s12" id="specs">Specs</h4>
   <% specs.each do |key, spec| %>
     <%= render 'projects/spec_field', f: f, spec_type: key %>

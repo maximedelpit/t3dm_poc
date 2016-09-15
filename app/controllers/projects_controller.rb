@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
     @project.cycle = 'co-engineering'
+    @project.project_users.build(user_id: 6) # TO DELETE
     if @project.save
       manage_file_upload
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).generate_full_repo
@@ -69,10 +70,11 @@ class ProjectsController < ApplicationController
     end
     @project.state_machine.next if params[:next] == 'true'
     @project.state_machine.next if params[:previous] == 'true'
-    respond_to do |format|
-      format.html {redirect_to project_path(@project)}
-      format.js {}
-    end
+    # respond_to do |format|
+    #   format.html {redirect_to project_path(@project)}
+    #   format.js {}
+    # end
+    head :ok
   end
 
   private
@@ -80,7 +82,7 @@ class ProjectsController < ApplicationController
    def project_params
     spec_attr = [:id, :title, :description, :_destroy]
     project_params = params.require(:project).permit( :title, :client_project_id, :part_functionality, :notes, :file,
-                                     purpose_attributes: spec_attr, material_attributes: spec_attr,
+                                     :picture, purpose_attributes: spec_attr, material_attributes: spec_attr,
                                      heat_treatment_attributes: spec_attr, surface_attributes: spec_attr,
                                      dimension_attributes: spec_attr, quality_control_attributes: spec_attr
                                     )

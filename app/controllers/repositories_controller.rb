@@ -18,7 +18,6 @@ class RepositoriesController < ApplicationController
         format.js {}
       end
     else
-      binding.pry
       content_type = Mime::Type.lookup_by_extension(@file[:extension].gsub('.','')).to_s
       send_data(Base64.decode64(@file[:content]), type: content_type, filename: @file[:basename], disposition: 'attachment')
     end
