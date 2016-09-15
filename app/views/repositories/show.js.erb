@@ -1,1 +1,36 @@
-$('#step-focus').html('<%= j "file_viewer" %>');
+// script = $.getScript('https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path] %>')
+// $('#step-focus').html('script');
+
+// $('#step-focus').html('<%= j render "file_viewer" %>');
+// debugger;
+
+
+
+// var s = document.createElement("script");
+// s.type = "text/javascript";
+// s.src = "https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path] %>";
+// $("#step-focus").append(s);
+// debugger
+
+
+// $("#step-focus").append("<iframe height='420' width='620' frameborder='0' src='https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path] %>' title='<%= j @file[:basename] %>'></iframe>")
+// debugger;
+
+
+
+// USING IFRAMES
+$('iframe#gh-viewer', parent.document).remove()
+<% if @file[:extension] == '.stl' %>
+  var iframe = document.createElement('iframe');
+  iframe.width = '640px';
+  iframe.height = '440px';
+  iframe.id = 'gh-viewer';
+  $('#step-focus').append(iframe);
+  var doc = iframe.contentWindow.document;
+
+  // do this whenever you want (f.ex after ajax is made):
+  doc.open();
+  doc.write('<script class="gh-embed" src="https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path].gsub(" " ,"%20") %>"></script>');
+  doc.close();
+<% else %>
+<% end %>

@@ -13,6 +13,7 @@
 $brand-color: #D23333;
 
 $c-red: #ff053a;
+$c-red-light: lighten($c-red, 30%);
 $c-navy-blue: #08112a;
 $c-blue: #0f1a53;
 $c-blue-opaq: rgba(15, 26, 83, 0.8);

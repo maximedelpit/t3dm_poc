@@ -15,7 +15,22 @@
       text-transform: uppercase;
     }
     .date {
-      color: $c-gray-light !important;
+      color: $c-gray !important;
+      font-style: italic
+    }
+  }
+
+  .card-content.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+    .main-flex {
+      flex: 1 0 auto;
+    }
+    .small-size {
+      font-size: 12px;
     }
   }
 
@@ -41,7 +56,8 @@
 }
 
 .project-card .card-action {
-  background-color: $c-gray-lighter
+  background-color: $c-gray-lighter;
+  min-height: 56px;
 }
 
 #topic-body .card-content {

@@ -7,6 +7,6 @@ class Order < ApplicationRecord
   end
 
   def total
-    unit_price * quantity
+    unit_price.to_i * quantity.to_i
   end
 end

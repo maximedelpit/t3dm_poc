@@ -1,5 +1,10 @@
 <div id="small-viewer" class='viewer'>
-  <img src="http://placehold.it/270x180" class='responsive-img materialboxed'>
+
+  <% if @project.picture %>
+    <%= cl_image_tag @project.picture.path, width: 635, crop: :fill, class:'responsive-img materialboxed' %>
+  <% else %>
+    <%= image_tag 'missing_3d_picture.png',  style: 'width:100%;', class:'responsive-img' %>
+  <% end %>
 </div>
 <div class="row">
   <div class="col s12">

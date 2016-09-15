@@ -23,6 +23,14 @@ module ProjectsHelper
     end.join.html_safe
   end
 
+  def truncate_project(title)
+    title.size > 23 ? "#{title.first(20)}..." : title
+  end
+
+  def project_user_activities(project)
+    PublicActivity::Activity.where(recipient: current_user, seen: false, trackable_type: 'Project', trackable_id: project.id).count
+  end
+
   private
   def project_breadcrumb_conditions
     if %w(projects comments topics).include?(params[:controller])

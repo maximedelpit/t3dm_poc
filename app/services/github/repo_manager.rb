@@ -53,7 +53,8 @@ class RepoManager
     # @octokit_client.contents(@project.repo_uri, path:"3D Models/0_index_projet_list.jpg", sha: "84bb468c935ea2032d2dff95c02a4e7970f0fd10")
 
   def get_blob(sha)
-    return @octokit_client.blob(@project.repo_uri, sha)
+    return @octokit_client.blob(@project.repo_uri, sha, accept: 'application/vnd.github+raw'
+)
   end
 
   def get_content(path)

@@ -32,8 +32,8 @@ class User < ApplicationRecord
 
   def set_entity
     # TO DO => remove since temporary
-    self.entity = 'Max Corp'
-    self.category = 'client'
+    # self.entity = 'Max Corp'
+    # self.category = 'client'
   end
 
   def initials

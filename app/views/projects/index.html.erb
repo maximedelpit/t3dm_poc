@@ -7,16 +7,13 @@
           <%= link_to 'All Projects', projects_path(list: params[:list]), target:'', class: 'active', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'feasibility', projects_path(filters: 'feasibility', list: params[:list]), target:'', remote: true %>
-        </li>
-        <li class='tab'>
-          <%= link_to 'Bid', projects_path(filters: 'bid', list: params[:list]), target:'', remote: true %>
+          <%= link_to 'Co-Engineering', projects_path(filters: 'co_engineering', list: params[:list]), target:'', remote: true %>
         </li>
         <li class='tab'>
           <%= link_to 'Production', projects_path(filters: 'production', list: params[:list]), target:'', remote: true %>
         </li>
         <li class='tab'>
-          <%= link_to 'Archives', projects_path(filters: 'archives', list: params[:list]), target:'', remote: true %>
+          <%= link_to 'Done', projects_path(filters: 'done', list: params[:list]), target:'', remote: true %>
         </li>
       </ul>
     </div>

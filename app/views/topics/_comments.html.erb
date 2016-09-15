@@ -1,19 +1,20 @@
 <div class="main">
   <ul class="collapsible" data-collapsible="accordion" id='comment-form-accordion'>
     <li>
-      <ul class='title-action collapsible-header'>
-        <li>
+    <!-- collapsible-header => class -->
+      <ul class='list-inline'>
+        <li class= 'main-item'>
           <h4 class='part-title'>Topic: <%= @topic_hash[:title]%>
           </h4>
         </li>
         <li>
           <a class="btn-icon">
-            <%= state_button_tag(@topic_hash[:state]) %>
+            <%= state_button_tag(@topic_hash[:state], {class:'small'}) %>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a class="btn-icon-large"><i class="material-icons turquoise">add_circle_outline</i></a>
-        </li>
+        </li> -->
       </ul>
       <div class="collapsible-body" id='comment-form'>
         <p>TO DO Show Details</p>
