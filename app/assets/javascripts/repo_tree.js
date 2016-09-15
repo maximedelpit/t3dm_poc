@@ -9,9 +9,7 @@ function init_tree(tree) {
       var project_id = data.node.data.project;
       var url = project_id + '/file/' + sha + '?path=' + path;
       console.log(path + ' - ' + sha);
-      $.get( url, function( data ) {
-        debugger;
-      });
+      $.get( url, null, function(data,status,xhr) {}, 'script');
     } else if (data.node.data.gtype === 'tree') {
       if (data.node.state.opened) {
         tree.jstree("close_node", $("#"+data.node.id));
@@ -119,3 +117,11 @@ $(document).ready(function() {
 
 //         // do something
 // });
+
+
+
+
+
+
+
+

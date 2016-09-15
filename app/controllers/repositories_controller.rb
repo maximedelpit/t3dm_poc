@@ -1,15 +1,9 @@
 class RepositoriesController < ApplicationController
+  require "base64"
   def show
     @project = Project.find(params[:id])
     @state_machine = @project.state_machine
-    if @state_machine.current_state == 'feasibility'
-      @meeting = Meeting.where(project_id: @project.id, object: 'Setup').first_or_initialize
-      if @meeting.start_time
-        @ref_date = @meeting.start_time.to_date.to_s
-        @ref_time = @meeting.start_time.to_s(:time)
-      end
-    end
-    if @state_machine.phasis != "Adapt & Finalize"
+    if !["adapt_and_finalize", "design_analisys"].include?(@state_machine.current_state)
       @order = @project.last_order || Order.new
     end
     blob_path = params[:path]
@@ -17,10 +11,16 @@ class RepositoriesController < ApplicationController
     @file = RepoManager.new(current_user, @project.id).get_blob(blob_sha)
     @file[:path] = blob_path
     @file[:extension] = File.extname blob_path
-    binding.pry
-    respond_to do |format|
-      format.html {}
-      format.js {}
+    @file[:basename] = File.basename(blob_path)
+    if @file[:extension] == '.stl'
+      respond_to do |format|
+        format.html {}
+        format.js {}
+      end
+    else
+      binding.pry
+      content_type = Mime::Type.lookup_by_extension(@file[:extension].gsub('.','')).to_s
+      send_data(Base64.decode64(@file[:content]), type: content_type, filename: @file[:basename], disposition: 'attachment')
     end
   end
 end

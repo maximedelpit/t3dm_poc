@@ -59,12 +59,13 @@ class ProjectsController < ApplicationController
   def update
     # TO DO manage permitted params
     # Make a repository controller
-    @project.update(project_params)
     if params[:upload] == 'true'
       manage_file_upload
       # For the moment no new branch
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).upload_file("master", @dir_path, handle_pull_request)
       @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
+    else
+      @project.update(project_params)
     end
     @project.state_machine.next if params[:next] == 'true'
     @project.state_machine.next if params[:previous] == 'true'

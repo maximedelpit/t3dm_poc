@@ -53,7 +53,9 @@ gem "attachinary", github: "assembler/attachinary"
 gem "jquery-fileupload-rails"
 gem "coffee-rails"
 
+# Notiffications
 gem 'icalendar', '~> 2.2.2'
+gem 'public_activity'
 
 group :development, :test do
   # debug
