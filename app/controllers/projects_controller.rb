@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update]
   before_action :project_update_params, only: :update
+  before_action :mark_notif_as_seen, only: :show
   def index
     if params[:filters]
       # @projects = current_user.projects.in_phasis(params[:filters])
@@ -156,5 +157,9 @@ class ProjectsController < ApplicationController
 
   def temporary_affect_all_users
     User.all.each {|u| @project.project_users.build(user_id: u.id)}
+  end
+
+  def mark_notif_as_seen
+    PublicActivity::Activity.where(recipient: current_user, seen: false, trackable_type: 'Project', trackable_id: project.id).update_all(seen: true)
   end
 end
