@@ -13,18 +13,7 @@
     <div class="main-flex">
       <h6><%= link_to truncate_project(project.title), project_path(project), class:'title' %></h6>
       <!-- <p class='date'><%#= formatted_date(project.created_at) %></p> -->
-      <p></p>
     </div>
-    <div class="small-size">
-      <%= project.state_machine.current_state.gsub('_', ' ').capitalize %>
-    </div>
-  </div>
-  <div class="card-action bg-<%= project.state_machine.current_state %>">
-    <div>
-      <span id='progress-index'></span>
-      <span class='date'>Due date: <%= formatted_date(project.due_date) %></span>
-    </div>
-
     <%= link_to "#" do %>
       <% if project_user_activities(project) > 0 %>
         <div class="badge-container">
@@ -33,5 +22,15 @@
         </div>
       <% end %>
     <% end %>
+  </div>
+  <div class="card-action flex row">
+    <div class='main-flex'>
+      <span id='progress-index'></span>
+      <span class='date'>Due date: <%= formatted_date(project.due_date) %></span>
+    </div>
+
+    <div class="small-size color-<%= project.state_machine.current_state %>">
+      <%= project.state_machine.current_state.gsub('_', ' ').capitalize %>
+    </div>
   </div>
 </div>

@@ -46,6 +46,30 @@
   background: $c-light-green !important;
 }
 
+
+.color-client, .color-adapt_and_finalize, .color-bid {
+  color: $c-sky-blue !important;
+  font-weight: 900;
+}
+
+.color-methods, .color-design_analysis, .color-preparation, .color-quotation {
+  color: $c-purple !important;
+  font-weight: 900;
+}
+
+.color-supplier {
+  color: $c-orange !important;
+  font-weight: 900;
+}
+
+.color-production, .color-printing, .color-heat_treatment, .color-cutting, .color-machining,
+.color-finishes, .color-surface_treatment, .color-quality_control, .color-shipping  {
+  color: $c-light-green !important;
+  font-weight: 900;
+}
+
+
+
 .part-title {
   font-weight: bold;
   color: $c-turquoise;

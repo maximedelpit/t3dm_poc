@@ -20,7 +20,7 @@
     }
   }
 
-  .card-content.flex {
+  .card-content.flex, .card-action.flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -56,7 +56,7 @@
 }
 
 .project-card .card-action {
-  background-color: $c-gray-lighter;
+  background-color: #F3F3F3;
   min-height: 56px;
 }
 
