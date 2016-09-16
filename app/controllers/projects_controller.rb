@@ -160,6 +160,6 @@ class ProjectsController < ApplicationController
   end
 
   def mark_notif_as_seen
-    PublicActivity::Activity.where(recipient: current_user, seen: false, trackable_type: 'Project', trackable_id: project.id).update_all(seen: true)
+    PublicActivity::Activity.where(recipient: current_user, seen: false, trackable_type: 'Project', trackable_id: @project.id).update_all(seen: true)
   end
 end
