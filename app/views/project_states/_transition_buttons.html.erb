@@ -1,10 +1,10 @@
 <% if @state_machine.current_state != Project.initial_state.to_s %>
-  <%= link_to project_project_state_path(@project, previous: true), method: :put, class: 'waves-effect waves-light btn gray-lighter btn-mini', remote: true do %>
+  <%= link_to project_project_state_path(@project, previous: true), method: :put, class: 'waves-effect waves-light btn gray-lighter btn-mini', id: 'prev-btn', remote: true do %>
     <i class="material-icons left">navigate_before</i>Back
   <% end %>
 <% end %>
 <% if @state_machine.current_state != Project.last_state.to_s %>
-  <%= link_to project_project_state_path(@project, next: true), method: :put, class: 'waves-effect waves-light btn btn-mini', remote: true do %>
+  <%= link_to project_project_state_path(@project, next: true), method: :put, class: 'waves-effect waves-light btn btn-mini', id: 'next-btn', remote: true do %>
     <i class="material-icons right">navigate_next</i>Next
   <% end %>
 <% end %>

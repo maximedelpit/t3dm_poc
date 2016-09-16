@@ -76,7 +76,6 @@ class ProjectsController < ApplicationController
       format.html {redirect_to project_path(@project)}
       format.js {}
     end
-    head :ok
   end
 
   private
