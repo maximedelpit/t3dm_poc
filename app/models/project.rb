@@ -4,7 +4,7 @@ class Project < ApplicationRecord
   after_commit { NotificationsBroadcastJob.perform_later({
                   resource_class: self.class.to_s,
                   resource_id: self.id,
-                  user_id: 5, # TO DO: variabilize
+                  user_id: User.find_by_github_login(self.github_owner).id, # TO DO: variabilize
                   recipient_ids: self.project_users.pluck(:user_id),
                   action: set_notif_action
                 })}
