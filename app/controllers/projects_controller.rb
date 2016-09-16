@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:edit, :update]
   before_action :project_update_params, only: :update
-  before_action :mark_notif_as_seen, only: :show
   def index
     if params[:filters]
       # @projects = current_user.projects.in_phasis(params[:filters])
@@ -18,6 +17,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:topics).find(params[:id])
+    mark_notif_as_seen
     @state_machine = @project.state_machine
     @topics = @project.topics
     # when dealing with states & branch
