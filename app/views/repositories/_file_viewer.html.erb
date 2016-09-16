@@ -1,11 +1,12 @@
-<% if @file[:extension] == '.stl' %>
-  <script class='gh-embed' src="https://embed.github.com/view/3d/<%= @project.repo_uri %>/master/<%= @file[:path].gsub(' ','%20') %>"></script>
+<ul class="title-action">
+  <li>
+    <h4 class='part-title'>File overview</h4></li>
+  <li>
+    <%= link_to 'Back', project_path(@project), class:'btn btn-mini' %>
+  </li>
+</ul>
+<br>
+<div class="viewer-container center-align
+">
 
-
-
-  <!-- <script src="https://embed.github.com/view/3d/maximedelpit/T3DM-000001-Test-co-eng-new/master/3D%20Models/medaille_ambition10__MEDAILLE_AMBITION10.stl"></script>
-  <script src="https://embed.github.com/view/3d/skalnik/secret-bear-clip/master/stl/clip.stl"></script>
- -->
-<% else %>
-  ...
-<% end %>
+</div>

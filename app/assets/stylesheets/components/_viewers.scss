@@ -1,3 +1,10 @@
 .viewer {
   margin-bottom: 20px;
 }
+
+#gh-viewer {
+  border: none;
+  #gh-embed {
+    width: 100%;
+  }
+}

@@ -1,9 +1,15 @@
 <%= f.simple_fields_for spec_type do |p| %>
   <div class="aligned-fields">
-    <div class="col s4">
-      <% spec_type.class == Symbol ? label = spec_type : label = spec_type.class %>
-      <%= p.input :title, collection: %w(a b c other), label: label.to_s.gsub('_', ' ').capitalize, wrapper_html: { class: 's12' } %>
+    <div class="col s6">
+      <% if spec_type.class == Symbol %>
+        <% label = spec_type %>
+        <% collection = "#{spec_type.to_s.classify}::TITLES".constantize %>
+      <%else %>
+        <% label = spec_type.class %>
+        <% collection = "#{spec_type.class}::TITLES".constantize %>
+      <% end %>
+      <%= p.input :title, collection: collection, label: label.to_s.gsub('_', ' ').capitalize, wrapper_html: { class: 's12' } %>
     </div>
-    <div class="col s8"><%= p.input :description, wrapper_html: { class: 's12' } %></div>
+    <div class="col s6"><%= p.input :description, wrapper_html: { class: 's12 small-size' } %></div>
   </div>
 <% end %>

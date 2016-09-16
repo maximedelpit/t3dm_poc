@@ -36,13 +36,14 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    @project.users.push(current_user)
+    # @project.users.push(current_user)
+    # TEMPORARY
+    temporary_affect_all_users
     @project.client = current_user.entity
     @project.github_owner = current_user.github_login
     @project.set_default_dimensions # TO DO => rework with stl upload
     @project.thales_id = Project::ExternalInput.next_thales_id
     @project.cycle = 'co-engineering'
-    @project.project_users.build(user_id: 6) # TO DELETE
     if @project.save
       manage_file_upload
       RepoManager.new(current_user.id, @project, {file_path: @file_path, file_name: @file_name}).generate_full_repo
@@ -70,10 +71,10 @@ class ProjectsController < ApplicationController
     end
     @project.state_machine.next if params[:next] == 'true'
     @project.state_machine.next if params[:previous] == 'true'
-    # respond_to do |format|
-    #   format.html {redirect_to project_path(@project)}
-    #   format.js {}
-    # end
+    respond_to do |format|
+      format.html {redirect_to project_path(@project)}
+      format.js {}
+    end
     head :ok
   end
 
@@ -151,5 +152,9 @@ class ProjectsController < ApplicationController
       @specs[type_key] = instance_variable_set('@' + type.underscore, @project.send('build_' + type.underscore, value))
     end
     return @specs
+  end
+
+  def temporary_affect_all_users
+    User.all.each {|u| @project.project_users.build(user_id: u.id)}
   end
 end

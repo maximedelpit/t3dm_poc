@@ -10,7 +10,7 @@ class NotificationsBroadcastJob < ApplicationJob
         recipient = User.find(recipient_id)
         notification = resource.create_activity options[:action], owner: current_user, recipient: recipient
         # NotificationsChannel.broadcast_to(recipient, message: render_notification(notification))
-        ActionCable.server.broadcast('notifications', message: 'coucou')
+        # ActionCable.server.broadcast('notifications', message: 'coucou')
 
       end
     end
