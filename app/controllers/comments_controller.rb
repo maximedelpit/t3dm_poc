@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   require 'open-uri'
   def create
     @comment = @topic.comments.build(comment_params)
+    authorize @comment
     @comment.user = current_user
     mentionned_users = check_mentions(@comment.content) if @comment.content
     mentionned_users.each {|u| @comment.mentions.build(user: u)}
@@ -37,6 +38,7 @@ class CommentsController < ApplicationController
 
   def find_comment
     @topic = Comment.find(params[:id])
+    authorize @comment
   end
 
   def comment_params

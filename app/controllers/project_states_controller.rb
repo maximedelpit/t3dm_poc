@@ -8,6 +8,7 @@ class ProjectStatesController < ApplicationController
     end
     @project = Project.find(params[:project_id])
     @state_machine = @project.state_machine
+    params[:user] ? skip_authorization :  authorize(@state_machine)
     if params[:next]
       @project.state_machine.next
     elsif params[:previous]

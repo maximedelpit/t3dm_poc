@@ -6,6 +6,7 @@ class TopicsController < ApplicationController
     @state_machine = @project.state_machine
     @repo_tree = RepoManager.new(current_user.id, @project.id).retrieve_repo_architecture("master")
     @topic = Topic.includes(:comments).find(params[:id]) # not sure to need include
+    authorize @topic
     @topic_hash = TopicManager.new(current_user.id, @project.id).get_topic_hash(@topic.github_number)
     @comments = @topic.comments
     # @topic_comments = TopicManager.new(current_user.id, @project.id).get_topic_and_comments(@topic.github_number)
@@ -13,6 +14,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = @project.topics.build(topic_params)
+    authorize @topic
     @topic.type ||= 'PullRequest'
     @topic.state = 'open'
     @topic.user = current_user
@@ -31,6 +33,7 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
+    authorize @topic
     if params[:topic_action] == 'merged'
       github_response = TopicManager.new(current_user.id, @project.id).merge_topic_pr(@topic.github_number)
     elsif params[:topic_action] == 'closed' && @topic.state != 'closed'

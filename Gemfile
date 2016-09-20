@@ -12,7 +12,7 @@ gem 'devise', github: 'plataformatec/devise'
 gem 'omniauth-github'
 
 # # Authorization
-# gem "pundit"
+gem "pundit"
 
 gem "octokit", "~> 4.0"
 gem 'github_webhook', '~> 0.5.0'

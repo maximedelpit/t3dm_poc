@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    skip_authorization
     @order.order_lines.each { |ol| ol.project_id =  @project.id}
     @order.state = 'pending'
     ProjectStateMachine.production[0..-3].each do |state|
@@ -25,6 +26,7 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find(params[:id])
+    authorize @order
   end
 
   def order_params
