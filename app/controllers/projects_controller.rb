@@ -4,10 +4,10 @@ class ProjectsController < ApplicationController
   def index
     if params[:filters]
       # @projects = current_user.projects.in_phasis(params[:filters])
-      @projects = Project.in_phasis(params[:filters])
+      @projects = policy_scope(Project).in_phasis(params[:filters])
     else
       # @projects = current_user.projects
-      @projects = Project.all
+      @projects = policy_scope(Project)
     end
     respond_to do |format|
       format.html {}
@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:topics).find(params[:id])
+    authorize @project
     mark_notif_as_seen
     @state_machine = @project.state_machine
     @topics = @project.topics
@@ -32,11 +33,13 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    authorize @project
     build_spec_fields
   end
 
   def create
     @project = Project.new(project_params)
+    authorize @project
     # @project.users.push(current_user)
     # TEMPORARY
     temporary_affect_all_users
@@ -107,6 +110,7 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
+    authorize @project
   end
 
   def manage_file_upload

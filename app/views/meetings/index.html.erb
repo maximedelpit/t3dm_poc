@@ -16,7 +16,7 @@
         <% @meetings.each do |meeting| %>
           <tr>
             <td><%= meeting.object %></td>
-            <td><%= meeting.project %></td>
+            <td><%= meeting.project.title if meeting.project %></td>
             <td><%= formatted_time(meeting.start_time) %></td>
             <td><%= formatted_time(meeting.end_time) %></td>
             <td>

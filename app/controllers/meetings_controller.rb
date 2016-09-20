@@ -3,12 +3,13 @@ class MeetingsController < ApplicationController
   require 'icalendar'
 
   def index
-    @meetings = current_user.meetings.to_come
+    @meetings = policy_scope(Meeting)
   end
 
   def create
     @meeting = Meeting.new(meeting_params)
     @attendees_params.each {|user_id| @meeting.attendees.build(user_id: user_id)}
+    authorize @meeting
     @meeting.state = 'pending'
     deduce_hours
     @meeting.save
@@ -17,6 +18,7 @@ class MeetingsController < ApplicationController
   def update
     # TO DO create notif
     @meeting = Meeting.find(params[:id])
+    authorize @meeting
     @meeting.start_time == "#{meeting_params[:date]} #{meeting_params[:time]}".to_datetime ? state = 'confirmed' : state = 'pending'
     deduce_hours
     @meeting.state = state

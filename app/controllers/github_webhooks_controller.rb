@@ -1,6 +1,6 @@
 class GithubWebhooksController < ActionController::Base
   include GithubWebhook::Processor
-
+  before_action skip_authorization
   # Handle push event
   def github_push(payload)
     # TODO: handle push webhook
