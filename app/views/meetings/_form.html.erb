@@ -11,6 +11,6 @@
     <%#= f.fields_for :attendees, meeting.attendees.build do |i| %>
       <%#= i.association :user, collection: User.where.not(id: current_user.id), include_blank: true, input_html: { multiple: true, name: 'meeting[attendees_attributes][user][]'}, wrapper_html: { class: 's12' } %>
     <%# end %>
-    <%= f.button :submit, class:'btn' %>
+    <%= f.button :button, class:'btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
   <% end %>
 </div>

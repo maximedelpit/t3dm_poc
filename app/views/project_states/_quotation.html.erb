@@ -27,7 +27,8 @@
         <%= f.error_notification %>
         <%= f.input :due_date, as: :string, input_html: { class: 'datepicker'}, label: 'Deadline', wrapper_html: { class: 's6' } %>
         <%= f.input :quantity, wrapper_html: { class: 's6' } %>
-        <%= f.button :submit, 'Request quotation', class:'btn-mini', wrapper_html: { class: 's12' } %>
+        <%= f.input :data_package, as: :boolean, checked_value: true, unchecked_value: false, label: 'I have uploaded last file versions', input_html: { value: false },  wrapper_html: { class: 's12' } %>
+        <%= f.button :button, 'Request quotation', class:'btn-mini', wrapper_html: { class: 's12' }, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."}, disabled: true%>
       <% end %>
     <% else %>
       <h3>We are building your quotation... We will come back to you soon.</h3>

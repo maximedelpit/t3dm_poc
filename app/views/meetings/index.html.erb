@@ -23,9 +23,7 @@
               <ul class='tabs row'>
                 <% meeting.users.each do |user| %>
                     <li class='col'>
-                      <span class='center-align btn-floating text bg-<%= user.category %>'>
-                        <%= user.initials %>
-                      </span>
+                      <%= render 'shared/user_badge', user: user %>
                     </li>
                 <% end %>
               </ul>

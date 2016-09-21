@@ -25,6 +25,6 @@
       <!-- BOURIN -->
       <%= f.input :due_date, as: :hidden, input_html: {value: @order.due_date} %>
     </div>
-    <%= f.button :submit, 'Accept Offer', id: 'remotipart-override' %>
+    <%= f.button :button, 'Accept Offer', id: 'remotipart-override', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."} %>
   <% end %>
 <% end %>

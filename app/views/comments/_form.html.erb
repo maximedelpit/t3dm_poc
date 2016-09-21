@@ -1,9 +1,9 @@
 <%= simple_form_for [@project, @topic, Comment.new], method: :post, html: {class: 'scrollspy', id: 'new_comment'} do |f| %>
   <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
-  <span class="fileinput-node icon">
+  <span class="fileinput-node icon" draggable='true' draggable='true' ondragstart="dragstart_handler(event);" ondragover="dragover_handler(event);" ondrop="drop_handler(event);" ondragleave="dragleave_handler(event);">
     <i class="material-icons attachment-icon">attach_file</i>
     <%= f.input :attachment, as: :attachinary, label: false %>
     <span class="attchachinary-filename"></span>
   </span>
-  <%= f.button :submit, 'Send', class: "btn-mini" %>
+  <%= f.button :button, 'Send', class: "btn-mini", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
 <% end %>

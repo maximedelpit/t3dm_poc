@@ -55,3 +55,13 @@
   left: 16px;
 }
 
+.dragging-in {
+  border: 1px dashed $c-gray-dark;
+  background-color: $c-gray-lighter;
+  padding-right: 5px;
+  cursor: copy !important;
+  .fileinput-node {
+    cursor: copy !important;
+  }
+}
+

@@ -1,8 +1,7 @@
-
 <%= simple_form_for :topic, url: project_topics_path(@project), remote: true do |f| %>
   <%= f.error_notification %>
   <%= f.input :title, as: :string, wrapper_html: { class: 's10' } %>
   <%= f.input :content, as: :text, wrapper_html: { class: 's12' } %>
   <%= f.input :type, as: :hidden, input_html: {value: 'Issue'} %>
-  <%= f.button :submit, 'ok', class:'btn btn-mini' %>
+  <%= f.button :button, 'ok', class:'btn btn-mini', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
 <% end %>
