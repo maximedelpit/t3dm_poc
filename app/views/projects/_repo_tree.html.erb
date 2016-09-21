@@ -1,5 +1,5 @@
 <li data-sha='<%= data.sha %>' data-url='<%= data.url %>' data-gtype='<%= data.type %>' data-jstree='{ "type" : "<%= data.type %>"}', data-path='<%= data.path %>' data-ext='<%= data.extension %>' data-project='<%= @project.id %>' >
-  <span class="fileinput-node">
+  <span class="fileinput-node" draggable='true' ondragstart="dragstart_handler(event);" ondragover="dragover_handler(event);" ondrop="drop_handler(event);" ondragleave="dragleave_handler(event);">
     <% if data.type == 'tree' %>
       <%= data.name %>
       <%= file_field_tag  "sha[#{data.sha}[file]]", accept: "*", class:'input-tree clean-input' %>

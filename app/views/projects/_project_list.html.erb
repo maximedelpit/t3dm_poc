@@ -5,8 +5,9 @@
       <th data-field="start_date">Creation</th>
       <th data-field="due_date">Due Date</th>
       <th data-field="status">Status</th>
+      <th data-field="collabs">Collaborators</th>
       <th data-field="notifications">Notifications</th>
-      <th data-field="collabs">Collabs</th>
+
     </tr>
   </thead>
 
@@ -20,19 +21,25 @@
         </td>
         <td><%= formatted_date(project.created_at) %></td>
         <td><%= formatted_date(project.due_date) %></td>
-        <td><%= project.state_machine.current_state %></td>
-        <td>4</td> <!-- TO DO : notifs -->
+        <td><%= project.state_machine.current_state.gsub('_', ' ').capitalize %></td>
         <td>
           <ul class='tabs row'>
             <% project.users.each do |user| %>
                 <li class='col'>
-                  <span class='center-align btn-floating text bg-<%= user.category %>'>
-                    <%= user.initials %>
-                  </span>
+                  <%= render 'shared/user_badge', user: user %>
                 </li>
             <% end %>
           </ul>
         </td>
+        <td>
+          <% if project_user_activities(project) > 0 %>
+            <div class="badge-container">
+              <i class="material-icons small">notifications</i>
+              <div class="badge red"><%= project_user_activities(project) %></div>
+            </div>
+          <% end %>
+        </td> <!-- TO DO : notifs -->
+
       </tr>
     <% end %>
   </tbody>

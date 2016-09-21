@@ -14,5 +14,5 @@
   <% specs.each do |key, spec| %>
     <%= render 'projects/spec_field', f: f, spec_type: key %>
   <% end %>
-  <%= f.button :submit, class:'btn' %>
+  <%= f.button :button, class:'btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
 <% end %>

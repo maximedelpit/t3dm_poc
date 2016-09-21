@@ -22,7 +22,7 @@
            <%= link_to_add_association 'Add line', f, :order_lines, data: { :'association-insertion-method' => 'append', :'association-insertion-node' => '.table_form tbody'}, class: 'btn btn-mini' %>
         </td>
         <td class="right-align">
-          <%= f.button :submit, 'Save', class:'btn-mini' %>
+          <%= f.button :button, 'Save', class:'btn-mini', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
         </td>
       </tr>
     </tfoot>

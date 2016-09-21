@@ -28,7 +28,7 @@
           <%= render 'projects/spec_field', f: f, spec_type: key %>
         <% end %>
         <%= f.input :notes, wrapper_html: { class: 's12' }  %>
-        <%= f.button :submit, class:'btn' %>
+        <%= f.button :button, class:'btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..."} %>
       <% end %>
     </div>
     <div class="col s4">

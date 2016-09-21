@@ -2,7 +2,7 @@ class RepositoriesController < ApplicationController
   require "base64"
   def show
     @project = Project.find(params[:id])
-    authorize @project, :update
+    authorize @project
     @state_machine = @project.state_machine
     if !["adapt_and_finalize", "design_analisys"].include?(@state_machine.current_state)
       @order = @project.last_order || Order.new

@@ -1,5 +1,10 @@
 <nav class='vertical-nav-wrapper'>
   <div class="block">
+    <% if request.referer %>
+      <%= link_to :back,  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "Back", class: 'tooltipped' do %>
+        <i class="material-icons">arrow_back</i>
+      <% end %>
+    <% end %>
     <%= link_to projects_path(list: true),  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "All Projects", class: 'tooltipped' do %>
       <i class="material-icons">work</i>
     <% end %>

@@ -171,3 +171,7 @@ i {
   cursor: pointer;
   cursor: hand;
 }
+
+i.material-icons.spinner {
+  animation: rotate 3s infinite 0.5s linear;
+}

@@ -6,7 +6,7 @@
     <%= f.input :time, as: :hidden, input_html: { value: Time.now.strftime("%I:%M%p") } %>
     <%= f.input :live, as: :hidden, input_html: { value: true } %>
     <%= f.association :attendees, collection: User.where.not(id: current_user.id), include_blank: true, input_html: { multiple: true}, wrapper_html: { class: 's12' } %>
-    <%= f.button :submit, 'Call', class:'btn' %>
+    <%= f.button :button, 'Call', class:'btn', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."} %>
   <% end %>
 </div>
 
