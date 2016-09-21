@@ -1,6 +1,6 @@
 class GithubWebhooksController < ActionController::Base
   include GithubWebhook::Processor
-  before_action skip_authorization
+  skip_after_action :verify_authorized
   # Handle push event
   def github_push(payload)
     # TODO: handle push webhook
