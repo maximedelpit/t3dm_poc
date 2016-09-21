@@ -1,0 +1,9 @@
+var new_step_focus = "<%= j render 'projects/step_focus', state_machine: @state_machine %>"
+
+$('#step-focus').html(new_step_focus);
+
+// TO DO INVESTIGATE TURBOLINKS
+$(function() {
+  Materialize.updateTextFields();
+});
+

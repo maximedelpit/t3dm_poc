@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
       @order.order_lines.build(description: state.to_s.gsub('_', ' ').capitalize, project_id: @project.id)
     end
     @project.update(due_date: @order.due_date)
+    @state_machine = @project.state_machine
     @order.save
   end
 
