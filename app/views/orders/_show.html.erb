@@ -11,8 +11,8 @@
   <thead>
     <tr>
       <th style='width: 60%;'>Description</th>
-      <th style='width: 20%;'>Units</th>
       <th style='width: 20%;'>Unit Price (€)</th>
+      <th style='width: 20%;'>Units</th>
       <th style='width: 20%;'>Total</th>
     </tr>
   </thead>
@@ -20,8 +20,9 @@
     <% order.order_lines.order(created_at: :asc).uniq.each do | order_line | %>
       <tr>
         <td><%= order_line.description %></td>
-        <td><%= order_line.duration %></td>
         <td>€<%= order_line.unit_price %></td>
+        <td><%= order_line.duration %></td>
+        <th style='width: 20%;'><%= order_line.unit_price * order_line.duration %></th>
       </tr>
     <% end %>
   </tbody>
