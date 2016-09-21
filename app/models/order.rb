@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   attr_accessor :data_package
 
   def unit_price
-    order_lines.sum(:unit_price)
+    order_lines.sum("unit_price * duration")
   end
 
   def total
