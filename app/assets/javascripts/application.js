@@ -10,4 +10,11 @@
 //= require_tree .
 
 
-
+function ajax_resize() {
+  $('.panel-container').css({
+      height: $(".panel.core").height()
+  });
+  $('.panel-container .panel.core .row').css({
+      height: $(".panel.core").height()
+  });
+}

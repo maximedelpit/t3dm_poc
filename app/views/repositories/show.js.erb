@@ -2,7 +2,7 @@
 // $('#step-focus').html('script');
 
 // $('#step-focus').html('<%= j render "file_viewer" %>');
-// debugger;
+//
 
 
 
@@ -34,9 +34,11 @@ $('iframe#gh-viewer', parent.document).remove()
   // do this whenever you want (f.ex after ajax is made):
   doc.open();
   doc.write('<script class="gh-embed" src="https://embed.github.com/view/3d/<%= j @project.repo_uri %>/master/<%= j @file[:path].gsub(" " ,"%20") %>"></script>');
-  debugger;
+
   doc.close();
   $(iframe).show();
-  debugger;
+
 <% else %>
 <% end %>
+
+ajax_resize
