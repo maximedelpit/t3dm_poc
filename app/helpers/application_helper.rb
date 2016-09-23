@@ -21,7 +21,7 @@ module ApplicationHelper
   def random_machine_usage
     usage = {}
     ProjectStateMachine.production[0..-3].each do |state|
-      usage[state] = generate_random_number(0, 1)
+      usage[state] = generate_random_number(0, 1) * 100
     end
     return usage
   end
