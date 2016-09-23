@@ -7,6 +7,7 @@
 //= require sweetalert2
 //= require clockpicker
 //= require cocoon
+//= require Chart-js
 //= require_tree .
 
 

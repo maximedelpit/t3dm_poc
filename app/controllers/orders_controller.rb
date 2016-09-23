@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
 
   def order_params
     # TO DO => change generation with project order items... and remove project_id hidden_fields
-    params.require(:order).permit(  :due_date, :quantity, :price,
+    params.require(:order).permit(  :due_date, :quantity, :price, :state, :review, :rating,
                                     order_lines_attributes: [:id, :description, :unit_price, :duration, :project_id, :_destroy]
                                 )
   end

@@ -14,5 +14,18 @@
 <h5>Production tracking</h5>
 <% if state_machine.current_state == 'shipping' %>
   <div class="as-track-button" data-size="small" data-domain="track.aftership.com"  data-tracking-number="1ZA6F598D992381375"  data-hide-tracking-number="true"></div>
+<% elsif state_machine.current_state == 'payment' && current_user.category == 'client' && @order.state != 'paid' %>
+  <%= simple_form_for [@project, @order]  do |f| %>
+    <%= f.input :state, as: :hidden, input_html: {value: 'paid'} %>
+    <p>Congrats! Once you consider your order valid you can process to the payment. Else open a topic.</p>
+    <%= f.button :button, 'Pay', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing payment..."} %>
+  <% end %>
+<% elsif state_machine.current_state == 'satisfaction' && current_user.category == 'client' && @order.state == 'paid'%>
+  <p>Thanks for your trust! It's no time to give us feedback. Feel free!</p>
+  <%= simple_form_for [@project, @order]  do |f| %>
+    <%= f.input :review, wrapper_html: { class: 's8' }%>
+    <%= f.input :rating, wrapper_html: { class: 's4' }%>
+    <%= f.button :button, 'Submit', id: 'satisfaction-btn' %>
+  <% end %>
 <% end %>
 <%= render 'project_states/production_tracking' %>

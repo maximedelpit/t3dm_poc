@@ -34,6 +34,7 @@ gem 'autoprefixer-rails'
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 gem 'rails-assets-jstree', source: 'https://rails-assets.org'
 gem 'rails-assets-clockpicker', source: 'https://rails-assets.org'
+gem 'rails-assets-Chart-js', source: 'https://rails-assets.org'
 
 # forms
 gem 'simple_form', github: 'plataformatec/simple_form'

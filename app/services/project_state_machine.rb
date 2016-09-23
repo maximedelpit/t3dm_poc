@@ -3,7 +3,7 @@ class ProjectStateMachine
 
   STATES = [ :adapt_and_finalize, :design_analysis, :quotation, :bid, :preparation,
              :printing, :heat_treatment, :cutting, :machining, :finishes, :surface_treatment,
-             :quality_control, :shipping, :payment, :satisfaction
+             :quality_control, :shipping, :payment, :satisfaction, :done
   ]
 
   STATES.each do | value |
@@ -73,17 +73,17 @@ class ProjectStateMachine
 
   def self.production
     [:preparation, :printing, :heat_treatment, :cutting, :machining, :finishes, :surface_treatment,
-     :quality_control, :shipping, :payment]
+     :quality_control, :shipping, :payment, :satisfaction]
   end
 
   def self.done
-    [:satisfaction]
+    [:done]
   end
 
   def current_base_branch
     # does not deal with back to prev state since
     state = current_state.to_sym
-    if [:adapt_and_finalize, :payment, :satisfaction].include?(state)
+    if [:adapt_and_finalize, :payment, :satisfaction, :done].include?(state)
       return "master"
     else
       return current_state

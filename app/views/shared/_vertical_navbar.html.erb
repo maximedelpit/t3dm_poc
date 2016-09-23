@@ -22,4 +22,14 @@
     <% end %>
   </div>
 
+  <% if current_user.category != 'client' %>
+    <div class="block">
+      <%= link_to '#',  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "Data Consumption (coming soon)", class: 'tooltipped' do %>
+        <i class="material-icons">data_usage</i>
+      <% end %>
+      <%= link_to '#',  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "Smart Analytics (coming soon)", class: 'tooltipped' do %>
+        <i class="material-icons">trending_up</i>
+      <% end %>
+    </div>
+  <% end %>
 </nav>

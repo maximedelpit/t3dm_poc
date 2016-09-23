@@ -1,6 +1,8 @@
 <ul>
   <li>Quotation date: <%= formatted_date(@order.updated_at) %></li>
-  <li>Estimated deadline: <%= formatted_date(@order.due_date.to_date) %></li>
+  <% if @order.due_date %>
+    <li>Estimated deadline: <%= formatted_date(@order.due_date.to_date) %></li>
+  <% end %>
   <li>
     This quotation remains valid for 30 days.
     <%= (@order.updated_at.to_date + 30.days - Date.today).to_i %> days left.
@@ -10,9 +12,9 @@
 <table class='responsive-table small-padding'>
   <thead>
     <tr>
-      <th style='width: 50%;'>Description</th>
+      <th style='width: 40%;'>Description</th>
       <th style='width: 20%;'>Unit Price (€)</th>
-      <th style='width: 10%;'>Units</th>
+      <th style='width: 20%;'>Units</th>
       <th style='width: 20%;'>Total</th>
     </tr>
   </thead>
@@ -22,7 +24,7 @@
         <td><%= order_line.description %></td>
         <td>€<%= number_with_delimiter(order_line.unit_price, delimiter: " ", separator: ",") %></td>
         <td><%= number_with_delimiter(order_line.duration, delimiter: " ", separator: ",") %></td>
-        <td>€<%= number_with_delimiter(order_line.unit_price * order_line.duration, delimiter: " ", separator: ",") %></td>
+        <td>€<%= number_with_delimiter(order_line.unit_price.to_i * order_line.duration.to_i, delimiter: " ", separator: ",") %></td>
       </tr>
     <% end %>
   </tbody>

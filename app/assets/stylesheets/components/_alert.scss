@@ -91,3 +91,15 @@
   }
 
 }
+
+
+.giphy-wrapper {
+  margin-top: 2rem;
+  width: 100%;
+  iframe {
+    width: 100%;
+  }
+  #gif {
+   border-radius: 2px;
+  }
+}

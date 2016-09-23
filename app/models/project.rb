@@ -110,11 +110,15 @@ class Project < ApplicationRecord
   end
 
   def self.last_state
-    :satisfaction
+    :done
   end
 
   def last_order
     orders.last
+  end
+
+  def duration
+    ((transitions.where(to_state: 'done').limit(1).first.created_at - created_at) / 3600 / 24).ceil
   end
 
   def set_notif_action

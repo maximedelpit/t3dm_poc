@@ -31,6 +31,23 @@ module ProjectsHelper
     PublicActivity::Activity.where(recipient: current_user, seen: false, trackable_type: 'Project', trackable_id: project.id).count
   end
 
+  def progress_days(project)
+    days = {}
+    project.transitions.order(created_at: :asc).reduce(@project.created_at) do | memo, transition |
+      day = (transition.created_at - memo) / 3600 / 24
+      days[transition.to_state] ? days[transition.to_state] += day : days[transition.to_state] = day
+      memo = transition.created_at
+    end
+    cumulated_days = {"pending" => 0}
+    sum = 0
+    ProjectStateMachine::STATES.each do | state |
+      sum += days[state.to_s].to_f
+      cumulated_days[state.to_s] = sum.round(2)
+
+    end
+    return cumulated_days
+  end
+
   private
   def project_breadcrumb_conditions
     if %w(projects comments topics).include?(params[:controller])

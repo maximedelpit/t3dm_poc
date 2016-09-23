@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs small">
+      <li class="tab col s3"><a  class="active" href="#overview">Project Overview</a></li>
+      <li class="tab col s3"><a  class="active" href="#order">Order Summary</a></li>
+      <li class="tab col s3"><a href="#data">Data Analytics</a></li>
+    </ul>
+  </div>
+  <div id="overview" class="col s12 tab-content">
+    <h4>Project Overview</h4>
+    <%= render 'projects/summary' %>
+  </div>
+  <div id="order" class="col s12 tab-content">
+    <h4>Order summary</h4>
+    <%= render 'orders/show', order: @order %>
+  </div>
+  <div id="data" class="col s12 tab-content">
+    <h4>Order summary</h4>
+    <%= render 'projects/data_analytics'%>
+  </div>
+</div>
+
+
+
