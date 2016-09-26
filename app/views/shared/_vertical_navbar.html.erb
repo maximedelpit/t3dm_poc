@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <% if current_user.category != 'client' %>
+  <% if user_signed_in? && current_user.category != 'client' %>
     <div class="block">
       <%= link_to '#',  'data-position' => "right", 'data-delay' => "200", 'data-tooltip' => "Data Consumption (coming soon)", class: 'tooltipped' do %>
         <i class="material-icons">data_usage</i>
