@@ -1,8 +1,6 @@
 class MeetingPolicy < ApplicationPolicy
   def create?
-    binding.pry
     record.project_id ? record.attendees.map(&:user_id).include?(user.id) : true
-
   end
 
   def update?

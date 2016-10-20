@@ -63,6 +63,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    @project = Project.find(params[:id])
+    authorize @project
     # TO DO manage permitted params
     # Make a repository controller
     if params[:upload] == 'true'
