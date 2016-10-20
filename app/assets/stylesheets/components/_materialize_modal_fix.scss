@@ -40,8 +40,10 @@
   background-color: transparent;
   width: 80%;
   max-height: 90%;
+
   .modal-content {
-    background-color: transparent;
-    width: 100%
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    padding: 10px 0 0 0;
   }
 }
