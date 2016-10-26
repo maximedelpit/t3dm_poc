@@ -33,12 +33,10 @@ class User < ApplicationRecord
 
   def set_entity
     self.entity = 'T3DM POC Team'
-    # TO DO => remove since temporary
-    # self.entity = 'Max Corp'
-    # self.category = 'client'
     if email.include?('production')
+      self.category = 'production'
     elsif email.include?('methods')
-      self.category = 'client'
+      self.category = 'methods'
     elsif email.include?('engineering')
       self.category = 'client'
     end
