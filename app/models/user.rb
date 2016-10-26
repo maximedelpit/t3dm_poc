@@ -32,13 +32,15 @@ class User < ApplicationRecord
   end
 
   def set_entity
-    self.entity = 'T3DM POC Team'
-    if email.include?('production')
-      self.category = 'production'
-    elsif email.include?('methods')
-      self.category = 'methods'
-    elsif email.include?('engineering')
-      self.category = 'client'
+    if self.category.nil?
+      self.entity = 'T3DM POC Team'
+      if email.include?('production')
+        self.category = 'production'
+      elsif email.include?('methods')
+        self.category = 'methods'
+      elsif email.include?('engineering')
+        self.category = 'client'
+      end
     end
   end
 
