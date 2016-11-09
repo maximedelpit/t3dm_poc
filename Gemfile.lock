@@ -238,6 +238,7 @@ GEM
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
+    railroady (1.5.2)
     rails (5.0.0)
       actioncable (= 5.0.0)
       actionmailer (= 5.0.0)
@@ -391,6 +392,7 @@ DEPENDENCIES
   public_activity
   puma
   pundit
+  railroady
   rails (= 5.0.0)
   rails-assets-Chart-js!
   rails-assets-clockpicker!

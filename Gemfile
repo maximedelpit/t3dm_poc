@@ -75,6 +75,9 @@ group :development, :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'webmock'
+
+  # schema, model, controller, graphs
+  gem 'railroady'
 end
 
 group :test do
