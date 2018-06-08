@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20160923100322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
